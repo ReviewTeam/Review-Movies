@@ -6,10 +6,13 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Checkbox
+import androidx.compose.material.CheckboxDefaults
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -31,9 +34,7 @@ class MainActivity : ComponentActivity() {
 //                ) {
 //                    Greeting("Android")
 //                }
-                LoginSignupBackground {
-
-                }
+                StandardTextPreview()
             }
         }
     }
@@ -111,15 +112,27 @@ fun TitleText(
     )
 }
 
+@Composable
+fun StandardTickbox() {
+    var isCheckboxTicked by remember { mutableStateOf(false) }
+    Checkbox(
+        checked = isCheckboxTicked,
+        onCheckedChange = { isCheckboxTicked = it },
+        modifier = Modifier.padding(5.dp),
+        colors = CheckboxDefaults.colors(Color.Blue)
+    )
+}
+
 @Preview(showBackground = true)
 @Composable
-fun StandardText() {
+fun StandardTextPreview() {
     LoginSignupBackground {
         Column {
             StandardText(text = "Hello there")
             BoldStandardText(text = "Hello there")
             LoginText(text = "Hello there")
             TitleText(text = "Hello there")
+            StandardTickbox()
         }
     }
 }
