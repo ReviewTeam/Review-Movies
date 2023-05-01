@@ -3,12 +3,14 @@ package com.example.revieweverything
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -132,6 +134,27 @@ fun StandardButton(
     }
 }
 
+@Composable
+fun LoginSignupFrame(
+    content: @Composable () -> Unit
+) {
+    BoxWithConstraints(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxHeight(0.85f)
+                .fillMaxWidth(0.85f)
+                .clip(RoundedCornerShape(16.dp))
+                .background(PanelBlackTheme)
+                .padding(20.dp)
+        ) {
+            content()
+        }
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun StandardTextPreview() {
@@ -143,6 +166,9 @@ fun StandardTextPreview() {
             TitleText(text = "Hello there")
             StandardTickbox()
             StandardButton { Text(text = "Login") }
+            LoginSignupFrame {
+                Text(text = "Panel")
+            }
         }
     }
 }
