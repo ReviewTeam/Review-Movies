@@ -6,10 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Checkbox
-import androidx.compose.material.CheckboxDefaults
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -17,10 +14,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.revieweverything.ui.theme.BackgroundWhiteTheme
-import com.example.revieweverything.ui.theme.ReviewEverythingTheme
-import com.example.revieweverything.ui.theme.fonts
-import com.example.revieweverything.ui.theme.textWhiteTheme
+import com.example.revieweverything.ui.theme.*
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -123,6 +117,21 @@ fun StandardTickbox() {
     )
 }
 
+@Composable
+fun StandardButton(
+    content: @Composable () -> Unit
+) {
+    Button(
+        colors = ButtonDefaults.buttonColors(
+            backgroundColor = Purple500,
+            contentColor = textBlackTheme
+        ),
+        onClick = {},
+    ) {
+        content()
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun StandardTextPreview() {
@@ -133,6 +142,7 @@ fun StandardTextPreview() {
             LoginText(text = "Hello there")
             TitleText(text = "Hello there")
             StandardTickbox()
+            StandardButton { Text(text = "Login") }
         }
     }
 }
