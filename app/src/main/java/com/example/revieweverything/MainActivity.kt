@@ -155,6 +155,37 @@ fun LoginSignupFrame(
     }
 }
 
+@Composable
+fun StandardField(
+    label: String,
+    isCorrect: (String) -> Boolean
+) {
+    var value by remember { mutableStateOf("") }
+    var focusedIndicatorColor by remember { mutableStateOf(Color.DarkGray) }
+
+    TextField(
+        modifier = Modifier.fillMaxWidth(),
+        value = value,
+        onValueChange = {
+            value = it
+            if(isCorrect(value)) {
+                focusedIndicatorColor = Color.Green
+            } else if(value == "") {
+                focusedIndicatorColor = Color.DarkGray
+            } else {
+                focusedIndicatorColor = Color.Red
+            }
+        },
+        label = { StandardText(text = label)},
+        colors = TextFieldDefaults.textFieldColors(
+            textColor = textWhiteTheme,
+            backgroundColor = PanelBlackTheme,
+            unfocusedIndicatorColor = unfocusedIndicatorBlackTheme,
+            focusedIndicatorColor = focusedIndicatorColor
+        )
+    )
+}
+
 @Preview(showBackground = true)
 @Composable
 fun StandardTextPreview() {
@@ -167,7 +198,10 @@ fun StandardTextPreview() {
             StandardTickbox()
             StandardButton { Text(text = "Login") }
             LoginSignupFrame {
-                Text(text = "Panel")
+                StandardField(
+                    label = "Name",
+                    isCorrect = { text: String -> text == "Alex" }
+                )
             }
         }
     }
