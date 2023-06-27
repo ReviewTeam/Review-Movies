@@ -30,6 +30,7 @@ public class SecurityConfiguration {
                 .and()
                 .authorizeHttpRequests(authz -> authz
                         .requestMatchers(
+                                antMatcher(HttpMethod.GET, "/api/v1/ping"),
                                 antMatcher(HttpMethod.POST, "/api/v1/users"),
                                 antMatcher(HttpMethod.POST, "/api/v1/auth")).permitAll()
                         .anyRequest()

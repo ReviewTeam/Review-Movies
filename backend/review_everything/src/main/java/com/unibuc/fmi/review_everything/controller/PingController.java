@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class PingController {
     @GetMapping
     public ResponseEntity<String> ping(){
-        return ResponseEntity.ok().body("Ce-i în mână nu-i minciună, domnule student!");
+        return ResponseEntity.ok().body("Ce-i in mana nu-i minciuna.. domnule student");
     }
 }
