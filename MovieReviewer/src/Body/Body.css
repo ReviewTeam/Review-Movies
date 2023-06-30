@@ -1,5 +1,6 @@
 .body {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     font-family: 'Inter';
@@ -12,6 +13,11 @@
     font-weight: bold;
 }
 
+.carouselSection {
+    display: flex;
+    align-items: center;
+}
+
 .carouselText {
-    padding: 0 15px;
+    padding: 0 50px;
 }
