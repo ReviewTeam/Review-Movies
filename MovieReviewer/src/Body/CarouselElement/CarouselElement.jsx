@@ -1,4 +1,5 @@
-import HarryPotterMovie from '../../../assets/images/HarryPotterMovie.jpg'
+import HarryPotterMovie from '../../assets/images/HarryPotterMovie.jpg'
+import './CarouselElement.css'
 
 function CarouselElement() {
     return (

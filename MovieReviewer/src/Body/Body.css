@@ -1,0 +1,17 @@
+.body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter';
+    margin-top: 100px;
+    padding: 0 40px;
+}
+
+.body span {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.carouselText {
+    padding: 0 15px;
+}
