@@ -1,6 +1,6 @@
-import movieSearchBar from '../assets/movieSearchBar.svg'
-import searchBarIcon from '../assets/searchBarIcon.svg'
-import userSolid from '../assets/userSolid.svg'
+import movieSearchBar from '../../assets/movieSearchBar.svg'
+import searchBarIcon from '../../assets/searchBarIcon.svg'
+import userSolid from '../../assets/userSolid.svg'
 import './SearchBar.css'
 
 function SearchBar() {

@@ -1,4 +1,4 @@
-import movieLogo from '../assets/movieLogo.svg'
+import movieLogo from '../../assets/movieLogo.svg'
 import SearchBar from '../SearchBar/SearchBar'
 import UserSlot from '../UserSlot/UserSlot'
 import './Navbar.css'

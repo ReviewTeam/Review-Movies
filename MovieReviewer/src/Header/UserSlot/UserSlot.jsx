@@ -1,5 +1,5 @@
 import UserInfo from '../UserInfo/UserInfo'
-import profileLogo from '../assets/profileLogo.svg'
+import profileLogo from '../../assets/profileLogo.svg'
 import './UserSlot.css'
 
 function UserSlot() {
