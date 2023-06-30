@@ -1,0 +1,14 @@
+.userSlot {
+    display: flex;
+    color: white;
+    font-family: 'Inter';
+}
+
+.userScore {
+    display: flex;
+    align-items: center;
+}
+
+.userSlot strong {
+    font-size: 18px;
+}

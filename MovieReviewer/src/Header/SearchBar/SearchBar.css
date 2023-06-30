@@ -1,0 +1,42 @@
+@font-face {
+    font-family: 'Inter';
+    src: url("../fonts/Inter.ttf")
+}
+
+.searchBar {
+    display: flex;
+    align-items: center;
+    background-color: #D9D9D9;
+    border: solid white 4px;    
+    border-radius: 30px;
+    margin-right: 30px;
+}
+
+.searchBar input {
+    border: none;
+    outline: none;
+    min-width: 300px;
+    font-family: 'Inter';
+    font-size: 22px;
+    font-weight: 600;
+    color: #717171;
+    background-color: #D9D9D9;
+}
+
+.searchBar .logo {
+    padding: 0 15px;
+}
+
+.borderLeft {
+    border-left:solid white 4px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px; 
+}
+
+.borderRigth {
+    border-right: solid white 2px;
+}
+
+/* .searchBar input:focus {
+    border-bottom: black solid 2px; 
+} */
