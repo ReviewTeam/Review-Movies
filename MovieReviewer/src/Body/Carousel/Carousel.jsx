@@ -4,7 +4,7 @@ import './Carousel.css'
 import { useState } from "react"
 
 function Carousel() {
-    const numOfElements = 10
+    const numOfElements = 15
     const carouselArray = Array(numOfElements).fill(null).map((_, index) => index)
     console.log(carouselArray)
 
@@ -12,19 +12,29 @@ function Carousel() {
 
     return (
         <div className="carousel">
+            <div id="leftScroll">
+                <img src={carouselRightLogo} onClick={() => {
+                    // let currentElement = $('.carousel section')
+                    if(document.querySelector('.carousel section').scrollLeft > 0)
+                        $('.carousel section').animate({scrollLeft: '-=480'}, 500)
+                 }}/>
+            </div>
+
             <section>
                 {carouselArray.map((index) => (
                     <CarouselElement key={index} />
                 ))}
             </section>
             
-            <div>
+            <div id="rightScroll">
                 <img src={carouselRightLogo} onClick={() => {
-                    setScrollLeft(scrollLeft + 240)
-                    document.querySelector(".carousel section").scrollBy({
-                        left: 240,
-                        behavior: 'smooth'
-                    })}}/>
+                    let element = document.querySelector('.carousel section')
+                    console.log("Scroll left:", element.scrollLeft)
+                    console.log("Scroll width: ", element.getBoundingClientRect().width)
+                    if(element.scrollLeft < element.getBoundingClientRect().width) {
+                        $('.carousel section').animate({scrollLeft: '+=480'}, 500);
+                    }
+                 }}/>
             </div>    
         </div>
     )

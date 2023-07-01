@@ -9,3 +9,7 @@
     overflow-x: auto;
     transition: scroll 1s ease-in-out;
 }
+
+#leftScroll {
+    transform: scaleX(-1);
+}
