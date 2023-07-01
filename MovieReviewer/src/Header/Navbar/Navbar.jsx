@@ -14,7 +14,7 @@ function Navbar() {
             <SearchBar />
 
             {/* Go to the user profile by clicking on the user slot */}
-            <Link to='/profile' style={{ textDecoration: 'none' }}>
+            <Link to='/profile/user1' style={{ textDecoration: 'none' }}>
                 <UserSlot />
             </Link>
         </nav>

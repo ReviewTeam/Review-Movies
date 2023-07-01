@@ -11,7 +11,7 @@ function App() {
       <Navbar/>
       <Routes>
         <Route path='/' element={<PlaceHolder />}/>
-        <Route path='/profile' element={<ProfilePage />}/>
+        <Route path='/profile/:username' element={<ProfilePage />}/>
       </Routes>
     </>
   )
