@@ -47,14 +47,17 @@ function ProfilePage() {
     <>
       <div className="container">
         <div className="row">
+
           {/* User information on the left */}
           <div className="col-3">
             <UserProfile user={user} />
           </div>
+
           {/* Reviews in the middle */}
           <div className="col-6">
             <PlaceHolder></PlaceHolder>
           </div>
+          
           {/* Friend list on the right */}
           <div className="col-3">
             <FirendList user={user}/>

@@ -13,11 +13,31 @@ function FirendList({ user }) {
 
   return (
     <>
-      <h2>Friend List</h2>
-      <ul>
-        {/* Diplay each frind with a link to that user's profile */}
-        {friendList.map(friend => <li key={friend}><Link to={`/profile/${friend}`}>{friend}</Link></li>)}
-      </ul>
+      <div className="container">
+        <div className="col">
+          <div className="row">
+            <div className="col text-center">'
+              <h2>Friends</h2>
+            </div>
+          </div>
+          <div className="row"> 
+            <ul class="list-group">
+              {/* Diplay each frind with a link to that user's profile */}
+              {
+                friendList.map(friend => <li class="list-group-item"><Link to={`/profile/${friend}`} style={{ textDecoration: 'none' }}>
+                  
+                  <div className="col text-center">
+                    {friend}
+                  </div>
+                </Link></li>)
+              }
+            </ul>
+          </div>
+          
+        </div>
+        
+      </div>
+      
     </>
   );
 }
