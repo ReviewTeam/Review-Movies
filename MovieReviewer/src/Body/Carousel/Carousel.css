@@ -6,5 +6,6 @@
 .carousel section {
     display: flex;
     max-width: 90rem;
-    overflow-x: scroll;
+    overflow-x: auto;
+    transition: scroll 1s ease-in-out;
 }
