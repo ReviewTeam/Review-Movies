@@ -1,6 +1,8 @@
 import { Link, useParams } from "react-router-dom";
 import profilePic from '../assets/images/profile-pic.png'
 import UserProfile from "./UserProfile";
+import PlaceHolder from "./PlaceHolder";
+import FirendList from "./FriendList";
 
 function ProfilePage() {
   const { username } = useParams();
@@ -38,6 +40,8 @@ function ProfilePage() {
       user = users[i]
     }
   }
+
+  console.log(user);
   
   return (
     <>
@@ -46,8 +50,11 @@ function ProfilePage() {
           <div className="col-3">
             <UserProfile user={user} />
           </div>
-          <div className="col-9">
-            
+          <div className="col-6">
+            <PlaceHolder></PlaceHolder>
+          </div>
+          <div className="col-3">
+            <FirendList user={user}/>
           </div>
         </div>
       </div>
