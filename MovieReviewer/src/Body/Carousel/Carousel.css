@@ -2,3 +2,9 @@
     display: flex;
     justify-content: center;
 }
+
+.carousel section {
+    display: flex;
+    max-width: 90rem;
+    overflow-x: scroll;
+}

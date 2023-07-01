@@ -1,4 +1,5 @@
 .carouselElement {
     width: 240px;
     height: 250px;
+    border: solid gray 1px;
 }
