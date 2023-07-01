@@ -7,6 +7,7 @@ import FirendList from "./FriendList";
 function ProfilePage() {
   const { username } = useParams();
 
+  // Dummy users
   const users = [
     {
       picture: {profilePic},
@@ -34,6 +35,7 @@ function ProfilePage() {
     }
   ]
 
+  // find the user
   let user;
   for (let i = 0; i < users.length; i++) {
     if (users[i].username === username) {
@@ -41,18 +43,19 @@ function ProfilePage() {
     }
   }
 
-  console.log(user);
-  
   return (
     <>
       <div className="container">
         <div className="row">
+          {/* User information on the left */}
           <div className="col-3">
             <UserProfile user={user} />
           </div>
+          {/* Reviews in the middle */}
           <div className="col-6">
             <PlaceHolder></PlaceHolder>
           </div>
+          {/* Friend list on the right */}
           <div className="col-3">
             <FirendList user={user}/>
           </div>
