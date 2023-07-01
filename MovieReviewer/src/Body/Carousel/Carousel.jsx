@@ -1,5 +1,5 @@
 import CarouselElement from "../CarouselElement/CarouselElement"
-import carouselRightLogo from "../../assets/carouselRightLogo.svg"
+import carouselRightLogo from "../../assets/logos/carouselRightLogo.svg"
 import './Carousel.css'
 import { useState } from "react"
 

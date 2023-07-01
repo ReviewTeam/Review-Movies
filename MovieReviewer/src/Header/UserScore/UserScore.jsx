@@ -1,4 +1,4 @@
-import movieScoreLogo from '../../assets/movieScoreLogo.svg'
+import movieScoreLogo from '../../assets/logos/movieScoreLogo.svg'
 
 function UserScore() {
     return (

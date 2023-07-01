@@ -1,5 +1,5 @@
 import HarryPotterMovie from '../../assets/images/HarryPotterMovie.jpg'
-import star from '../../assets/star.svg'
+import star from '../../assets/logos/star.svg'
 import './Review.css'
 
 function Review() {

@@ -1,8 +1,8 @@
 import Carousel from "./Carousel/Carousel";
-import './Body.css'
+import './ReviewBody.css'
 import Feed from "./Feed/Feed";
 
-function Body() {
+function ReviewBody() {
     return (
         <div className="body">
             <section className="carouselSection">
@@ -16,4 +16,4 @@ function Body() {
     )
 }
 
-export default Body
+export default ReviewBody
