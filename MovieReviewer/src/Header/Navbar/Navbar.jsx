@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import movieLogo from '../../assets/movieLogo.svg'
+import movieLogo from '../../assets/logos/movieLogo.svg'
 import SearchBar from '../SearchBar/SearchBar'
 import UserSlot from '../UserSlot/UserSlot'
 import './Navbar.css'

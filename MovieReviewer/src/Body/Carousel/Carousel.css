@@ -1,0 +1,15 @@
+.carousel {
+    display: flex;
+    justify-content: center;
+}
+
+.carousel section {
+    display: flex;
+    max-width: 90rem;
+    overflow-x: auto;
+    transition: scroll 1s ease-in-out;
+}
+
+#leftScroll {
+    transform: scaleX(-1);
+}

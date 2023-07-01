@@ -1,0 +1,24 @@
+.body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter';
+    margin-top: 100px;
+    padding: 0 40px;
+}
+
+.body span {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.carouselSection {
+    display: flex;
+    align-items: center;
+    margin-bottom: 100px;
+}
+
+.carouselText {
+    padding: 0 50px;
+}
