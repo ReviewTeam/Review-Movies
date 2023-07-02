@@ -2,7 +2,7 @@ import Carousel from "./Carousel/Carousel";
 import './ReviewBody.css'
 import Feed from "./Feed/Feed";
 
-function ReviewBody() {
+function ReviewBody({reviewsState, setReviewsState, searchReviewsState, setSearchReviewsState}) {
     return (
         <div className="body">
             <section className="carouselSection">
@@ -11,7 +11,7 @@ function ReviewBody() {
                 </div>
                 <Carousel />
             </section>
-            <Feed />
+            <Feed {...{reviewsState, setReviewsState}}/>
         </div>
     )
 }

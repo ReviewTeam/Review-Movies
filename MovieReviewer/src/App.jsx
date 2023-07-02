@@ -1,18 +1,82 @@
 import { useState } from 'react'
 import Navbar from './Header/Navbar/Navbar'
-import Body from './Body/ReviewBody'
+import HarryPotterMovie from './assets/images/HarryPotterMovie.jpg'
 import './App.css'
 import { Route, Routes } from 'react-router-dom'
-import PlaceHolder from './Profile/PlaceHolder'
 import ProfilePage from './Profile/ProfilePage'
 import ReviewBody from './Body/ReviewBody'
 
 function App() {
+    const [reviewsState, setReviewsState] = useState([
+    {
+        key: 1,
+        imgSrc: HarryPotterMovie,
+        imgAlt: "Harry Potter Movie Photo",
+        movieName: "Harry Potter",
+        score: 10,
+        userName: "user1",
+        reviewText: "One of the best movies ever made"
+    },
+    {
+        key: 2,
+        imgSrc: HarryPotterMovie,
+        imgAlt: "Harry Potter Movie Photo",
+        movieName: "Harry Potter",
+        score: 10,
+        userName: "user1",
+        reviewText: "One of the best movies ever made"
+    },
+    {
+        key: 3,
+        imgSrc: HarryPotterMovie,
+        imgAlt: "Harry Potter Movie Photo",
+        movieName: "Harry Potter",
+        score: 10,
+        userName: "user1",
+        reviewText: "One of the best movies ever made"
+    },
+    {
+        key: 4,
+        imgSrc: HarryPotterMovie,
+        imgAlt: "Harry Potter Movie Photo",
+        movieName: "Harry Potter",
+        score: 10,
+        userName: "user1",
+        reviewText: "One of the best movies ever made"
+    },
+    {
+        key: 5,
+        imgSrc: HarryPotterMovie,
+        imgAlt: "Harry Potter Movie Photo",
+        movieName: "Harry Potter",
+        score: 10,
+        userName: "user1",
+        reviewText: "One of the best movies ever made"
+    },
+])
+
+  const [searchValue, setSearchValue] = useState("")
+  const [searchedReviewsState, setSearchedReviewsState] = useState(reviewsState)
+
+  const onChange = (e) => {
+    setSearchValue(e.value)
+  }
+
+  const onClick = () => {
+    const listReviews = []
+
+    for(let i = 0; i < reviewsState.length; i++)
+      if(reviewsState[i].userName == searchValue)
+        listReviews.push(reviewsState[i])
+
+    setSearchedReviewsState(listReviews)
+  }
+
   return (
     <>
-      <Navbar/>
+      <Navbar {...{searchValue, onChange, onClick}}/>
       <Routes>
-        <Route path='/' element={<ReviewBody />}/>
+        <Route path='/' element={<ReviewBody {...{reviewsState, setReviewsState, searchedReviewsState, setSearchedReviewsState}}/>}/>
         <Route path='/profile/:username' element={<ProfilePage />}/>
       </Routes>
     </>
