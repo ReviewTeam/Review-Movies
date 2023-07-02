@@ -4,7 +4,6 @@
     align-items: center;
     justify-content: center;
     font-family: 'Inter';
-    margin-top: 100px;
     padding: 0 40px;
 }
 
@@ -15,10 +14,19 @@
 
 .carouselSection {
     display: flex;
+    flex-direction: column;
     align-items: center;
     margin-bottom: 100px;
 }
 
 .carouselText {
-    padding: 0 50px;
+    padding: 7rem 0;
+    width: 50rem;
+    
+}
+
+.carouselText h1 {
+    font-size: 4rem;
+    font-weight: bold;
+    text-transform: uppercase;
 }

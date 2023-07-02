@@ -7,7 +7,7 @@ function ReviewBody({reviewsState, setReviewsState, searchReviewsState, setSearc
         <div className="body">
             <section className="carouselSection">
                 <div className="carouselText">
-                    <span>Check out the most popular movies & series according to our members</span>
+                    <h1>Check out the most popular movies & series according to our members</h1>
                 </div>
                 <Carousel />
             </section>

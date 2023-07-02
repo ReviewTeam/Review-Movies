@@ -7,12 +7,12 @@ function Feed({reviewsState, setReviewsState}) {
     // console.log("array of reviews")
     // console.log(arrayReviews)
 
-    console.log({...reviewsState[0]})
     return (
         <div className="feed">
-            {reviewsState.map((review) => (
-                <Review {...review}/>
-            ))}
+            {reviewsState.map((review, id) => {
+                const newObject = {...review, reviewsState: reviewsState, setReviewsState: setReviewsState}
+                return <Review key={id} id={id} {...newObject}/>
+            })}
         </div>
     )
 }

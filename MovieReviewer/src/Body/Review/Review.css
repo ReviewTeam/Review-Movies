@@ -2,10 +2,15 @@
     box-sizing: border-box;
 }
 
+.flexContainer {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5rem;
+}
+
 .reviewContainer {
     display: grid;
     grid-template-columns: 1fr 4fr;
-    margin-bottom: 5rem;
     line-height: 0;
 }
 
@@ -43,7 +48,38 @@
 }
 
 .reviewText {
+    position: relative;
     border-top: 0;
     border-right: solid black 1px;
     padding: 2rem 0 0 2rem;
+}
+
+.edit {
+    position: absolute;
+    padding: 20px 10px;
+    background: #8E27F5;
+    color: white;
+    font-family: 'Inter';
+    font-size: 2rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    bottom: 0%;
+    right: 0%;
+    border: none;
+    transition: background 0.3s, color 0.3s , border 0.3s;
+}
+
+.edit:hover {
+    background: white;
+    color: black;
+    border: 1px solid black;
+}
+
+.reviewTextArea {
+    width: 100%;
+    height: 15rem;
+    font-family: 'Inter';
+    font-size: 1.5rem;
+    padding: 1rem;
+    display: none;
 }

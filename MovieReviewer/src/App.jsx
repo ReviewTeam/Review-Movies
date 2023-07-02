@@ -9,7 +9,6 @@ import ReviewBody from './Body/ReviewBody'
 function App() {
     const [reviewsState, setReviewsState] = useState([
     {
-        key: 1,
         imgSrc: HarryPotterMovie,
         imgAlt: "Harry Potter Movie Photo",
         movieName: "Harry Potter",
@@ -18,7 +17,6 @@ function App() {
         reviewText: "One of the best movies ever made"
     },
     {
-        key: 2,
         imgSrc: HarryPotterMovie,
         imgAlt: "Harry Potter Movie Photo",
         movieName: "Harry Potter",
@@ -27,7 +25,6 @@ function App() {
         reviewText: "One of the best movies ever made"
     },
     {
-        key: 3,
         imgSrc: HarryPotterMovie,
         imgAlt: "Harry Potter Movie Photo",
         movieName: "Harry Potter",
@@ -36,7 +33,6 @@ function App() {
         reviewText: "One of the best movies ever made"
     },
     {
-        key: 4,
         imgSrc: HarryPotterMovie,
         imgAlt: "Harry Potter Movie Photo",
         movieName: "Harry Potter",
@@ -45,7 +41,6 @@ function App() {
         reviewText: "One of the best movies ever made"
     },
     {
-        key: 5,
         imgSrc: HarryPotterMovie,
         imgAlt: "Harry Potter Movie Photo",
         movieName: "Harry Potter",
