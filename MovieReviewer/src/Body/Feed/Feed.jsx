@@ -1,16 +1,65 @@
 import Review from '../Review/Review'
+import HarryPotterMovie from '../../assets/images/HarryPotterMovie.jpg'
 import './Feed.css'
+import { useState } from 'react'
 
 function Feed() {
-    const nrOfReviews = 5
-    let arrayReviews = Array(nrOfReviews).fill(null).map((_, index) => index)
-    console.log("array of reviews")
-    console.log(arrayReviews)
+    // console.log("array of reviews")
+    // console.log(arrayReviews)
 
+    const [reviewsState, setReviewsState] = useState([
+        {
+            key: 1,
+            imgSrc: HarryPotterMovie,
+            imgAlt: "Harry Potter Movie Photo",
+            movieName: "Harry Potter",
+            score: 10,
+            userName: "user1",
+            reviewText: "One of the best movies ever made"
+        },
+        {
+            key: 2,
+            imgSrc: HarryPotterMovie,
+            imgAlt: "Harry Potter Movie Photo",
+            movieName: "Harry Potter",
+            score: 10,
+            userName: "user1",
+            reviewText: "One of the best movies ever made"
+        },
+        {
+            key: 3,
+            imgSrc: HarryPotterMovie,
+            imgAlt: "Harry Potter Movie Photo",
+            movieName: "Harry Potter",
+            score: 10,
+            userName: "user1",
+            reviewText: "One of the best movies ever made"
+        },
+        {
+            key: 4,
+            imgSrc: HarryPotterMovie,
+            imgAlt: "Harry Potter Movie Photo",
+            movieName: "Harry Potter",
+            score: 10,
+            userName: "user1",
+            reviewText: "One of the best movies ever made"
+        },
+        {
+            key: 5,
+            imgSrc: HarryPotterMovie,
+            imgAlt: "Harry Potter Movie Photo",
+            movieName: "Harry Potter",
+            score: 10,
+            userName: "user1",
+            reviewText: "One of the best movies ever made"
+        },
+    ])
+
+    console.log({...reviewsState[0]})
     return (
         <div className="feed">
-            {arrayReviews.map(index => (
-                <Review key={index} />
+            {reviewsState.map((review) => (
+                <Review {...review}/>
             ))}
         </div>
     )
