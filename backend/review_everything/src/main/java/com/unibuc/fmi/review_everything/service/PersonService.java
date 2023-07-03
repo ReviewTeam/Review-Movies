@@ -3,10 +3,8 @@ package com.unibuc.fmi.review_everything.service;
 
 import com.unibuc.fmi.review_everything.dto.person.request.PersonRequestDto;
 import com.unibuc.fmi.review_everything.dto.person.response.PersonResponseDto;
-import com.unibuc.fmi.review_everything.dto.user.response.UserResponseDto;
 import com.unibuc.fmi.review_everything.exception.person.PersonNotFoundException;
 import com.unibuc.fmi.review_everything.model.Person;
-import com.unibuc.fmi.review_everything.model.User;
 import com.unibuc.fmi.review_everything.repository.PersonRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +14,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.awt.print.Pageable;
 import java.util.List;
 
 @Slf4j

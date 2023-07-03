@@ -5,7 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -24,4 +25,10 @@ public class Person {
 
     @Column(nullable = false)
     private LocalDate birthDate;
+
+    @OneToMany(mappedBy = "director", cascade = CascadeType.ALL)
+    private List<Movie> directedMovies;
+
+    @ManyToMany(mappedBy = "actors", cascade = CascadeType.ALL)
+    private List<Movie> actedInMovies;
 }
