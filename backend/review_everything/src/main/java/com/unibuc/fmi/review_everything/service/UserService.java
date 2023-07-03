@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -56,8 +58,9 @@ public class UserService {
         return getUserById(loggedInUser.getId());
     }
 
-    public List<UserResponseDto> findUsersByUsername(String username) {
-        var users = userRepository.findUsersByUsername(username);
+    public List<UserResponseDto> findUsersByUsername(String username, int pageNumber, int pageSize) {
+        var pageable = PageRequest.of(pageNumber, pageSize);
+        var users = userRepository.findUsersByUsernameContainingIgnoreCase(username, pageable);
         var listType = new TypeToken<List<UserResponseDto>>() {}.getType();
 
         return modelMapper.map(users, listType);

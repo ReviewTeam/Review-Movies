@@ -32,7 +32,10 @@ public class UserController {
 
     @Secured({"ROLE_USER"})
     @GetMapping
-    public ResponseEntity<List<UserResponseDto>>  findUsersByUsername(@RequestParam String username){
-        return ResponseEntity.ok(userService.findUsersByUsername(username));
+    public ResponseEntity<List<UserResponseDto>>  findUsersByUsername(
+            @RequestParam String username,
+            @RequestParam(name = "page-number", required = false, defaultValue = "0") int pageNumber,
+            @RequestParam(name = "page-size", required = false, defaultValue = "10") int pageSize){
+        return ResponseEntity.ok(userService.findUsersByUsername(username, pageNumber, pageSize));
     }
 }
