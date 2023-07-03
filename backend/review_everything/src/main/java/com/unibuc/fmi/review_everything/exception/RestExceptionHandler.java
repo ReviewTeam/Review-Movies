@@ -2,6 +2,7 @@ package com.unibuc.fmi.review_everything.exception;
 
 import com.unibuc.fmi.review_everything.dto.error.ErrorDto;
 import com.unibuc.fmi.review_everything.exception.auth.AuthUnauthorizedAccessException;
+import com.unibuc.fmi.review_everything.exception.person.PersonNotFoundException;
 import com.unibuc.fmi.review_everything.exception.user.UserBadRequestException;
 import com.unibuc.fmi.review_everything.exception.user.UserForbiddenException;
 import com.unibuc.fmi.review_everything.exception.user.UserNotFoundException;
@@ -62,7 +63,8 @@ public class RestExceptionHandler {
             UserForbiddenException.class,
             UserNotFoundException.class,
             UserBadRequestException.class,
-            AccessDeniedException.class
+            AccessDeniedException.class,
+            PersonNotFoundException.class
     })
 
     protected ResponseEntity<Object> handleException(Exception ex) {
@@ -74,7 +76,7 @@ public class RestExceptionHandler {
                     -> status = HttpStatus.UNAUTHORIZED;
             case "UserForbiddenException", "AccessDeniedException"
                     -> status = HttpStatus.FORBIDDEN;
-            case "UserNotFoundException"
+            case "UserNotFoundException", "PersonNotFoundException"
                     -> status = HttpStatus.NOT_FOUND;
             case "UserBadRequestException"
                     -> status = HttpStatus.BAD_REQUEST;
