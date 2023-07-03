@@ -3,6 +3,7 @@ import profilePic from '../assets/images/profile-pic.png'
 import UserProfile from "./UserProfile";
 import PlaceHolder from "./PlaceHolder";
 import FirendList from "./FriendList";
+import Review from "../Body/Review/Review"
 
 function ProfilePage() {
   const { username } = useParams();
@@ -55,7 +56,7 @@ function ProfilePage() {
 
           {/* Reviews in the middle */}
           <div className="col-6">
-            <PlaceHolder></PlaceHolder>
+            <Review></Review>
           </div>
           
           {/* Friend list on the right */}
