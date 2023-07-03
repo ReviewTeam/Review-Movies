@@ -24,8 +24,8 @@ public class AuthService {
     private final JwtProvider jwtProvider;
 
     public String authenticate(UserAuthRequestDto userAuthRequestDto) {
-        var userName = userAuthRequestDto.getUserName().toLowerCase();
-        User user = userRepository.findUserByUserName(userAuthRequestDto.getUserName())
+        var userName = userAuthRequestDto.getUsername().toLowerCase();
+        User user = userRepository.findUserByUsername(userAuthRequestDto.getUsername())
                 .orElseThrow(() -> new UserNotFoundException("user with username '" + userName + "' not found"));
 
         if (!passwordEncoder.matches(userAuthRequestDto.getPassword(), user.getPassword())) {
@@ -35,6 +35,6 @@ public class AuthService {
         Set<String> roles = Arrays.stream(user.getAuthorizationRoles().split(",")).collect(Collectors.toSet());
 
         long TTL = 30;
-        return jwtProvider.generateToken(userAuthRequestDto.getUserName(), TTL, roles);
+        return jwtProvider.generateToken(userAuthRequestDto.getUsername(), TTL, roles);
     }
 }

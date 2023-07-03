@@ -9,6 +9,7 @@ import com.unibuc.fmi.review_everything.exception.user.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -48,10 +49,17 @@ public class UserService {
     }
 
     public UserResponseDto getCurrentUser() {
-        String loggedInUsername = authenticationUtil.getLoggedInUsername();
+        var loggedInUsername = authenticationUtil.getLoggedInUsername();
 
-        var loggedInUser = userRepository.findUserByUserName(loggedInUsername).orElseThrow(UserNotFoundException::new);
+        var loggedInUser = userRepository.findUserByUsername(loggedInUsername).orElseThrow(UserNotFoundException::new);
 
         return getUserById(loggedInUser.getId());
+    }
+
+    public List<UserResponseDto> findUsersByUsername(String username) {
+        var users = userRepository.findUsersByUsername(username);
+        var listType = new TypeToken<List<UserResponseDto>>() {}.getType();
+
+        return modelMapper.map(users, listType);
     }
 }

@@ -25,7 +25,7 @@ public class UserRequestDto {
 
     @NotBlank
     @Size(min = 6, max = 25)
-    private String userName;
+    private String username;
 
     @NotBlank
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=])[A-Za-z\\d@#$%^&+=]{8,25}$", message = "password must be 8-25 characters long and contain at least one lowercase letter, one uppercase letter, one digit, and one special character (@#$%^&+=)")

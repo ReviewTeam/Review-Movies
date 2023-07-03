@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RequiredArgsConstructor
 @RestController
@@ -26,5 +28,11 @@ public class UserController {
     @GetMapping("/{userId}")
     public ResponseEntity<UserResponseDto> getUserById(@PathVariable Long userId) {
         return ResponseEntity.ok(userService.getUserById(userId));
+    }
+
+    @Secured({"ROLE_USER"})
+    @GetMapping
+    public ResponseEntity<List<UserResponseDto>>  findUsersByUsername(@RequestParam String username){
+        return ResponseEntity.ok(userService.findUsersByUsername(username));
     }
 }

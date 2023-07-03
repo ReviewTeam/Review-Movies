@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class UserAuthRequestDto {
     @NotBlank
     @Size(min = 6, max = 25)
-    private String userName;
+    private String username;
 
     @NotBlank
     @Size(min = 8, max = 25, message = "password must be between 8 and 25 characters")
