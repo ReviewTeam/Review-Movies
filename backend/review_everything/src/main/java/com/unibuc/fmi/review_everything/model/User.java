@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Entity
 @NoArgsConstructor
@@ -31,4 +33,10 @@ public class User {
 
     @Column(nullable = false)
     private String authorizationRoles = "ROLE_USER";
+
+    @OneToMany(mappedBy = "sender")
+    private List<FriendRequest> sentRequests;
+
+    @OneToMany(mappedBy = "receiver")
+    private List<FriendRequest> receivedRequests;
 }
