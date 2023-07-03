@@ -27,11 +27,11 @@ function UserProfile({ user }) {
           <p>
             <strong>Review score:</strong> {user.score}
           </p>
+
           {/* Edit profile button */}
           <Link
             to={{
               pathname: `/profile/${user.username}/edit`,
-              state: { user },
             }}
             style={{ textDecoration: "none" }}
           >

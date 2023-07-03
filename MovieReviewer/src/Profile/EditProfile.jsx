@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import profilePic from "../assets/images/profile-pic.png";
 import { useEffect, useState } from "react";
+import { Form, Button } from "react-bootstrap";
 
 function EditProfile() {
   const { username } = useParams();
@@ -41,7 +42,7 @@ function EditProfile() {
     }
   }
 
-  const [username1, setUsername] = useState(user.username);
+  const [picture, setPicture] = useState(user.picture);
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);
   const [email, setEmail] = useState(user.email);
@@ -58,22 +59,31 @@ function EditProfile() {
     window.location.href = `/profile/${username}`;
   };
 
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    // Handle the selected file, such as uploading it to a server or processing it locally
+    setProfilePicture(URL.createObjectURL(file));
+  };
+
   return (
     <div className="container">
       <h2>Edit Profile</h2>
       <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="username" className="form-label">
-            Username
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="username"
-            value={username1}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </div>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group>
+            <Form.Label>Profile Picture:</Form.Label>
+            <div className="d-flex align-items-center">
+              <img
+                src={profilePic}
+                alt="Profile"
+                className="mr-3"
+                style={{ width: "100px", height: "100px" }}
+              />
+              <Button variant="outline-primary">Change</Button>
+              <Form.Control type="file" onChange={handleFileChange} />
+            </div>
+          </Form.Group>
+        </Form>
         <div className="mb-3">
           <label htmlFor="firstName" className="form-label">
             First Name
