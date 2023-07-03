@@ -7,6 +7,7 @@ import PlaceHolder from "./Profile/PlaceHolder";
 import ProfilePage from "./Profile/ProfilePage";
 import ReviewBody from "./Body/ReviewBody";
 import EditProfile from "./Profile/EditProfile";
+import PersonPage from "./Person/PersonPage";
 
 function App() {
   return (
@@ -16,6 +17,8 @@ function App() {
         <Route path="/" element={<ReviewBody />} />
         <Route path="/profile/:username/edit" element={<EditProfile />} />
         <Route path="/profile/:username" element={<ProfilePage />} />
+        <Route path="/person/:id" element={<PersonPage />} />
+        <Route path="/movie" element={<PlaceHolder />} />
       </Routes>
     </>
   );
