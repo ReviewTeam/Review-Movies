@@ -30,3 +30,23 @@
     font-weight: bold;
     text-transform: uppercase;
 }
+
+.addReview {
+    padding: 1rem 1rem;
+    background: #8E27F5;
+    color: white;
+    font-family: 'Inter';
+    font-size: 2rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    bottom: 0%;
+    right: 0%;
+    border: none;
+    transition: background 0.3s, color 0.3s , border 0.3s;
+}
+
+.addReview:hover {
+    background: white;
+    color: black;
+    border: 1px solid black;
+}

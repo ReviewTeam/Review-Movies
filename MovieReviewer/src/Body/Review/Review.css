@@ -54,9 +54,9 @@
     padding: 2rem 0 0 2rem;
 }
 
-.edit {
+.editReview {
     position: absolute;
-    padding: 20px 10px;
+    padding: 2rem 1rem;
     background: #8E27F5;
     color: white;
     font-family: 'Inter';
@@ -69,7 +69,7 @@
     transition: background 0.3s, color 0.3s , border 0.3s;
 }
 
-.edit:hover {
+.editReview:hover {
     background: white;
     color: black;
     border: 1px solid black;

@@ -60,7 +60,7 @@ function Review({id, imgSrc, imgAlt, movieName, score, userName, reviewText, rev
                     </section>
                     <section className="reviewText">
                         <span>{reviewText}</span>
-                        <button className="edit" onClick={onEdit}>{!isEditingState ? "Edit" : "Save"}</button>
+                        <button className="editReview" onClick={onEdit}>{!isEditingState ? "Edit" : "Save"}</button>
                     </section>
                 </section>
             </div>

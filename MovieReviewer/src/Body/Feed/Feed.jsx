@@ -13,6 +13,21 @@ function Feed({reviewsState, setReviewsState}) {
                 const newObject = {...review, reviewsState: reviewsState, setReviewsState: setReviewsState}
                 return <Review key={id} id={id} {...newObject}/>
             })}
+
+            <h3>Add new review</h3>
+            <form className="addReviewForm">
+                <input type="file" id="addFile"/>
+                <label>Movie name </label>
+                <input type="text" id="addMovie"/>
+                <label>Score </label>
+                <input type="number" id="addScore"/>
+                <label>/10</label>
+                <br />
+                <label>Description:</label>
+                <br />
+                <textarea id="addDescription"></textarea>
+            </form>
+            <button id="addReview">Add review</button>
         </div>
     )
 }
