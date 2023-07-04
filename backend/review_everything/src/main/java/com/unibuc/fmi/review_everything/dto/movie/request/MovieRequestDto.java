@@ -20,7 +20,7 @@ public class MovieRequestDto {
     @NotNull
     private int year;
 
-    private byte[] posterImage;
+    private byte[] image;
 
     @NotNull
     private Long directorId;

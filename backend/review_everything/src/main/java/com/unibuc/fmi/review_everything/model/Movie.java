@@ -1,13 +1,11 @@
 package com.unibuc.fmi.review_everything.model;
 
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-import java.util.Set;
 
 @Data
 @Entity
@@ -29,7 +27,7 @@ public class Movie {
 
     @Lob
     @Column(nullable = true, columnDefinition = "LONGBLOB")
-    private byte[] posterImage;
+    private byte[] image;
 
     @ManyToOne
     private Person director;

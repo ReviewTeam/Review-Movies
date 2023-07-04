@@ -3,7 +3,6 @@ package com.unibuc.fmi.review_everything.service;
 import com.unibuc.fmi.review_everything.dto.movie.request.MovieRequestDto;
 import com.unibuc.fmi.review_everything.dto.movie.response.MovieResponseDto;
 import com.unibuc.fmi.review_everything.dto.person.request.PersonIdRequestDto;
-import com.unibuc.fmi.review_everything.dto.user.response.UserResponseDto;
 import com.unibuc.fmi.review_everything.exception.movie.MovieNotFoundException;
 import com.unibuc.fmi.review_everything.exception.person.PersonNotFoundException;
 import com.unibuc.fmi.review_everything.model.Movie;
@@ -28,10 +27,11 @@ public class MovieService {
 
     public MovieResponseDto createMovie(MovieRequestDto movieRequestDto) {
         var movie = modelMapper.map(movieRequestDto, Movie.class);
+        movie.setId(null);
+
         var director = personRepository.findById(movieRequestDto.getDirectorId()).orElseThrow(PersonNotFoundException::new);
 
         movie.setDirector(director);
-
         var savedMovie = movieRepository.save(movie);
 
         return modelMapper.map(savedMovie, MovieResponseDto.class);
