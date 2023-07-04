@@ -24,4 +24,6 @@ public class PersonRequestDto {
 
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate birthDate;
+
+    private byte[] image;
 }

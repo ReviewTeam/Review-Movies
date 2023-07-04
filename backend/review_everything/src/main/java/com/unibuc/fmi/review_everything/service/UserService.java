@@ -79,6 +79,7 @@ public class UserService {
         loggedInUser.setLastName(userUpdateRequestDto.getLastName());
         loggedInUser.setEmail(userUpdateRequestDto.getEmail());
         loggedInUser.setPassword(userUpdateRequestDto.getPassword());
+        loggedInUser.setImage(userUpdateRequestDto.getImage());
 
         var updatedUser = userRepository.save(loggedInUser);
 

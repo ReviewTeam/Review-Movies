@@ -26,6 +26,10 @@ public class Person {
     @Column(nullable = false)
     private LocalDate birthDate;
 
+    @Lob
+    @Column(nullable = true, columnDefinition = "LONGBLOB")
+    private byte[] image;
+
     @OneToMany(mappedBy = "director", cascade = CascadeType.ALL)
     private List<Movie> directedMovies;
 

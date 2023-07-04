@@ -31,4 +31,8 @@ public class User {
 
     @Column(nullable = false)
     private String authorizationRoles = "ROLE_USER";
+
+    @Lob
+    @Column(nullable = true, columnDefinition = "LONGBLOB")
+    private byte[] image;
 }

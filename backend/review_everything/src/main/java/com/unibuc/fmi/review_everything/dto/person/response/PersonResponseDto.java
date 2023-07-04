@@ -18,4 +18,5 @@ public class PersonResponseDto {
     private String lastName;
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate birthDate;
+    private byte[] image;
 }
