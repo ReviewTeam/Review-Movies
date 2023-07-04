@@ -5,9 +5,11 @@ import com.unibuc.fmi.review_everything.dto.friendrequest.request.FriendRequestS
 import com.unibuc.fmi.review_everything.dto.friendrequest.response.FriendResponseDto;
 import com.unibuc.fmi.review_everything.dto.user.response.UserResponseDto;
 import com.unibuc.fmi.review_everything.enums.Status;
+import com.unibuc.fmi.review_everything.model.FriendRequest;
 import com.unibuc.fmi.review_everything.service.FriendRequestService;
 import com.unibuc.fmi.review_everything.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@Slf4j
 @RequestMapping("api/v1/me/friends")
 @RequiredArgsConstructor
 public class FriendRequestController {
@@ -30,10 +33,11 @@ public class FriendRequestController {
 
     @Secured({"ROLE_USER"})
     @GetMapping("/requests")
-    public ResponseEntity<List<FriendResponseDto>> getFriendRequests() {
+    public ResponseEntity<List<FriendRequest>> getFriendRequests() {
         return ResponseEntity.ok(friendRequestService.getFriendRequests(userService.getCurrentUser().getId()));
     }
 
+    @Secured({"ROLE_USER"})
     @PostMapping("/requests/{requestId}")
     public ResponseEntity<Void> handleFriendRequest(
             @PathVariable Long requestId,

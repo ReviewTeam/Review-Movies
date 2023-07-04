@@ -3,9 +3,7 @@ package com.unibuc.fmi.review_everything.service;
 
 import com.unibuc.fmi.review_everything.dto.friendrequest.request.FriendRequestDto;
 import com.unibuc.fmi.review_everything.dto.friendrequest.request.FriendRequestStatusDto;
-import com.unibuc.fmi.review_everything.dto.friendrequest.response.FriendResponseDto;
 import com.unibuc.fmi.review_everything.dto.user.response.UserResponseDto;
-import com.unibuc.fmi.review_everything.exception.friendrequest.FriendRequestNotFoundException;
 import com.unibuc.fmi.review_everything.exception.user.UserNotFoundException;
 import com.unibuc.fmi.review_everything.model.FriendRequest;
 import com.unibuc.fmi.review_everything.enums.Status;
@@ -20,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Slf4j
@@ -36,12 +35,10 @@ public class FriendRequestService {
         friendRequestRepository.save(friendRequest);
     }
 
-    public List<FriendResponseDto> getFriendRequests(Long receiverId) {
+    public List<FriendRequest> getFriendRequests(Long receiverId) {
         var receiver = userRepository.findById(receiverId).orElseThrow();
         var requests = friendRequestRepository.findByReceiverAndStatus(receiver, Status.WAITING);
-        var listType = new TypeToken<List<FriendResponseDto>>() {}.getType();
-
-        return modelMapper.map(requests, listType);
+        return requests;
     }
 
     public FriendRequestDto handleFriendRequest(Long requestId, FriendRequestStatusDto friendRequestStatusDto) {
@@ -57,16 +54,27 @@ public class FriendRequestService {
 
         var sentRequests = friendRequestRepository.findByReceiverAndStatus(user, Status.ACCEPTED);
         for (FriendRequest request : sentRequests) {
-            friends.add(request.getReceiver());
+            if (!Objects.equals(request.getReceiver().getId(), userId) && !this.checkFriendIsAlreadyInList(friends, request.getReceiver())) {
+                friends.add(request.getReceiver());
+            }
         }
 
         var receivedRequests = friendRequestRepository.findByReceiverAndStatus(user, Status.ACCEPTED);
         for (FriendRequest request : receivedRequests) {
-            friends.add(request.getSender());
+            if (!Objects.equals(request.getSender().getId(), userId) && !this.checkFriendIsAlreadyInList(friends, request.getSender())) {
+                friends.add(request.getSender());
+            }
         }
 
         var listType = new TypeToken<List<UserResponseDto>>() {}.getType();
         return modelMapper.map(friends, listType);
     }
+
+    private boolean checkFriendIsAlreadyInList(List<User> friendRequests, User friend) {
+        List<Long> friendRequestIds = friendRequests.stream().map(User::getId).toList();
+
+        return friendRequestIds.contains(friend.getId());
+    }
+
 }
 
