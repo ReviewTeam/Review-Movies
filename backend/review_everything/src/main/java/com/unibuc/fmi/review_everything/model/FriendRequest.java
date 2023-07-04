@@ -1,6 +1,7 @@
 package com.unibuc.fmi.review_everything.model;
 
 
+import com.unibuc.fmi.review_everything.enums.Status;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

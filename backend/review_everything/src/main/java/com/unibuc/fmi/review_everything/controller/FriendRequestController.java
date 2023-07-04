@@ -1,9 +1,10 @@
 package com.unibuc.fmi.review_everything.controller;
 
 import com.unibuc.fmi.review_everything.dto.friendrequest.request.FriendRequestDto;
+import com.unibuc.fmi.review_everything.dto.friendrequest.request.FriendRequestStatusDto;
 import com.unibuc.fmi.review_everything.dto.friendrequest.response.FriendResponseDto;
 import com.unibuc.fmi.review_everything.dto.user.response.UserResponseDto;
-import com.unibuc.fmi.review_everything.model.Status;
+import com.unibuc.fmi.review_everything.enums.Status;
 import com.unibuc.fmi.review_everything.service.FriendRequestService;
 import com.unibuc.fmi.review_everything.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -34,8 +35,10 @@ public class FriendRequestController {
     }
 
     @PostMapping("/requests/{requestId}")
-    public ResponseEntity<Void> handleFriendRequest(@PathVariable Long requestId, @RequestParam Status status) {
-        friendRequestService.handleFriendRequest(requestId, status);
+    public ResponseEntity<Void> handleFriendRequest(
+            @PathVariable Long requestId,
+            @RequestBody FriendRequestStatusDto friendRequestStatusDto) {
+        friendRequestService.handleFriendRequest(requestId, friendRequestStatusDto);
         return ResponseEntity.ok().build();
     }
     @Secured({"ROLE_USER"})

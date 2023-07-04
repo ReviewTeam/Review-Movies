@@ -1,4 +1,4 @@
-package com.unibuc.fmi.review_everything.model;
+package com.unibuc.fmi.review_everything.enums;
 
 public enum Status {
     ACCEPTED,

@@ -2,10 +2,13 @@ package com.unibuc.fmi.review_everything.service;
 
 
 import com.unibuc.fmi.review_everything.dto.friendrequest.request.FriendRequestDto;
+import com.unibuc.fmi.review_everything.dto.friendrequest.request.FriendRequestStatusDto;
 import com.unibuc.fmi.review_everything.dto.friendrequest.response.FriendResponseDto;
 import com.unibuc.fmi.review_everything.dto.user.response.UserResponseDto;
+import com.unibuc.fmi.review_everything.exception.friendrequest.FriendRequestNotFoundException;
+import com.unibuc.fmi.review_everything.exception.user.UserNotFoundException;
 import com.unibuc.fmi.review_everything.model.FriendRequest;
-import com.unibuc.fmi.review_everything.model.Status;
+import com.unibuc.fmi.review_everything.enums.Status;
 import com.unibuc.fmi.review_everything.model.User;
 import com.unibuc.fmi.review_everything.repository.FriendRequestRepository;
 import com.unibuc.fmi.review_everything.repository.UserRepository;
@@ -17,7 +20,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -37,19 +39,20 @@ public class FriendRequestService {
     public List<FriendResponseDto> getFriendRequests(Long receiverId) {
         var receiver = userRepository.findById(receiverId).orElseThrow();
         var requests = friendRequestRepository.findByReceiverAndStatus(receiver, Status.WAITING);
-        return requests.stream()
-                .map(request -> modelMapper.map(request, FriendResponseDto.class))
-                .collect(Collectors.toList());
+        var listType = new TypeToken<List<FriendResponseDto>>() {}.getType();
+
+        return modelMapper.map(requests, listType);
     }
 
-    public void handleFriendRequest(Long requestId, Status status) {
-        var request = friendRequestRepository.findById(requestId).orElseThrow();
-        request.setStatus(status);
+    public FriendRequestDto handleFriendRequest(Long requestId, FriendRequestStatusDto friendRequestStatusDto) {
+        FriendRequest request = friendRequestRepository.findById(requestId).orElseThrow();
+        request.setStatus(Status.valueOf(friendRequestStatusDto.getStatus().name()));
         friendRequestRepository.save(request);
+        return modelMapper.map(request, FriendRequestDto.class);
     }
 
     public List<UserResponseDto> getFriends(Long userId) {
-        var user = userRepository.findById(userId).orElseThrow();
+        var user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
         List<User> friends = new ArrayList<>();
 
         var sentRequests = friendRequestRepository.findByReceiverAndStatus(user, Status.ACCEPTED);
@@ -65,6 +68,5 @@ public class FriendRequestService {
         var listType = new TypeToken<List<UserResponseDto>>() {}.getType();
         return modelMapper.map(friends, listType);
     }
-
 }
 
