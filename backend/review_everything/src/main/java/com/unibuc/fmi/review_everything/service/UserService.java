@@ -59,7 +59,7 @@ public class UserService {
 
         var loggedInUser = userRepository.findUserByUsername(loggedInUsername).orElseThrow(UserNotFoundException::new);
 
-        return getUserById(loggedInUser.getId());
+        return modelMapper.map(loggedInUser, UserResponseDto.class);
     }
 
     public List<UserResponseDto> findUsersByUsername(String username, int pageNumber, int pageSize) {
