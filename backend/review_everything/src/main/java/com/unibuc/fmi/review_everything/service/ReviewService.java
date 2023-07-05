@@ -5,6 +5,7 @@ import com.unibuc.fmi.review_everything.dto.review.response.ReviewResponseDto;
 import com.unibuc.fmi.review_everything.exception.movie.MovieNotFoundException;
 import com.unibuc.fmi.review_everything.exception.review.ReviewNotFoundException;
 import com.unibuc.fmi.review_everything.exception.user.UserNotFoundException;
+import com.unibuc.fmi.review_everything.model.Movie;
 import com.unibuc.fmi.review_everything.model.Review;
 import com.unibuc.fmi.review_everything.repository.MovieRepository;
 import com.unibuc.fmi.review_everything.repository.ReviewRepository;
@@ -25,13 +26,16 @@ public class ReviewService {
     private final ModelMapper modelMapper;
 
     public ReviewResponseDto addReview(Long userId, ReviewRequestDto reviewRequestDto) {
-        var user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
-        var movie = movieRepository.findById(reviewRequestDto.getMovieId()).orElseThrow(MovieNotFoundException::new);
+        var review = modelMapper.map(reviewRequestDto, Review.class);
+        review.setId(null);
 
-        var review = new Review();
-        review.setUser(user);
-        review.setRating(reviewRequestDto.getRating());
+        var movie = movieRepository.findById(reviewRequestDto.getMovieId()).orElseThrow(MovieNotFoundException::new);
+        var user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
+
         review.setMovie(movie);
+        review.setUser(user);
+
+        review.setRating(reviewRequestDto.getRating());
         review.setDescription(reviewRequestDto.getDescription());
 
         var savedReview = reviewRepository.save(review);
@@ -74,7 +78,6 @@ public class ReviewService {
         if (!review.getUser().equals(user)) {
             throw new ReviewNotFoundException();
         }
-
         reviewRepository.delete(review);
     }
 }
