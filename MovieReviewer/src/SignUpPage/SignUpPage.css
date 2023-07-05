@@ -1,0 +1,15 @@
+.signup-page {
+    height: 100vh; 
+  }
+  
+  .signup-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+  }
+  
+  .signup-element {
+    margin-bottom: 20px; 
+  }
+  

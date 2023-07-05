@@ -1,0 +1,56 @@
+
+
+.terms-agreement {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .terms-agreement-checkbox {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  .terms-agreement-checkbox input[type="checkbox"] {
+    display: none;
+  }
+  
+  .terms-agreement-checkbox label {
+    display: inline-block;
+    position: relative;
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    cursor: pointer;
+  }
+  
+  .terms-agreement-checkbox input[type="checkbox"]:checked + label::after {
+    content: url('../../assets/logos/CheckedBoxSVG.svg');
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .terms-agreement-checkbox label::after {
+    content: url('../../assets/logos/UncheckedBoxSVG.svg');
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+  }
+  
+  .terms-agreement-checkbox input[type="checkbox"]:hover + label::after {
+    opacity: 0.8;
+  }
+  
+  .terms-agreement-text {
+    font-size: 24px;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    color: black;
+  }
+  

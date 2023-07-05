@@ -6,13 +6,13 @@ import { Route, Routes } from 'react-router-dom'
 import PlaceHolder from './Profile/PlaceHolder'
 import ProfilePage from './Profile/ProfilePage'
 import ReviewBody from './Body/ReviewBody'
+import SignUpPage from './SignUpPage/SignUpPage'
 
 function App() {
   return (
     <>
-      <Navbar/>
       <Routes>
-        <Route path='/' element={<ReviewBody />}/>
+        <Route path='/' element={<SignUpPage />}/>
         <Route path='/profile/:username' element={<ProfilePage />}/>
       </Routes>
     </>
