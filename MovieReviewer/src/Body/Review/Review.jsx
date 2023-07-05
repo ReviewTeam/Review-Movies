@@ -48,11 +48,9 @@ function Review({id, imgSrc, imgAlt, movieName, score, userName, reviewText, rev
                             <span>{movieName}</span>
                         </div>
                         <div className="headerItem">
-                            <img src={star} alt="start" />
-                            <img src={star} alt="start" />
-                            <img src={star} alt="start" />
-                            <img src={star} alt="start" />
-                            <img src={star} alt="start" />
+                            {Array(score).fill(null).map((val, index) => (
+                                <img key={index} src={star} alt="start" />
+                            ))}
                         </div>
                         <div className="headerItem">
                             <span>{userName}</span>
