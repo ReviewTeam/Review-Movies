@@ -41,7 +41,6 @@ public class ReviewController {
         var userId = userService.getCurrentUser().getId();
         return ResponseEntity.ok(reviewService.updateReview(userId, reviewId, reviewRequestDto));
     }
-
     @DeleteMapping("/{reviewId}")
     public ResponseEntity<Void> deleteReview(@PathVariable Long reviewId) {
         var userId = userService.getCurrentUser().getId();
