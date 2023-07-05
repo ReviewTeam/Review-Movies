@@ -1,0 +1,18 @@
+.log-in-button {
+    background-color: #8E27F5;
+    color: white;
+    margin-right: 1vw;
+    width: 12vw;
+    height: 6vh;
+    border-style: solid;
+    border-radius: 20px;
+    border-color: white;
+    border-width: 0.75vh;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+  }
+  
