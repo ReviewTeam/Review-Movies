@@ -10,6 +10,9 @@ import EditProfile from "./Profile/EditProfile";
 import PersonPage from "./Person/PersonPage";
 import AddPerson from "./Person/AddPerson";
 import EditPerson from "./Person/EditPerson";
+import Movie from "./Movie/Movie";
+import AddMovie from "./Movie/AddMovie";
+import EditMovie from "./Movie/EditMovie";
 
 function App() {
   return (
@@ -22,7 +25,9 @@ function App() {
         <Route path="/person/:id" element={<PersonPage />} />
         <Route path="/person/:id/edit" element={<EditPerson />} />
         <Route path="/person/add" element={<AddPerson />} />
-        <Route path="/movie" element={<PlaceHolder />} />
+        <Route path="/movie/:id" element={<Movie />} />
+        <Route path="/movie/add" element={<AddMovie />} />
+        <Route path="/movie/:id/edit" element={<EditMovie />} />
       </Routes>
     </>
   );

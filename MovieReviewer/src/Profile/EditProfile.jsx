@@ -79,7 +79,12 @@ function EditProfile() {
                 className="mr-3"
                 style={{ width: "100px", height: "100px" }}
               />
-              <Button variant="outline-primary">Change</Button>
+              <Button
+                variant="outline-primary"
+                style={{ color: "#8e27f5", borderColor: "#8e27f5" }}
+              >
+                Change
+              </Button>
               <Form.Control type="file" onChange={handleFileChange} />
             </div>
           </Form.Group>
@@ -132,7 +137,11 @@ function EditProfile() {
             onChange={(e) => (e ? setPassword(e.target.value) : user.password)}
           />
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button
+          type="submit"
+          className="btn btn-primary"
+          style={{ backgroundColor: "#8e27f5" }}
+        >
           Save
         </button>
 

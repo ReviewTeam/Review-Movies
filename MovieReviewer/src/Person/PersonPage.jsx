@@ -21,10 +21,10 @@ function PersonPage() {
       birthdate: "1/1/1000",
     },
     {
-      id: "2",
+      id: "3",
       picture: { profilePic },
       firstname: "Person",
-      lastname: "2",
+      lastname: "3",
       birthdate: "1/1/1000",
     },
   ];
@@ -84,7 +84,7 @@ function PersonPage() {
             </ul>
           </Col>
         </Row>
-        <br></br>
+        <br />
         <Row>
           <center>
             <Link

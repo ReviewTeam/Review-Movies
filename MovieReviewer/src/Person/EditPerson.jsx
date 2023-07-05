@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import profilePic from "../assets/images/profile-pic.png";
+import HarryPotterMovie from "../assets/images/HarryPotterMovie.jpg";
 
 function EditPerson() {
   const { id } = useParams();
@@ -41,12 +42,17 @@ function EditPerson() {
             <Form.Label>Profile Picture:</Form.Label>
             <div className="d-flex align-items-center">
               <img
-                src={profilePic}
+                src={HarryPotterMovie}
                 alt="Profile"
                 className="mr-3"
                 style={{ width: "100px", height: "100px" }}
               />
-              <Button variant="outline-primary">Change</Button>
+              <Button
+                variant="outline-primary"
+                style={{ color: "#8e27f5", borderColor: "#8e27f5" }}
+              >
+                Change
+              </Button>
               <Form.Control type="file" onChange={handleFileChange} />
             </div>
           </Form.Group>
@@ -90,7 +96,11 @@ function EditPerson() {
             required
           />
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button
+          type="submit"
+          className="btn btn-primary"
+          style={{ backgroundColor: "#8e27f5" }}
+        >
           Save Changes
         </button>
 
