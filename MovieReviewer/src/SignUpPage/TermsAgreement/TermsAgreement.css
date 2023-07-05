@@ -14,7 +14,12 @@
   }
   
   .terms-agreement-checkbox input[type="checkbox"] {
-    display: none;
+    content: url('../../assets/logos/UncheckedBoxSVG.svg');
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
   }
   
   .terms-agreement-checkbox label {
@@ -32,6 +37,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    opacity: 1;
   }
   
   .terms-agreement-checkbox label::after {
@@ -40,7 +46,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    opacity: 0;
+    opacity: 1;
   }
   
   .terms-agreement-checkbox input[type="checkbox"]:hover + label::after {

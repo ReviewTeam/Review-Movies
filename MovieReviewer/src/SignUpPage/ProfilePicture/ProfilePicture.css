@@ -1,10 +1,11 @@
 .profile-picture {
-    width: 200px;
-    height: 200px;
-    margin-top: 50px;
+    width: 15vh;
+    height: 15vh;
+    margin-top: 4vh;
+    margin-bottom: 2vh;
     background-color: white;
-    border-radius: 25px;
-    border: 10px;
+    border-radius: 20px;
+    border: 1vh;
     border-color: #8E27F5;
     overflow: hidden;
   }

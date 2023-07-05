@@ -1,9 +1,9 @@
 .textbox{
     display: flex;
-    margin-top: 15px;
-    margin-bottom: 25px;
-    width: 600px;
-    border: 7px solid #717171;
+    margin-top: 1.25vh;
+    margin-bottom: 2vh;
+    width: 26vw;
+    border: 0.5vh solid #717171;
     border-radius: 30px;
     justify-content: center;
     align-items: center;
@@ -11,13 +11,14 @@
   }
 
   .textinput{
-    padding: 10px;
-    width: 500px;
+    padding: 1vh;
+    width: 22vw;
     font-family: 'Inter', sans-serif;
     font-weight: bold;
     text-align: center;
     color: black;
     font-size: 24px;
     border: none;
+    outline: none;
     justify-content: center;
   }

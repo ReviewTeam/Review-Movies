@@ -1,0 +1,17 @@
+.submit-button {
+    background-color: #8E27F5;
+    color: white;
+    margin-top: 2vh;
+    width: 12vw;
+    height: 6vh;
+    border: none;
+    border-radius: 20px;
+    padding: 1vh;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+  }
+  
