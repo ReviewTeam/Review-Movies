@@ -2,7 +2,10 @@ import Carousel from "./Carousel/Carousel";
 import './ReviewBody.css'
 import Feed from "./Feed/Feed";
 
-function ReviewBody({reviewsState, setReviewsState, searchReviewsState, setSearchReviewsState}) {
+function ReviewBody({searchValue, reviewsState, setReviewsState, searchedReviewsState, setSearchedReviewsState}) {
+
+    console.log("Search revieweul state-ul este: ", searchedReviewsState);
+    console.log(searchValue)
     return (
         <div className="body">
             <section className="carouselSection">
@@ -11,7 +14,7 @@ function ReviewBody({reviewsState, setReviewsState, searchReviewsState, setSearc
                 </div>
                 <Carousel />
             </section>
-            <Feed {...{reviewsState, setReviewsState}}/>
+            <Feed {...{searchValue, reviewsState, setReviewsState, searchedReviewsState, setSearchedReviewsState}}/>
         </div>
     )
 }

@@ -3,10 +3,10 @@ import searchBarIcon from '../../assets/logos/searchBarIcon.svg'
 import userSolid from '../../assets/logos/userSolid.svg'
 import './SearchBar.css'
 
-function SearchBar({searchValue, onChange, onClick}) {
+function SearchBar({searchValue, onChange}) {
     return (
         <div className="searchBar">
-            <button id="searchButton" onClick={onClick}>
+            <button id="searchButton">
                 <img src={searchBarIcon} className="logo" alt="Search icon" />
             </button>
             <input type="text" value={searchValue} onChange={onChange}/>

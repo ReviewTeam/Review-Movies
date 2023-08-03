@@ -1,4 +1,4 @@
-import Body from "../Body/ReviewBody"
+import ReviewBody from "../Body/ReviewBody"
 
 function HomePage() {
     return (
