@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Entity
 @NoArgsConstructor
@@ -35,4 +37,9 @@ public class User {
     @Lob
     @Column(nullable = true, columnDefinition = "LONGBLOB")
     private byte[] image;
+    @OneToMany(mappedBy = "sender")
+    private List<FriendRequest> sentRequests;
+
+    @OneToMany(mappedBy = "receiver")
+    private List<FriendRequest> receivedRequests;
 }
