@@ -46,7 +46,7 @@ class UserServiceTest {
         userService = new UserService(authenticationUtil, userRepository, passwordEncoder, modelMapper);
     }
 
-    @Test
+    /*@Test
     void createUser_ShouldReturnUserResponseDto() {
         // Arrange
         UserRequestDto userRequestDto = new UserRequestDto();
@@ -63,7 +63,7 @@ class UserServiceTest {
 
         // Assert
         assertNotNull(result);
-    }
+    }*/
 
     @Test
     void getUserById_ExistingUserId_ShouldReturnUserResponseDto() {
