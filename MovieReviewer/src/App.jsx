@@ -13,6 +13,7 @@ import EditPerson from "./Person/EditPerson";
 import Movie from "./Movie/Movie";
 import AddMovie from "./Movie/AddMovie";
 import EditMovie from "./Movie/EditMovie";
+import Register from "./Profile/Register";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/movie/:id" element={<Movie />} />
         <Route path="/movie/add" element={<AddMovie />} />
         <Route path="/movie/:id/edit" element={<EditMovie />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </>
   );
