@@ -17,9 +17,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@Slf4j
-@RequestMapping("api/v1/me/friends")
 @RequiredArgsConstructor
+@Slf4j
+@CrossOrigin(origins = "*")
+@RequestMapping("api/v1/me/friends")
 public class FriendRequestController {
     private final FriendRequestService friendRequestService;
     private final UserService userService;
