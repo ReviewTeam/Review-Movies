@@ -52,7 +52,7 @@ public class FriendRequestService {
         var user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
         List<User> friends = new ArrayList<>();
 
-        var sentRequests = friendRequestRepository.findByReceiverAndStatus(user, Status.ACCEPTED);
+        var sentRequests = friendRequestRepository.findBySenderAndStatus(user, Status.ACCEPTED);
         for (FriendRequest request : sentRequests) {
             if (!Objects.equals(request.getReceiver().getId(), userId) && !this.checkFriendIsAlreadyInList(friends, request.getReceiver())) {
                 friends.add(request.getReceiver());
