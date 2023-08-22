@@ -18,9 +18,9 @@ function Feed({searchValue, reviewsState, setReviewsState, searchedReviewsState,
                 return <Review key={id} id={id} {...newObject}/>
             })}
 
-            <h3>Add new review</h3>
+            {/* <h3>Add new review</h3>
             
-            <ReviewForm {...{setReviewsState}} />
+            <ReviewForm {...{setReviewsState}} /> */}
         </div>
     )
 }
