@@ -35,6 +35,7 @@ function Register() {
 
           localStorage.setItem("jwtToken", token);
 
+          // redirect to profile/home
           console.log(token);
         })
         .catch((error) => {
