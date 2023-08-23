@@ -25,10 +25,16 @@ public class UserController {
         return ResponseEntity.ok(userService.createUser(userRequestDto));
     }
 
-    @Secured({"ROLE_USER"})
+    /*@Secured({"ROLE_USER"})
     @GetMapping("/{userId}")
     public ResponseEntity<UserResponseDto> getUserById(@PathVariable Long userId) {
         return ResponseEntity.ok(userService.getUserById(userId));
+    }*/
+
+    @Secured({"ROLE_USER"})
+    @GetMapping("/{username}")
+    public ResponseEntity<UserResponseDto> getUserByUsername(@PathVariable String username) {
+        return ResponseEntity.ok(userService.getUserByUsername(username));
     }
 
     @Secured({"ROLE_USER"})

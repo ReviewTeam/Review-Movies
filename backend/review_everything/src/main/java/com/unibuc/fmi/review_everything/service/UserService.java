@@ -62,6 +62,11 @@ public class UserService {
         return modelMapper.map(loggedInUser, UserResponseDto.class);
     }
 
+    public UserResponseDto getUserByUsername(String username) {
+        var user = userRepository.findUserByUsername(username).orElseThrow(UserNotFoundException::new);
+
+        return modelMapper.map(user, UserResponseDto.class);
+    }
     public List<UserResponseDto> findUsersByUsername(String username, int pageNumber, int pageSize) {
         var pageable = PageRequest.of(pageNumber, pageSize);
         var users = userRepository.findUsersByUsernameContainingIgnoreCase(username, pageable);
