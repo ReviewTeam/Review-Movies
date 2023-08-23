@@ -1,7 +1,5 @@
 import Review from '../Review/Review'
-import HarryPotterMovie from '../../assets/images/HarryPotterMovie.jpg'
 import './Feed.css'
-import { ReviewForm } from '../ReviewForm/ReviewForm';
 
 function Feed({searchValue, reviewsState, setReviewsState, searchedReviewsState, setSearchedReviewsState}) {
     // console.log("array of reviews")
