@@ -16,8 +16,10 @@ function Register() {
   
     if (file) {
       const reader = new FileReader();
-      reader.onload = (event) => {
-        setImage(event.target.result); 
+  
+      reader.onload = function(event) {
+        const base64String = event.target.result.split(',')[1];
+        setImage(base64String);
       };
       reader.readAsDataURL(file);
     }
@@ -29,14 +31,13 @@ function Register() {
     setSuccessMessage("");
 
     try {
-      const imageData = image.split(',')[1];
       await axios.post("http://localhost:8080/api/v1/users", {
         firstName,
         lastName,
         email,
         username,
         password,
-        image: imageData
+        image
       });
       setSuccessMessage("Registration successful!");
 
@@ -50,6 +51,7 @@ function Register() {
 
           localStorage.setItem("jwtToken", token);
 
+          // redirect to profile/home
           console.log(token);
         })
         .catch((error) => {

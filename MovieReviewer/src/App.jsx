@@ -14,6 +14,7 @@ import Movie from "./Movie/Movie";
 import AddMovie from "./Movie/AddMovie";
 import EditMovie from "./Movie/EditMovie";
 import Register from "./Profile/Register";
+import Login from "./Profile/Login";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="/movie/add" element={<AddMovie />} />
         <Route path="/movie/:id/edit" element={<EditMovie />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </>
   );
