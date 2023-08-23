@@ -2,6 +2,7 @@ import Carousel from "./Carousel/Carousel";
 import './ReviewBody.css'
 import Feed from "./Feed/Feed";
 
+// eslint-disable-next-line react/prop-types
 function ReviewBody({searchValue, reviewsState, setReviewsState, searchedReviewsState, setSearchedReviewsState}) {
 
     console.log("Search revieweul state-ul este: ", searchedReviewsState);

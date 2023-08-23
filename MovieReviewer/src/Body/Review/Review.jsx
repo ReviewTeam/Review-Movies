@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import star from '../../assets/logos/star.svg'
+import like from '../../assets/logos/like.svg'
 import './Review.css'
 
-function Review({id, imgSrc, imgAlt, movieName, score, userName, reviewText, reviewsState, setReviewsState}) {
+function Review({id, imgSrc, imgAlt, movieName, score, userName, reviewText, likes, reviewsState, setReviewsState}) {
     // console.log(imgSrc)
     // console.log(imgAlt)
     // console.log(movieName)
@@ -35,6 +36,12 @@ function Review({id, imgSrc, imgAlt, movieName, score, userName, reviewText, rev
 
         setIsEditingState(!isEditingState)
     }
+
+    const onLiking = () => {
+        const newReviewsState = [...reviewsState];
+        newReviewsState[id].likes += 1;
+        setReviewsState(newReviewsState);
+    }
     
     return (
         <div className='flexContainer'>
@@ -58,9 +65,13 @@ function Review({id, imgSrc, imgAlt, movieName, score, userName, reviewText, rev
                             <span>{userName}</span>
                         </div>
                     </section>
-                    <section className="reviewText">
+                    <section className="reviewSection">
                         <span>{reviewText}</span>
-                        <button className="editReview" onClick={onEdit}>{!isEditingState ? "Edit" : "Save"}</button>
+                        <div className="editDiv">
+                            <img className="likeIcon" onClick={onLiking} src={like} alt="like" />
+                            <span>{likes}</span>
+                            <button className="editReview" onClick={onEdit}>{!isEditingState ? "Edit" : "Save"}</button>
+                        </div>
                     </section>
                 </section>
             </div>

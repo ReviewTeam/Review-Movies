@@ -34,7 +34,7 @@
     justify-content: center;
 }
 
-.headerItem, .reviewText {
+.headerItem, .reviewSection {
     flex: 1;
     flex-basis: 0;
     border: solid black 1px;
@@ -47,15 +47,36 @@
     border-right: solid black 1px;
 }
 
-.reviewText {
+.reviewSection {
     position: relative;
     border-top: 0;
     border-right: solid black 1px;
     padding: 2rem 0 0 2rem;
 }
 
-.editReview {
+.editDiv {
     position: absolute;
+    bottom: 0%;
+    right: 0%;
+}
+
+.likeIcon {
+    box-sizing: content-box;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    margin-right: 15px;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    transition: background 0.3s, padding 0.3s;
+}
+
+.likeIcon:hover {
+    background-color: cornflowerblue;
+    padding: 10px;
+}
+
+.editReview {
     padding: 2rem 1rem;
     background: #8E27F5;
     color: white;
@@ -63,8 +84,6 @@
     font-size: 2rem;
     font-weight: bold;
     letter-spacing: 2px;
-    bottom: 0%;
-    right: 0%;
     border: none;
     transition: background 0.3s, color 0.3s , border 0.3s;
 }

@@ -18,7 +18,8 @@ function App() {
           movieName: "Harry Potter",
           score: 10,
           userName: "user1",
-          reviewText: "One of the best movies ever made"
+          reviewText: "One of the best movies ever made",
+          likes: 0
       },
       {
           imgSrc: Inception,
@@ -26,7 +27,8 @@ function App() {
           movieName: "Inception",
           score: 10,
           userName: "user1",
-          reviewText: "Inception breaks the laws"
+          reviewText: "Inception breaks the laws",
+          likes: 0
       },
       {
           imgSrc: JohnWick1,
@@ -34,7 +36,8 @@ function App() {
           movieName: "John Wick",
           score: 10,
           userName: "user1",
-          reviewText: "Thanos should be afraid of him"
+          reviewText: "Thanos should be afraid of him",
+          likes: 0
       },
       {
           imgSrc: TheGodfatherI,
@@ -42,7 +45,8 @@ function App() {
           movieName: "God Father I",
           score: 10,
           userName: "user1",
-          reviewText: "He is your papa"
+          reviewText: "He is your papa",
+          likes: 0
       },
       {
         imgSrc: JohnWick1,
@@ -50,7 +54,8 @@ function App() {
         movieName: "John Wick",
         score: 10,
         userName: "user1",
-        reviewText: "Thanos should be afraid of him 2"
+        reviewText: "Thanos should be afraid of him 2",
+        likes: 0
       },
     ])
 
