@@ -7,8 +7,21 @@ function Register() {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [image, setImage] = useState(null);
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+  
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        setImage(event.target.result); 
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -16,12 +29,14 @@ function Register() {
     setSuccessMessage("");
 
     try {
+      const imageData = image.split(',')[1];
       await axios.post("http://localhost:8080/api/v1/users", {
         firstName,
         lastName,
         email,
         username,
         password,
+        image: imageData
       });
       setSuccessMessage("Registration successful!");
 
@@ -115,6 +130,19 @@ function Register() {
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="profileImage" className="form-label">
+            Profile Image
+          </label>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleFileChange}
+            className="form-control"
+            id="profileImage"
             required
           />
         </div>
