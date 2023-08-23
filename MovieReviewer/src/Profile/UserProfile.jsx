@@ -12,6 +12,7 @@ function UserProfile() {
     const token = localStorage.getItem("jwtToken"); // Retrieve the JWT token from storage
 
     if (token) {
+      // get the logged in user
       axios
         .get("http://localhost:8080/api/v1/me", {
           headers: {
@@ -27,7 +28,37 @@ function UserProfile() {
             email: response.data.email,
             score: 321,
           };
-          setUser(userData);
+
+          // check if the current profile page is the logged in user's profile page
+          if (userData.username === username) {
+            setUser(userData);
+          } else {
+            // if it is another user's profile page get that user's data
+            axios
+              .get(`http://localhost:8080/api/v1/users?username=${username}`, {
+                headers: {
+                  Authorization: `Bearer ${token}`, // Include the token in the 'Authorization' header
+                },
+              })
+              .then((response1) => {
+                console.log(response1);
+
+                const userData1 = {
+                  profilePic,
+                  username: response1.data.username,
+                  firstName: response1.data.firstName,
+                  lastName: response1.data.lastName,
+                  email: response1.data.email,
+                  score: 321,
+                };
+
+                setUser(userData1);
+              })
+              .catch((error) => {
+                console.error("Error fetching user data:", error);
+                setLoading(false);
+              });
+          }
 
           setLoading(false);
         })
