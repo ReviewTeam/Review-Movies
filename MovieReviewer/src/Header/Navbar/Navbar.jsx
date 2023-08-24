@@ -36,6 +36,10 @@ function Navbar() {
 
           setUser(userData);
           setUrl(`/profile/${userData.username}`);
+
+          if (userData.roles.split(",").length > 1) {
+            setIsAdmin(true);
+          }
         })
         .catch((error) => {
           console.error("Error fetching user data:", error);
@@ -43,10 +47,6 @@ function Navbar() {
     } else {
       // Handle the case where the user is not authenticated
       console.log("aici");
-    }
-
-    if (user && user.roles.split(",").length > 1) {
-      setIsAdmin(true);
     }
   }, []);
 
@@ -67,13 +67,13 @@ function Navbar() {
       )}
       {isAdmin && (
         <Link to="/person/add" style={{ color: "white" }}>
-          Add Movie
+          Add Person
         </Link>
       )}
       {/* Go to the user profile by clicking on the user slot */}
       {user && (
         <Link to={url} style={{ textDecoration: "none" }}>
-          <UserSlot />
+          <UserSlot username={user.username} score={user.score} />
         </Link>
       )}
 

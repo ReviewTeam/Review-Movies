@@ -67,7 +67,7 @@ function UserProfile() {
           setLoading(false);
         });
     }
-  }, []);
+  }, [username]);
 
   if (loading) {
     return <div>Loading...</div>;

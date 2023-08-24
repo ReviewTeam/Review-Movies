@@ -6,11 +6,27 @@ function AddPerson() {
   const [lastName, setLastName] = useState("");
   const [birthdate, setBirthdate] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
-    // Handle form submission here (e.g., send data to backend or update state)
-    // You can access the entered data using the state variables (picture, firstName, lastName, birthdate)
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    setSuccessMessage("");
+
+    try {
+      await axios.post("http://localhost:8080/api/v1/persons", {
+        headers: {
+          Authorization: `Bearer ${token}`, // Include the token in the 'Authorization' header
+        },
+        firstName,
+        lastName,
+        birthdate,
+      });
+      setSuccessMessage("Person added!");
+    } catch (error) {
+      setError("Error. Please try again.");
+    }
 
     // Reset the form after submission
     setPicture("");
@@ -38,6 +54,10 @@ function AddPerson() {
 
   return (
     <div className="container">
+      {error && <div className="alert alert-danger">{error}</div>}
+      {successMessage && (
+        <div className="alert alert-success">{successMessage}</div>
+      )}
       <br />
       <center>
         <h1>Add Person</h1>
