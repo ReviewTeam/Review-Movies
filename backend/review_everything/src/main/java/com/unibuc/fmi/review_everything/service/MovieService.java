@@ -66,5 +66,10 @@ public class MovieService {
 
         return modelMapper.map(movie, MovieResponseDto.class);
     }
+
+    public void deleteMovie(Long movieId) {
+        var movie = movieRepository.findById(movieId).orElseThrow(MovieNotFoundException::new);
+        movieRepository.delete(movie);
+    }
 }
 

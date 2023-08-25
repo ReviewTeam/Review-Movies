@@ -5,13 +5,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(code = HttpStatus.NOT_FOUND)
-public class FriendRequestNotFoundException extends RuntimeException {
-    private static final String DEFAULT_MESSAGE = "Friend Request not found";
-    public FriendRequestNotFoundException() {
+
+public class FriendRequestAlreadyExistsException extends RuntimeException {
+    private static final String DEFAULT_MESSAGE = "Friend Request already exists";
+    public FriendRequestAlreadyExistsException() {
         super(DEFAULT_MESSAGE);
     }
 
-    public FriendRequestNotFoundException(String message) {
+    public FriendRequestAlreadyExistsException(String message) {
         super(message);
     }
 }

@@ -50,4 +50,11 @@ public class PersonController {
             @RequestBody @Valid PersonRequestDto personRequestDto) {
         return ResponseEntity.ok(personService.updatePerson(personId, personRequestDto));
     }
+
+    @Secured({"ROLE_ADMIN"})
+    @DeleteMapping("/{personId}")
+    public ResponseEntity<Void> deletePerson(@PathVariable Long personId) {
+        personService.deletePerson(personId);
+        return ResponseEntity.noContent().build();
+    }
 }

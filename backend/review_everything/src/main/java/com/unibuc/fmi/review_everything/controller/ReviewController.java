@@ -22,6 +22,7 @@ public class ReviewController {
     private final ReviewService reviewService;
     private final UserService userService;
 
+    @Secured({"ROLE_USER"})
     @PostMapping
     public ResponseEntity<ReviewResponseDto> addReview(
             @RequestBody @Valid ReviewRequestDto reviewRequestDto) {
@@ -35,6 +36,7 @@ public class ReviewController {
         return ResponseEntity.ok(reviewService.getUserReviews(userId));
     }
 
+    @Secured({"ROLE_USER"})
     @PutMapping("/{reviewId}")
     public ResponseEntity<ReviewResponseDto> updateReview(
             @PathVariable Long reviewId,
@@ -42,6 +44,8 @@ public class ReviewController {
         var userId = userService.getCurrentUser().getId();
         return ResponseEntity.ok(reviewService.updateReview(userId, reviewId, reviewRequestDto));
     }
+
+    @Secured({"ROLE_USER"})
     @DeleteMapping("/{reviewId}")
     public ResponseEntity<Void> deleteReview(@PathVariable Long reviewId) {
         var userId = userService.getCurrentUser().getId();

@@ -25,6 +25,7 @@ public class FriendRequestController {
     private final FriendRequestService friendRequestService;
     private final UserService userService;
 
+    @Secured({"ROLE_USER"})
     @PostMapping("/{userId}")
     public ResponseEntity<Void> sendFriendRequest(@PathVariable Long userId) {
         var friendRequestDto = new FriendRequestDto(userService.getCurrentUser().getId(), userId);
@@ -51,4 +52,20 @@ public class FriendRequestController {
     public ResponseEntity<List<UserResponseDto>> getFriends() {
         return ResponseEntity.ok(friendRequestService.getFriends(userService.getCurrentUser().getId()));
     }
+
+    @Secured({"ROLE_USER"})
+    @DeleteMapping("/requests/{requestId}")
+    public ResponseEntity<Void> DeleteFriendRequest(@PathVariable Long requestId) {
+        friendRequestService.deleteFriendRequest(requestId);
+        return ResponseEntity.ok().build();
+    }
+
+    @Secured({"ROLE_USER"})
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<Void> DeleteFriend(@PathVariable Long userId) {
+        friendRequestService.deleteFriend(userId);
+        return ResponseEntity.ok().build();
+    }
+
+
 }

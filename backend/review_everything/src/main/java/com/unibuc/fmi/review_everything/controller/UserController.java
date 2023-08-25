@@ -45,4 +45,11 @@ public class UserController {
             @RequestParam(name = "page-size", required = false, defaultValue = "10") int pageSize){
         return ResponseEntity.ok(userService.findUsersByUsername(username, pageNumber, pageSize));
     }
+
+    @Secured({"ROLE_ADMIN"})
+    @DeleteMapping("/{username}")
+    public ResponseEntity<Void> deleteUser(@PathVariable String username) {
+        userService.deleteUser(username);
+        return ResponseEntity.noContent().build();
+    }
 }

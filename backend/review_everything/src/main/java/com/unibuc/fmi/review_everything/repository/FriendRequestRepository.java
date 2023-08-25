@@ -10,4 +10,5 @@ import java.util.List;
 public interface FriendRequestRepository extends JpaRepository<FriendRequest, Long> {
     List<FriendRequest> findByReceiverAndStatus(User receiver, Status status);
     List<FriendRequest> findBySenderAndStatus(User sender, Status status);
+    List<FriendRequest> findBySenderAndReceiverAndStatus(User sender, User receiver, Status status);
 }

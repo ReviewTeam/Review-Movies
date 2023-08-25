@@ -52,4 +52,12 @@ public class MovieController {
         return ResponseEntity.ok(movieService.addActorToMovie(movieId, personIdRequestDto));
     }
 
+    @Secured({"ROLE_ADMIN"})
+    @DeleteMapping("/{movieId}")
+    public ResponseEntity<Void> deleteMovie(@PathVariable Long movieId) {
+        movieService.deleteMovie(movieId);
+        return ResponseEntity.noContent().build();
+    }
+
+
 }

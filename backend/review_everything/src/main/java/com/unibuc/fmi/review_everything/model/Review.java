@@ -14,13 +14,13 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     private User user;
 
     @Column(nullable = false)
     private int rating;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     private Movie movie;
 
     @Column(nullable = false)

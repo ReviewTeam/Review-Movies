@@ -4,6 +4,11 @@ package com.unibuc.fmi.review_everything.service;
 import com.unibuc.fmi.review_everything.dto.friendrequest.request.FriendRequestDto;
 import com.unibuc.fmi.review_everything.dto.friendrequest.request.FriendRequestStatusDto;
 import com.unibuc.fmi.review_everything.dto.user.response.UserResponseDto;
+import com.unibuc.fmi.review_everything.exception.friendrequest.FriendNotFoundException;
+import com.unibuc.fmi.review_everything.exception.friendrequest.FriendRequestAlreadyExistsException;
+import com.unibuc.fmi.review_everything.exception.friendrequest.FriendRequestBadRequestException;
+import com.unibuc.fmi.review_everything.exception.friendrequest.FriendRequestNotFoundException;
+import com.unibuc.fmi.review_everything.exception.movie.MovieNotFoundException;
 import com.unibuc.fmi.review_everything.exception.user.UserNotFoundException;
 import com.unibuc.fmi.review_everything.model.FriendRequest;
 import com.unibuc.fmi.review_everything.enums.Status;
@@ -27,10 +32,24 @@ public class FriendRequestService {
     private final UserRepository userRepository;
     private final FriendRequestRepository friendRequestRepository;
     private final ModelMapper modelMapper;
+    private final UserService userService;
 
     public void sendFriendRequest(FriendRequestDto friendRequestDto) {
-        var sender = userRepository.findById(friendRequestDto.getSenderId()).orElseThrow();
-        var receiver = userRepository.findById(friendRequestDto.getReceiverId()).orElseThrow();
+        var sender = userRepository.findById(friendRequestDto.getSenderId()).orElseThrow(UserNotFoundException::new);
+        var receiver = userRepository.findById(friendRequestDto.getReceiverId()).orElseThrow(UserNotFoundException::new);
+
+        if (friendRequestDto.getSenderId().equals(friendRequestDto.getReceiverId())) {
+            throw new FriendRequestBadRequestException();
+        }
+
+        List<FriendRequest> existingWaitingRequests1 = friendRequestRepository.findBySenderAndReceiverAndStatus(sender, receiver, Status.WAITING);
+        List<FriendRequest> existingAcceptedRequests1 = friendRequestRepository.findBySenderAndReceiverAndStatus(sender, receiver, Status.ACCEPTED);
+        List<FriendRequest> existingWaitingRequests2 = friendRequestRepository.findBySenderAndReceiverAndStatus(receiver, sender, Status.WAITING);
+        List<FriendRequest> existingAcceptedRequests2 = friendRequestRepository.findBySenderAndReceiverAndStatus(receiver, sender, Status.ACCEPTED);
+        if (!existingWaitingRequests1.isEmpty() || !existingAcceptedRequests1.isEmpty() || !existingWaitingRequests2.isEmpty() || !existingAcceptedRequests2.isEmpty()) {
+            throw new FriendRequestAlreadyExistsException();
+        }
+
         var friendRequest = new FriendRequest(null, sender, receiver, Status.WAITING);
         friendRequestRepository.save(friendRequest);
     }
@@ -42,7 +61,7 @@ public class FriendRequestService {
     }
 
     public FriendRequestDto handleFriendRequest(Long requestId, FriendRequestStatusDto friendRequestStatusDto) {
-        FriendRequest request = friendRequestRepository.findById(requestId).orElseThrow();
+        FriendRequest request = friendRequestRepository.findById(requestId).orElseThrow(FriendRequestNotFoundException::new);
         request.setStatus(Status.valueOf(friendRequestStatusDto.getStatus().name()));
         friendRequestRepository.save(request);
         return modelMapper.map(request, FriendRequestDto.class);
@@ -76,5 +95,26 @@ public class FriendRequestService {
         return friendRequestIds.contains(friend.getId());
     }
 
+    public void deleteFriendRequest(Long requestId) {
+        var friendRequest = friendRequestRepository.findById(requestId).orElseThrow(FriendRequestNotFoundException::new);
+        if(friendRequest.getStatus() == Status.WAITING) {
+            friendRequestRepository.delete(friendRequest);
+        }
+        else throw new FriendRequestNotFoundException();
+    }
+
+    public void deleteFriend(Long userId) {
+        var friendRequestDto = new FriendRequestDto(userService.getCurrentUser().getId(), userId);
+        var sender = userRepository.findById(friendRequestDto.getSenderId()).orElseThrow(UserNotFoundException::new);
+        var receiver = userRepository.findById(friendRequestDto.getReceiverId()).orElseThrow(UserNotFoundException::new);
+        List<FriendRequest> existingAcceptedRequests1 = friendRequestRepository.findBySenderAndReceiverAndStatus(sender, receiver, Status.ACCEPTED);
+        List<FriendRequest> existingAcceptedRequests2 = friendRequestRepository.findBySenderAndReceiverAndStatus(receiver, sender, Status.ACCEPTED);
+
+        if (!existingAcceptedRequests1.isEmpty() || !existingAcceptedRequests2.isEmpty()) {
+            friendRequestRepository.deleteAll(existingAcceptedRequests1);
+            friendRequestRepository.deleteAll(existingAcceptedRequests2);
+        }
+        else throw new FriendNotFoundException();
+    }
 }
 

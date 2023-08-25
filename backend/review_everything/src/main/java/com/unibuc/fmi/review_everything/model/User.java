@@ -37,9 +37,9 @@ public class User {
     @Lob
     @Column(nullable = true, columnDefinition = "LONGBLOB")
     private byte[] image;
-    @OneToMany(mappedBy = "sender")
+    @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL)
     private List<FriendRequest> sentRequests;
 
-    @OneToMany(mappedBy = "receiver")
+    @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL)
     private List<FriendRequest> receivedRequests;
 }

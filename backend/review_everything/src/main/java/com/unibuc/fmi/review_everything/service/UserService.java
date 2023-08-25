@@ -90,4 +90,9 @@ public class UserService {
 
         return modelMapper.map(updatedUser, UserResponseDto.class);
     }
+
+    public void deleteUser(String username) {
+        var user = userRepository.findUserByUsername(username).orElseThrow(UserNotFoundException::new);
+        userRepository.delete(user);
+    }
 }
