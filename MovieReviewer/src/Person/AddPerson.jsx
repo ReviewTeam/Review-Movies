@@ -9,30 +9,36 @@ function AddPerson() {
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
+  const token = localStorage.getItem("jwtToken"); // Retrieve the JWT token from storage
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setSuccessMessage("");
 
-    try {
-      await axios.post("http://localhost:8080/api/v1/persons", {
-        headers: {
-          Authorization: `Bearer ${token}`, // Include the token in the 'Authorization' header
-        },
-        firstName,
-        lastName,
-        birthdate,
-      });
-      setSuccessMessage("Person added!");
-    } catch (error) {
-      setError("Error. Please try again.");
-    }
+    if (token) {
+      try {
+        console.log(firstName, lastName, birthdate);
 
-    // Reset the form after submission
-    setPicture("");
-    setFirstName("");
-    setLastName("");
-    setBirthdate("");
+        await axios.post("http://localhost:8080/api/v1/persons", {
+          headers: {
+            Authorization: `Bearer ${token}`, // Include the token in the 'Authorization' header
+          },
+          firstName,
+          lastName,
+          birthdate,
+        });
+        setSuccessMessage("Person added!");
+      } catch (error) {
+        setError("Error. Please try again.");
+      }
+
+      // Reset the form after submission
+      // setPicture("");
+      // setFirstName("");
+      // setLastName("");
+      // setBirthdate("");
+    }
   };
 
   const handlePictureChange = (e) => {
@@ -48,8 +54,7 @@ function AddPerson() {
 
   // Handle cancel button click
   const handleCancel = () => {
-    // Redirect the user back to the profile page without saving any changes
-    window.location.href = `/person/${id}`;
+    window.location.href = `/`;
   };
 
   return (

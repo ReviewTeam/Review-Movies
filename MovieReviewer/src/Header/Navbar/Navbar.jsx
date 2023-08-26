@@ -8,9 +8,10 @@ import axios from "axios";
 import profilePic from "../../assets/images/profile-pic.png";
 
 function Navbar() {
-  const token = localStorage.getItem("jwtToken"); // Retrieve the JWT token from storage
   const [user, setUser] = useState(null);
   const [url, setUrl] = useState("/");
+
+  const token = localStorage.getItem("jwtToken"); // Retrieve the JWT token from storage
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
