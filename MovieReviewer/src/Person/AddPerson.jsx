@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import axios from "axios";
+import profilePic from "../assets/images/profile-pic.png";
+import { useState } from "react";
 
 function AddPerson() {
   const [picture, setPicture] = useState("");
@@ -30,6 +32,7 @@ function AddPerson() {
         });
         setSuccessMessage("Person added!");
       } catch (error) {
+        console.log(error);
         setError("Error. Please try again.");
       }
 
