@@ -173,7 +173,9 @@ function AddMovie() {
             required
           />
         </div> */}
-        <div className="mb-3">
+
+        {/* imagine */}
+        {/* <div className="mb-3">
           <label htmlFor="image" className="form-label">
             Poster:
           </label>
@@ -191,7 +193,8 @@ function AddMovie() {
             <label>Preview:</label>
             <img src={image} alt="Preview" style={{ maxWidth: "200px" }} />
           </div>
-        )}
+        )} */}
+
         <div className="mb-3">
           <label htmlFor="description" className="form-label">
             Description:

@@ -6,6 +6,7 @@ import "./Navbar.css";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import profilePic from "../../assets/images/profile-pic.png";
+import { Button } from "react-bootstrap";
 
 function Navbar() {
   const [user, setUser] = useState(null);
@@ -51,7 +52,10 @@ function Navbar() {
     }
   }, []);
 
-  console.log(isAdmin);
+  function logout() {
+    localStorage.removeItem("jwtToken");
+    window.location.href = `/`;
+  }
 
   return (
     <nav>
@@ -71,6 +75,9 @@ function Navbar() {
           Add Person
         </Link>
       )}
+
+      {user && <Button onClick={logout}>Logout</Button>}
+
       {/* Go to the user profile by clicking on the user slot */}
       {user && (
         <Link to={url} style={{ textDecoration: "none" }}>

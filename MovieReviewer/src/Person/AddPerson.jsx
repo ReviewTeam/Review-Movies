@@ -71,7 +71,7 @@ function AddPerson() {
         <h1>Add Person</h1>
       </center>
       <form onSubmit={handleSubmit}>
-        <div className="mb-3">
+        {/* <div className="mb-3">
           <label htmlFor="picture" className="form-label">
             Picture:
           </label>
@@ -89,7 +89,7 @@ function AddPerson() {
             <label>Preview:</label>
             <img src={picture} alt="Preview" style={{ maxWidth: "200px" }} />
           </div>
-        )}
+        )} */}
         <div className="mb-3">
           <label htmlFor="firstName" className="form-label">
             First Name:
