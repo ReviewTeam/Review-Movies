@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useState } from 'react'
 import star from '../../assets/logos/star.svg'
 import like from '../../assets/logos/like.svg'
@@ -52,7 +53,9 @@ function Review({id, imgSrc, imgAlt, movieName, score, userName, reviewText, lik
                 <section className="reviewSectionBody">
                     <section className="reviewSectionHeader">
                         <div className="headerItem">
+                           <Link to="/movie/1">
                             <span>{movieName}</span>
+                            </Link>
                         </div>
                         <div className="headerItem">
                             <img src={star} alt="start" />
@@ -62,7 +65,9 @@ function Review({id, imgSrc, imgAlt, movieName, score, userName, reviewText, lik
                             <img src={star} alt="start" />
                         </div>
                         <div className="headerItem">
+                          <Link to="/profile/user1">
                             <span>{userName}</span>
+                          </Link>
                         </div>
                     </section>
                     <section className="reviewSection">
@@ -81,4 +86,4 @@ function Review({id, imgSrc, imgAlt, movieName, score, userName, reviewText, lik
     )
 }
 
-export default Review
+export default Review;
