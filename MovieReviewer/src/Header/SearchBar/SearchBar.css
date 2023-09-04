@@ -40,3 +40,13 @@
 /* .searchBar input:focus {
     border-bottom: black solid 2px; 
 } */
+
+#searchButton {
+    border: none;
+    background: none;
+}
+
+#searchButton:focus {
+    border: none;
+    outline: none;
+}
