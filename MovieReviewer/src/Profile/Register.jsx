@@ -51,7 +51,7 @@ function Register() {
 
           localStorage.setItem("jwtToken", token);
 
-          // redirect to profile/home
+          window.location.href = `/`;
           console.log(token);
         })
         .catch((error) => {

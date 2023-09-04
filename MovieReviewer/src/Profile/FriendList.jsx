@@ -9,7 +9,7 @@ function FirendList() {
   };
 
   // get the friend list of the current user
-  const friendList = friends[0];
+  const friendList = friends[user.username];
 
   return (
     <>

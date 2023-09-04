@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import axios from "axios";
+import profilePic from "../assets/images/profile-pic.png";
+import { useState } from "react";
 
 function AddPerson() {
   const [picture, setPicture] = useState("");
@@ -6,17 +8,40 @@ function AddPerson() {
   const [lastName, setLastName] = useState("");
   const [birthdate, setBirthdate] = useState("");
 
-  const handleSubmit = (e) => {
+  const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+
+  const token = localStorage.getItem("jwtToken"); // Retrieve the JWT token from storage
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
+    setSuccessMessage("");
 
-    // Handle form submission here (e.g., send data to backend or update state)
-    // You can access the entered data using the state variables (picture, firstName, lastName, birthdate)
+    if (token) {
+      try {
+        console.log(firstName, lastName, birthdate);
 
-    // Reset the form after submission
-    setPicture("");
-    setFirstName("");
-    setLastName("");
-    setBirthdate("");
+        await axios.post("http://localhost:8080/api/v1/persons", {
+          headers: {
+            Authorization: `Bearer ${token}`, // Include the token in the 'Authorization' header
+          },
+          firstName,
+          lastName,
+          birthdate,
+        });
+        setSuccessMessage("Person added!");
+      } catch (error) {
+        console.log(error);
+        setError("Error. Please try again.");
+      }
+
+      // Reset the form after submission
+      // setPicture("");
+      // setFirstName("");
+      // setLastName("");
+      // setBirthdate("");
+    }
   };
 
   const handlePictureChange = (e) => {
@@ -32,12 +57,15 @@ function AddPerson() {
 
   // Handle cancel button click
   const handleCancel = () => {
-    // Redirect the user back to the profile page without saving any changes
-    window.location.href = `/person/${id}`;
+    window.location.href = `/`;
   };
 
   return (
     <div className="container">
+      {error && <div className="alert alert-danger">{error}</div>}
+      {successMessage && (
+        <div className="alert alert-success">{successMessage}</div>
+      )}
       <br />
       <center>
         <h1>Add Person</h1>

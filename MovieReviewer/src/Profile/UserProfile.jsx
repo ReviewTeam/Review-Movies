@@ -12,6 +12,7 @@ function UserProfile() {
     const token = localStorage.getItem("jwtToken"); // Retrieve the JWT token from storage
 
     if (token) {
+      // get the logged in user
       axios
         .get("http://localhost:8080/api/v1/me", {
           headers: {
@@ -27,8 +28,8 @@ function UserProfile() {
             email: response.data.email,
             score: 321,
           };
-          setUser(userData);
 
+          setUser(userData);
           setLoading(false);
         })
         .catch((error) => {
@@ -39,11 +40,41 @@ function UserProfile() {
       // Handle the case where the user is not authenticated
       setLoading(false);
     }
-  }, []);
+
+    // check if the current profile page is the logged in user's profile page
+    if (!user || user.username != username) {
+      // if it is another user's profile page get that user's data
+      axios
+        .get(`http://localhost:8080/api/v1/users?username=${username}`, {
+          headers: {
+            Authorization: `Bearer ${token}`, // Include the token in the 'Authorization' header
+          },
+        })
+        .then((response1) => {
+          const userData1 = {
+            profilePic,
+            username: response1.data[0].username,
+            firstName: response1.data[0].firstName,
+            lastName: response1.data[0].lastName,
+            email: response1.data[0].email,
+            score: 321,
+          };
+
+          setUser((prevUser) => ({ ...prevUser, ...userData1 }));
+        })
+        .catch((error) => {
+          console.error("Error fetching user data:", error);
+          setLoading(false);
+        });
+    }
+  }, [username]);
 
   if (loading) {
     return <div>Loading...</div>;
   }
+
+  console.log("USER");
+  console.log(user);
 
   return (
     <div className="profile bg-light p-3">

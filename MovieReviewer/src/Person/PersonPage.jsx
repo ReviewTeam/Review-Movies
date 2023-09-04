@@ -1,9 +1,39 @@
 import { useParams, Link } from "react-router-dom";
 import profilePic from "../assets/images/profile-pic.png";
 import { Container, Row, Col } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 function PersonPage() {
   const { id } = useParams();
+
+  const token = localStorage.getItem("jwtToken"); // Retrieve the JWT token from storage
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    if (token) {
+      // get the logged in user to check if it is an admin
+      axios
+        .get("http://localhost:8080/api/v1/me", {
+          headers: {
+            Authorization: `Bearer ${token}`, // Include the token in the 'Authorization' header
+          },
+        })
+        .then((response) => {
+          console.log(response);
+
+          if (response.data.authorizationRoles.split(",").length > 1) {
+            setIsAdmin(true);
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching user data:", error);
+        });
+    } else {
+      // Handle the case where the user is not authenticated
+      console.log("aici");
+    }
+  }, []);
 
   const people = [
     {
@@ -86,22 +116,24 @@ function PersonPage() {
         </Row>
         <br />
         <Row>
-          <center>
-            <Link
-              to={{
-                pathname: `/person/${person.id}/edit`,
-              }}
-              style={{ textDecoration: "none" }}
-            >
-              <button
-                type="button"
-                class="btn btn-primary"
-                style={{ backgroundColor: "#8e27f5" }}
+          {isAdmin && (
+            <center>
+              <Link
+                to={{
+                  pathname: `/person/${person.id}/edit`,
+                }}
+                style={{ textDecoration: "none" }}
               >
-                Edit
-              </button>
-            </Link>
-          </center>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  style={{ backgroundColor: "#8e27f5" }}
+                >
+                  Edit
+                </button>
+              </Link>
+            </center>
+          )}
         </Row>
       </Container>
     </>

@@ -2,55 +2,71 @@ import { useParams } from "react-router-dom";
 import profilePic from "../assets/images/profile-pic.png";
 import { useEffect, useState } from "react";
 import { Form, Button } from "react-bootstrap";
+import axios from "axios";
 
 function EditProfile() {
   const { username } = useParams();
 
-  // Dummy users
-  const users = [
-    {
-      picture: { profilePic },
-      username: "user1",
-      firstName: "User",
-      lastName: "1",
-      email: "user1@example.com",
-      score: 999,
-    },
-    {
-      picture: { profilePic },
-      username: "user2",
-      firstName: "User",
-      lastName: "2",
-      email: "user2@example.com",
-      score: 123,
-    },
-    {
-      picture: { profilePic },
-      username: "user3",
-      firstName: "User",
-      lastName: "3",
-      email: "user3@example.com",
-      score: 321,
-    },
-  ];
-
-  // find the user
-  let user;
-  for (let i = 0; i < users.length; i++) {
-    if (users[i].username === username) {
-      user = users[i];
-    }
-  }
-
-  const [picture, setPicture] = useState(user.picture);
-  const [firstName, setFirstName] = useState(user.firstName);
-  const [lastName, setLastName] = useState(user.lastName);
-  const [email, setEmail] = useState(user.email);
+  const [picture, setPicture] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [user, setUser] = useState(null);
+
+  const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+
+  const token = localStorage.getItem("jwtToken"); // Retrieve the JWT token from storage
+
+  useEffect(() => {
+    if (token) {
+      // get the logged in user
+      axios
+        .get("http://localhost:8080/api/v1/me", {
+          headers: {
+            Authorization: `Bearer ${token}`, // Include the token in the 'Authorization' header
+          },
+        })
+        .then((response) => {
+          setPicture(profilePic);
+          setFirstName(response.data.firstName);
+          setLastName(response.data.lastName);
+          setEmail(response.data.email);
+        })
+        .catch((error) => {
+          console.error("Error fetching user data:", error);
+        });
+    } else {
+      // Handle the case where the user is not authenticated
+    }
+  }, []);
+
+  // console.log(user);
 
   // Handle form submission
-  const handleSubmit = (e) => {
-    // to do
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    setSuccessMessage("");
+
+    try {
+      await axios.put("http://localhost:8080/api/v1/me", {
+        headers: {
+          // "Content-Type": "application/json", // or other content types
+          Authorization: `Bearer ${token}`, // Include the token in the 'Authorization' header
+        },
+        firstName,
+        lastName,
+        email,
+        password,
+      });
+      setSuccessMessage("Profile edited!");
+      window.location.href = `/profile/${username}`;
+    } catch (error) {
+      console.log(error);
+      setError("Error!");
+    }
   };
 
   // Handle cancel button click
@@ -68,6 +84,10 @@ function EditProfile() {
   return (
     <div className="container">
       <h2>Edit Profile</h2>
+      {error && <div className="alert alert-danger">{error}</div>}
+      {successMessage && (
+        <div className="alert alert-success">{successMessage}</div>
+      )}
       <form onSubmit={handleSubmit}>
         <Form onSubmit={handleSubmit}>
           <Form.Group>
@@ -113,18 +133,7 @@ function EditProfile() {
             onChange={(e) => setLastName(e.target.value)}
           />
         </div>
-        <div className="mb-3">
-          <label htmlFor="email" className="form-label">
-            Email
-          </label>
-          <input
-            type="email"
-            className="form-control"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
+
         <div className="mb-3">
           <label htmlFor="password" className="form-label">
             Change Password
@@ -134,7 +143,7 @@ function EditProfile() {
             className="form-control"
             id="password"
             value={password}
-            onChange={(e) => (e ? setPassword(e.target.value) : user.password)}
+            onChange={(e) => (e ? setPassword(e.target.value) : password)}
           />
         </div>
         <button

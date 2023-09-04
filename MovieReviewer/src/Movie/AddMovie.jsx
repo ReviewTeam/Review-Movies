@@ -27,25 +27,48 @@ function AddMovie() {
   ];
 
   const [title, setTitle] = useState("");
-  const [director, setDirector] = useState("");
-  const [actors, setActors] = useState("");
-  const [genre, setGenre] = useState("");
-  const [poster, setPoster] = useState("");
-  const [description, setDescription] = useState("");
+  const [directorId, setDirectorId] = useState("");
+  const [actorId, setActorId] = useState("");
+  // const [genre, setGenre] = useState("");
+  const [image, setImage] = useState("");
+  const [shortDescription, setShortDescription] = useState("");
+  const [year, setYear] = useState("");
 
-  const handleSubmit = (e) => {
+  const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+
+  const token = localStorage.getItem("jwtToken"); // Retrieve the JWT token from storage
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Handle form submission here (e.g., send data to backend or update state)
-    // You can access the entered data using the state variables
-
-    // Reset the form after submission
-    setTitle("");
-    setDirector("");
-    setActors("");
-    setGenre("");
-    setPoster("");
-    setDescription("");
+    setError("");
+    setSuccessMessage("");
+    if (token) {
+      try {
+        console.log(firstName, lastName, birthdate);
+        await axios.post("http://localhost:8080/api/v1/movies", {
+          headers: {
+            Authorization: `Bearer ${token}`, // Include the token in the 'Authorization' header
+          },
+          title,
+          shortDescription,
+          year,
+          directorId,
+          actorId,
+          image,
+        });
+        setSuccessMessage("Movie added!");
+      } catch (error) {
+        setError("Error. Please try again.");
+      }
+      setTitle("");
+      setDirectorId("");
+      setActorId("");
+      // setGenre("");
+      setImage("");
+      setShortDescription("");
+      setYear("");
+    }
   };
 
   const handlePictureChange = (e) => {
@@ -61,14 +84,17 @@ function AddMovie() {
 
   // Handle cancel button click
   const handleCancel = () => {
-    // Redirect the user back to the profile page without saving any changes
-    window.location.href = `/person/${id}`;
+    window.location.href = `/`;
   };
 
   return (
     <div className="container">
       <br />
       <h1>Add Movie</h1>
+      {error && <div className="alert alert-danger">{error}</div>}
+      {successMessage && (
+        <div className="alert alert-success">{successMessage}</div>
+      )}
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="title" className="form-label">
@@ -84,14 +110,27 @@ function AddMovie() {
           />
         </div>
         <div className="mb-3">
+          <label htmlFor="year" className="form-label">
+            Year:
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="year"
+            value={year}
+            onChange={(e) => setYear(e.target.value)}
+            required
+          />
+        </div>
+        <div className="mb-3">
           <label htmlFor="director" className="form-label">
             Director:
           </label>
           <select
             className="form-select"
             id="director"
-            value={director}
-            onChange={(e) => setDirector(e.target.value)}
+            value={directorId}
+            onChange={(e) => setDirectorId(e.target.value)}
             required
           >
             <option value="">Select Director</option>
@@ -107,27 +146,21 @@ function AddMovie() {
             Actors:
           </label>
           <select
-            multiple
             className="form-select"
-            id="actors"
-            value={actors}
-            onChange={(e) =>
-              setActors(
-                Array.from(e.target.selectedOptions, (option) => option.value)
-              )
-            }
+            id="actor"
+            value={actorId}
+            onChange={(e) => setActorId(e.target.value)}
             required
           >
-            {existingPersons
-              .filter((person) => person.name !== director)
-              .map((person) => (
-                <option key={person.id} value={person.id}>
-                  {person.firstname + " " + person.lastname}
-                </option>
-              ))}
+            <option value="">Select Actor</option>
+            {existingPersons.map((person) => (
+              <option key={person.id} value={person.id}>
+                {person.firstname + " " + person.lastname}
+              </option>
+            ))}
           </select>
         </div>
-        <div className="mb-3">
+        {/* <div className="mb-3">
           <label htmlFor="genre" className="form-label">
             Genre:
           </label>
@@ -139,24 +172,24 @@ function AddMovie() {
             onChange={(e) => setGenre(e.target.value)}
             required
           />
-        </div>
+        </div> */}
         <div className="mb-3">
-          <label htmlFor="poster" className="form-label">
+          <label htmlFor="image" className="form-label">
             Poster:
           </label>
           <input
             type="file"
             className="form-control"
-            id="poster"
+            id="image"
             accept="image/*"
             onChange={handlePictureChange}
             required
           />
         </div>
-        {poster && (
+        {image && (
           <div className="mb-3">
             <label>Preview:</label>
-            <img src={poster} alt="Preview" style={{ maxWidth: "200px" }} />
+            <img src={image} alt="Preview" style={{ maxWidth: "200px" }} />
           </div>
         )}
         <div className="mb-3">
@@ -167,8 +200,8 @@ function AddMovie() {
             className="form-control"
             id="description"
             rows="3"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            value={shortDescription}
+            onChange={(e) => setShortDescription(e.target.value)}
             required
           ></textarea>
         </div>
