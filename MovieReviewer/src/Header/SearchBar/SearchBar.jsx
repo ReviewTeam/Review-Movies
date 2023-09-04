@@ -10,6 +10,7 @@ function SearchBar({searchValue, onChange}) {
                 <img src={searchBarIcon} className="logo" alt="Search icon" />
             </button>
             <input type="text" value={searchValue} onChange={onChange}/>
+
             <img src={movieSearchBar} className="logo borderLeft borderRigth" alt="Movie search bar icon"/>
             <img src={userSolid} className="logo" alt="User solid icon"/>
         </div>

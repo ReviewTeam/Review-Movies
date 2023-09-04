@@ -1,4 +1,4 @@
-import profilePic from "../assets/images/profile-pic.png";
+//import profilePic from "../assets/images/profile-pic.png";
 import { Link, useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
@@ -21,7 +21,7 @@ function UserProfile() {
         })
         .then((response) => {
           const userData = {
-            profilePic,
+            image: response.data.image,
             username: response.data.username,
             firstName: response.data.firstName,
             lastName: response.data.lastName,
@@ -81,7 +81,7 @@ function UserProfile() {
       <div className="col">
         {/* Profile picture */}
         <div className="row">
-          <img src={profilePic} alt="User Profile" className="img-fluid" />
+          <img src={`data:image;base64,${user.image}`} alt="User Profile" className="img-fluid" />
         </div>
 
         {/* Username */}

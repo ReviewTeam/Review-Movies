@@ -7,8 +7,23 @@ function Register() {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [image, setImage] = useState(null);
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+  
+    if (file) {
+      const reader = new FileReader();
+  
+      reader.onload = function(event) {
+        const base64String = event.target.result.split(',')[1];
+        setImage(base64String);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -22,6 +37,7 @@ function Register() {
         email,
         username,
         password,
+        image
       });
       setSuccessMessage("Registration successful!");
 
@@ -116,6 +132,19 @@ function Register() {
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="profileImage" className="form-label">
+            Profile Image
+          </label>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleFileChange}
+            className="form-control"
+            id="profileImage"
             required
           />
         </div>
