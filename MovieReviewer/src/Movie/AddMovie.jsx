@@ -77,7 +77,7 @@ function AddMovie() {
       const reader = new FileReader();
       reader.onloadend = () => {
         setPoster(reader.result);
-      };
+      };  
       reader.readAsDataURL(file);
     }
   };
