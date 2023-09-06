@@ -67,9 +67,5 @@ public class PersonService {
         personRepository.delete(person);
     }
 
-//    public void deletePerson(Long personId) {
-//        var person = personRepository.findById(personId).orElseThrow(PersonNotFoundException::new);
-//        personRepository.delete(person);
-//    }
 }
 

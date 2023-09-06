@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,4 +17,6 @@ public class ReviewResponseDto {
     private int rating;
     private MovieResponseDto movie;
     private String description;
+    private int nrLikes;
+    private List<UserResponseDto> likedByUsers;
 }
