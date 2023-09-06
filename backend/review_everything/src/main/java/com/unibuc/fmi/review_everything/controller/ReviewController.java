@@ -1,6 +1,7 @@
 package com.unibuc.fmi.review_everything.controller;
 
 import com.unibuc.fmi.review_everything.dto.review.request.ReviewRequestDto;
+import com.unibuc.fmi.review_everything.dto.review.response.ReviewLikeInfo;
 import com.unibuc.fmi.review_everything.dto.review.response.ReviewResponseDto;
 import com.unibuc.fmi.review_everything.service.ReviewService;
 import com.unibuc.fmi.review_everything.service.UserService;
@@ -53,6 +54,30 @@ public class ReviewController {
 
         return ResponseEntity.noContent().build();
     }
+
+//    @Secured({"ROLE_USER"})
+//    @PostMapping("like/{reviewId}")
+//    public ResponseEntity<Void> likeReview(@PathVariable Long reviewId) {
+//        reviewService.likeReview(reviewId);
+//        return ResponseEntity.ok().build();
+//    }
+//
+//    @Secured({"ROLE_USER"})
+//    @PostMapping("unlike/{reviewId}")
+//    public ResponseEntity<Void> unlikeReview(@PathVariable Long reviewId) {
+//        reviewService.unlikeReview(reviewId);
+//        return ResponseEntity.ok().build();
+//    }
+
+    @Secured({"ROLE_USER"})
+    @PostMapping("like-info/{reviewId}")
+    public ResponseEntity<ReviewLikeInfo> getReviewLikeInfo(@PathVariable Long reviewId) {
+        boolean likedByCurrentUser = reviewService.toggleLikeReview(reviewId);
+        int nrLikes = reviewService.getNumberOfLikes(reviewId);
+        ReviewLikeInfo likeInfo = new ReviewLikeInfo(nrLikes, likedByCurrentUser);
+        return ResponseEntity.ok(likeInfo);
+    }
+
 }
 
 
