@@ -24,6 +24,7 @@ public class ReviewService {
     private final MovieRepository movieRepository;
     private final ReviewRepository reviewRepository;
     private final ModelMapper modelMapper;
+    private final UserService userService;
 
     public ReviewResponseDto addReview(Long userId, ReviewRequestDto reviewRequestDto) {
         var review = modelMapper.map(reviewRequestDto, Review.class);
@@ -80,5 +81,50 @@ public class ReviewService {
         }
         reviewRepository.delete(review);
     }
+
+//    public void likeReview(Long reviewId) {
+//        var user = userRepository.findById(userService.getCurrentUser().getId()).orElseThrow(UserNotFoundException::new);
+//        var review = reviewRepository.findById(reviewId).orElseThrow(ReviewNotFoundException::new);
+//
+//        if (!review.getLikedByUsers().contains(user)) {
+//            review.getLikedByUsers().add(user);
+//            review.setNrLikes(review.getNrLikes() + 1);
+//            reviewRepository.save(review);
+//        }
+//    }
+//
+//    public void unlikeReview(Long reviewId) {
+//        var user = userRepository.findById(userService.getCurrentUser().getId()).orElseThrow(UserNotFoundException::new);
+//        Review review = reviewRepository.findById(reviewId).orElseThrow(ReviewNotFoundException::new);
+//
+//        if (review.getLikedByUsers().contains(user)) {
+//            review.getLikedByUsers().remove(user);
+//            review.setNrLikes(review.getNrLikes() - 1);
+//            reviewRepository.save(review);
+//        }
+//    }
+
+    public boolean toggleLikeReview(Long reviewId) {
+        var user = userRepository.findById(userService.getCurrentUser().getId()).orElseThrow(UserNotFoundException::new);
+        var review = reviewRepository.findById(reviewId).orElseThrow(ReviewNotFoundException::new);
+
+        if(review.getLikedByUsers().contains(user)) {
+            review.getLikedByUsers().remove(user);
+            review.setNrLikes(review.getNrLikes() - 1);
+        }
+        else {
+            review.getLikedByUsers().add(user);
+            review.setNrLikes(review.getNrLikes() + 1);
+        }
+
+        reviewRepository.save(review);
+        return review.getLikedByUsers().contains(user);
+    }
+
+    public int getNumberOfLikes(Long reviewId) {
+        var review = reviewRepository.findById(reviewId).orElseThrow(ReviewNotFoundException::new);
+        return review.getNrLikes();
+    }
+
 }
 

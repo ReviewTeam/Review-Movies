@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Entity
 @NoArgsConstructor
@@ -25,4 +27,9 @@ public class Review {
 
     @Column(nullable = false)
     private String description;
+
+    private int nrLikes;
+
+    @ManyToMany
+    private List<User> likedByUsers;
 }
