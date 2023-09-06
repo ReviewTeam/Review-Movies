@@ -18,7 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/api/v1/me/reviews")
+@RequestMapping("/api/v1/reviews")
 public class ReviewController {
     private final ReviewService reviewService;
     private final UserService userService;
@@ -38,6 +38,12 @@ public class ReviewController {
     }
 
     @Secured({"ROLE_USER"})
+    @GetMapping("/{movieId}")
+    public ResponseEntity<List<ReviewResponseDto>> getMovieReviews(@PathVariable Long movieId) {
+        return ResponseEntity.ok(reviewService.getMovieReviews(movieId));
+    }
+
+    @Secured({"ROLE_USER"})
     @PutMapping("/{reviewId}")
     public ResponseEntity<ReviewResponseDto> updateReview(
             @PathVariable Long reviewId,
@@ -54,20 +60,6 @@ public class ReviewController {
 
         return ResponseEntity.noContent().build();
     }
-
-//    @Secured({"ROLE_USER"})
-//    @PostMapping("like/{reviewId}")
-//    public ResponseEntity<Void> likeReview(@PathVariable Long reviewId) {
-//        reviewService.likeReview(reviewId);
-//        return ResponseEntity.ok().build();
-//    }
-//
-//    @Secured({"ROLE_USER"})
-//    @PostMapping("unlike/{reviewId}")
-//    public ResponseEntity<Void> unlikeReview(@PathVariable Long reviewId) {
-//        reviewService.unlikeReview(reviewId);
-//        return ResponseEntity.ok().build();
-//    }
 
     @Secured({"ROLE_USER"})
     @PostMapping("like-info/{reviewId}")

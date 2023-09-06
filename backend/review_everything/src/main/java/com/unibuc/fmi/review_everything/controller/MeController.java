@@ -28,4 +28,6 @@ public class MeController {
     public ResponseEntity<UserResponseDto> updateCurrentUser(@RequestBody @Valid UserUpdateRequestDto userUpdateRequestDto) {
         return ResponseEntity.ok(userService.updateCurrentUser(userUpdateRequestDto));
     }
+
+
 }

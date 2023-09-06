@@ -53,6 +53,15 @@ public class ReviewService {
         return modelMapper.map(reviews, listType);
     }
 
+    public List<ReviewResponseDto> getMovieReviews(Long movieId) {
+        var movie = movieRepository.findById(movieId).orElseThrow(MovieNotFoundException::new);
+        var reviews = reviewRepository.findByMovie(movie);
+
+        var listType = new TypeToken<List<ReviewResponseDto>>() {}.getType();
+
+        return modelMapper.map(reviews, listType);
+    }
+
     public ReviewResponseDto updateReview(Long userId, Long reviewId, ReviewRequestDto reviewRequestDto) {
         var user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
         var review = reviewRepository.findById(reviewId).orElseThrow(ReviewNotFoundException::new);
