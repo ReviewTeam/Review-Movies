@@ -31,9 +31,8 @@ public class ReviewController {
         return ResponseEntity.ok(reviewService.addReview(userId, reviewRequestDto));
     }
     @Secured({"ROLE_USER"})
-    @GetMapping
-    public ResponseEntity<List<ReviewResponseDto>> getUserReviews() {
-        var userId = userService.getCurrentUser().getId();
+    @GetMapping("info/{userId}")
+    public ResponseEntity<List<ReviewResponseDto>> getUserReviews(@PathVariable Long userId) {
         return ResponseEntity.ok(reviewService.getUserReviews(userId));
     }
 
