@@ -22,6 +22,7 @@ D:\Facultate\Anul II\Semestrul II\Metode de dezvoltare software\ProiectGit\Revie
 D:\Facultate\Anul II\Semestrul II\Metode de dezvoltare software\ProiectGit\ReviewEverything\backend\review_everything\src\main\java\com\unibuc\fmi\review_everything\dto\user\response\UserResponseDto.java
 D:\Facultate\Anul II\Semestrul II\Metode de dezvoltare software\ProiectGit\ReviewEverything\backend\review_everything\src\main\java\com\unibuc\fmi\review_everything\controller\FriendRequestController.java
 D:\Facultate\Anul II\Semestrul II\Metode de dezvoltare software\ProiectGit\ReviewEverything\backend\review_everything\src\main\java\com\unibuc\fmi\review_everything\exception\friendrequest\FriendRequestBadRequestException.java
+D:\Facultate\Anul II\Semestrul II\Metode de dezvoltare software\ProiectGit\ReviewEverything\backend\review_everything\src\main\java\com\unibuc\fmi\review_everything\controller\FeedController.java
 D:\Facultate\Anul II\Semestrul II\Metode de dezvoltare software\ProiectGit\ReviewEverything\backend\review_everything\src\main\java\com\unibuc\fmi\review_everything\model\Movie.java
 D:\Facultate\Anul II\Semestrul II\Metode de dezvoltare software\ProiectGit\ReviewEverything\backend\review_everything\src\main\java\com\unibuc\fmi\review_everything\exception\person\PersonNotFoundException.java
 D:\Facultate\Anul II\Semestrul II\Metode de dezvoltare software\ProiectGit\ReviewEverything\backend\review_everything\src\main\java\com\unibuc\fmi\review_everything\model\FriendRequest.java
@@ -44,6 +45,7 @@ D:\Facultate\Anul II\Semestrul II\Metode de dezvoltare software\ProiectGit\Revie
 D:\Facultate\Anul II\Semestrul II\Metode de dezvoltare software\ProiectGit\ReviewEverything\backend\review_everything\src\main\java\com\unibuc\fmi\review_everything\controller\PingController.java
 D:\Facultate\Anul II\Semestrul II\Metode de dezvoltare software\ProiectGit\ReviewEverything\backend\review_everything\src\main\java\com\unibuc\fmi\review_everything\controller\ReviewController.java
 D:\Facultate\Anul II\Semestrul II\Metode de dezvoltare software\ProiectGit\ReviewEverything\backend\review_everything\src\main\java\com\unibuc\fmi\review_everything\enums\StatusRequest.java
+D:\Facultate\Anul II\Semestrul II\Metode de dezvoltare software\ProiectGit\ReviewEverything\backend\review_everything\src\main\java\com\unibuc\fmi\review_everything\dto\review\response\ReviewLikeInfo.java
 D:\Facultate\Anul II\Semestrul II\Metode de dezvoltare software\ProiectGit\ReviewEverything\backend\review_everything\src\main\java\com\unibuc\fmi\review_everything\controller\PersonController.java
 D:\Facultate\Anul II\Semestrul II\Metode de dezvoltare software\ProiectGit\ReviewEverything\backend\review_everything\src\main\java\com\unibuc\fmi\review_everything\ReviewEverythingApplication.java
 D:\Facultate\Anul II\Semestrul II\Metode de dezvoltare software\ProiectGit\ReviewEverything\backend\review_everything\src\main\java\com\unibuc\fmi\review_everything\exception\RestExceptionHandler.java
