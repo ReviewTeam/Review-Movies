@@ -1,6 +1,8 @@
 package com.unibuc.fmi.review_everything.controller;
 
+import com.unibuc.fmi.review_everything.dto.review.response.ReviewResponseDto;
 import com.unibuc.fmi.review_everything.dto.user.request.UserUpdateRequestDto;
+import com.unibuc.fmi.review_everything.service.ReviewService;
 import com.unibuc.fmi.review_everything.service.UserService;
 import com.unibuc.fmi.review_everything.dto.user.response.UserResponseDto;
 import jakarta.validation.Valid;
@@ -10,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequiredArgsConstructor
@@ -18,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 @Secured({"ROLE_USER"})
 public class MeController {
     private final UserService userService;
-
+    private final ReviewService reviewService;
     @GetMapping
     public ResponseEntity<UserResponseDto> getCurrentUser() {
         return ResponseEntity.ok(userService.getCurrentUser());
@@ -28,4 +32,10 @@ public class MeController {
     public ResponseEntity<UserResponseDto> updateCurrentUser(@RequestBody @Valid UserUpdateRequestDto userUpdateRequestDto) {
         return ResponseEntity.ok(userService.updateCurrentUser(userUpdateRequestDto));
     }
+    @GetMapping("/reviews")
+    public ResponseEntity<List<ReviewResponseDto>> getCurrentUserReviews() {
+        var userId = userService.getCurrentUser().getId();
+        return ResponseEntity.ok(reviewService.getUserReviews(userId));
+    }
+
 }

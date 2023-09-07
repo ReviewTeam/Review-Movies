@@ -3,6 +3,7 @@ package com.unibuc.fmi.review_everything.service;
 
 import com.unibuc.fmi.review_everything.dto.friendrequest.request.FriendRequestDto;
 import com.unibuc.fmi.review_everything.dto.friendrequest.request.FriendRequestStatusDto;
+import com.unibuc.fmi.review_everything.dto.friendrequest.response.FriendResponseDto;
 import com.unibuc.fmi.review_everything.dto.user.response.UserResponseDto;
 import com.unibuc.fmi.review_everything.exception.friendrequest.FriendNotFoundException;
 import com.unibuc.fmi.review_everything.exception.friendrequest.FriendRequestAlreadyExistsException;
@@ -54,10 +55,21 @@ public class FriendRequestService {
         friendRequestRepository.save(friendRequest);
     }
 
-    public List<FriendRequest> getFriendRequests(Long receiverId) {
+    public List<FriendResponseDto> getFriendRequests(Long receiverId) {
         var receiver = userRepository.findById(receiverId).orElseThrow();
         var requests = friendRequestRepository.findByReceiverAndStatus(receiver, Status.WAITING);
-        return requests;
+        //return requests;
+        List<FriendResponseDto> friendResponseDtos = new ArrayList<>();
+        for (FriendRequest request : requests) {
+            var sender = request.getSender();
+            friendResponseDtos.add(new FriendResponseDto(
+                    request.getId(),
+                    request.getStatus(),
+                    request.getSender().getId(),
+                    request.getSender().getUsername()
+            ));
+        }
+        return friendResponseDtos;
     }
 
     public FriendRequestDto handleFriendRequest(Long requestId, FriendRequestStatusDto friendRequestStatusDto) {

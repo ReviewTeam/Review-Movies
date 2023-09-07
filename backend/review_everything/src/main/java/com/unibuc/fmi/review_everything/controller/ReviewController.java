@@ -18,26 +18,30 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/api/v1/me/reviews")
+@RequestMapping("/api/v1/reviews")
+@Secured({"ROLE_USER"})
 public class ReviewController {
     private final ReviewService reviewService;
     private final UserService userService;
 
-    @Secured({"ROLE_USER"})
+
     @PostMapping
     public ResponseEntity<ReviewResponseDto> addReview(
             @RequestBody @Valid ReviewRequestDto reviewRequestDto) {
         var userId = userService.getCurrentUser().getId();
         return ResponseEntity.ok(reviewService.addReview(userId, reviewRequestDto));
     }
-    @Secured({"ROLE_USER"})
-    @GetMapping
-    public ResponseEntity<List<ReviewResponseDto>> getUserReviews() {
-        var userId = userService.getCurrentUser().getId();
+
+    @GetMapping("info/{userId}")
+    public ResponseEntity<List<ReviewResponseDto>> getUserReviews(@PathVariable Long userId) {
         return ResponseEntity.ok(reviewService.getUserReviews(userId));
     }
 
-    @Secured({"ROLE_USER"})
+    @GetMapping("/{movieId}")
+    public ResponseEntity<List<ReviewResponseDto>> getMovieReviews(@PathVariable Long movieId) {
+        return ResponseEntity.ok(reviewService.getMovieReviews(movieId));
+    }
+
     @PutMapping("/{reviewId}")
     public ResponseEntity<ReviewResponseDto> updateReview(
             @PathVariable Long reviewId,
@@ -46,7 +50,6 @@ public class ReviewController {
         return ResponseEntity.ok(reviewService.updateReview(userId, reviewId, reviewRequestDto));
     }
 
-    @Secured({"ROLE_USER"})
     @DeleteMapping("/{reviewId}")
     public ResponseEntity<Void> deleteReview(@PathVariable Long reviewId) {
         var userId = userService.getCurrentUser().getId();
@@ -55,21 +58,6 @@ public class ReviewController {
         return ResponseEntity.noContent().build();
     }
 
-//    @Secured({"ROLE_USER"})
-//    @PostMapping("like/{reviewId}")
-//    public ResponseEntity<Void> likeReview(@PathVariable Long reviewId) {
-//        reviewService.likeReview(reviewId);
-//        return ResponseEntity.ok().build();
-//    }
-//
-//    @Secured({"ROLE_USER"})
-//    @PostMapping("unlike/{reviewId}")
-//    public ResponseEntity<Void> unlikeReview(@PathVariable Long reviewId) {
-//        reviewService.unlikeReview(reviewId);
-//        return ResponseEntity.ok().build();
-//    }
-
-    @Secured({"ROLE_USER"})
     @PostMapping("like-info/{reviewId}")
     public ResponseEntity<ReviewLikeInfo> getReviewLikeInfo(@PathVariable Long reviewId) {
         boolean likedByCurrentUser = reviewService.toggleLikeReview(reviewId);

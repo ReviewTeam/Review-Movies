@@ -14,8 +14,13 @@ import java.util.List;
 public class ReviewResponseDto {
     private Long id;
     private UserResponseDto user;
+//    private Long user_id;
+//    private String username;
     private int rating;
     private MovieResponseDto movie;
+//    private Long movie_id;
+//    private String title;
+//    private byte[] image;
     private String description;
     private int nrLikes;
     private List<UserResponseDto> likedByUsers;
