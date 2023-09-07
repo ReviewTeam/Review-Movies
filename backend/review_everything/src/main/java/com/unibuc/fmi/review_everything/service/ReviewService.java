@@ -66,6 +66,16 @@ public class ReviewService {
         return modelMapper.map(reviews, listType);
     }
 
+    public List<ReviewResponseDto> findReviewsByUsername(String username) {
+        // Obțineți utilizatorul pe baza numelui de utilizator
+        var user = userRepository.findUserByUsername(username).orElseThrow(UserNotFoundException::new);
+        var reviews = reviewRepository.findByUser(user);
+
+        // Convertiți lista de review-uri în DTO-uri
+        var listType = new TypeToken<List<ReviewResponseDto>>() {}.getType();
+        return modelMapper.map(reviews, listType);
+    }
+
     public List<ReviewResponseDto> getMovieReviews(Long movieId) {
         var movie = movieRepository.findById(movieId).orElseThrow(MovieNotFoundException::new);
         var reviews = reviewRepository.findByMovie(movie);
