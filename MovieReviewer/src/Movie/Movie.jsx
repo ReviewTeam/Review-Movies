@@ -67,7 +67,7 @@ function Movie() {
               });
 
               axios
-                  .get(`http://localhost:8080/api/v1/reviews/${id}`, {
+                  .get(`http://localhost:8080/api/v1/reviews/movie/${id}`, {
                     headers: {
                       Authorization: `Bearer ${token}`,
                     }
@@ -242,7 +242,7 @@ function Movie() {
           <h2>Reviews</h2>
           {/* //{id, imgSrc, imgAlt, movieName, score, userName, reviewText, likes, reviewsState, setReviewsState} */}
           {reviewList.map((review) =>
-            <MovieReview key={review.id} {...review} />
+            <MovieReview key={review.id} id={review.id} />
           )}
           <div className="AddReview">
             <div>
