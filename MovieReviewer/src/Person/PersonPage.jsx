@@ -10,6 +10,11 @@ function PersonPage() {
   const token = localStorage.getItem("jwtToken"); // Retrieve the JWT token from storage
   const [isAdmin, setIsAdmin] = useState(false);
 
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [birthDate, setBirthDate] = useState("");
+  const [image, setImage] = useState(null);
+
   useEffect(() => {
     if (token) {
       // get the logged in user to check if it is an admin
@@ -42,42 +47,15 @@ function PersonPage() {
       })
       .then((response) => {
         console.log(response);
+        setFirstName(response.data.firstName);
+        setLastName(response.data.lastName);
+        setBirthDate(response.data.birthDate);
+        setImage(response.data.image);
       })
       .catch((error) => {
         console.log(error);
       });
   }, [id]);
-
-  const people = [
-    {
-      id: "1",
-      picture: { profilePic },
-      firstname: "Person",
-      lastname: "1",
-      birthdate: "1/1/1000",
-    },
-    {
-      id: "2",
-      picture: { profilePic },
-      firstname: "Person",
-      lastname: "2",
-      birthdate: "1/1/1000",
-    },
-    {
-      id: "9",
-      picture: { profilePic },
-      firstname: "Person",
-      lastname: "3",
-      birthdate: "1/1/1000",
-    },
-  ];
-
-  let person;
-  for (let i = 0; i < people.length; i++) {
-    if (people[i].id === id) {
-      person = people[i];
-    }
-  }
 
   return (
     <>
@@ -85,15 +63,15 @@ function PersonPage() {
         <Row className="justify-content-center mt-5">
           <Col xs={12} md={6} className="text-center">
             <img
-              src={profilePic}
+              src={`data:image;base64,${image}`}
               alt="Profile"
               className="rounded-circle mb-4"
               style={{ width: "200px" }}
             />
             <h2>
-              {person.firstname} {person.lastname}
+              {firstName} {lastName}
             </h2>
-            <p>Birthdate: {person.birthdate}</p>
+            <p>Birthdate: {birthDate}</p>
           </Col>
         </Row>
 
@@ -133,7 +111,7 @@ function PersonPage() {
             <center>
               <Link
                 to={{
-                  pathname: `/person/${person.id}/edit`,
+                  pathname: `/person/${id}/edit`,
                 }}
                 style={{ textDecoration: "none" }}
               >
