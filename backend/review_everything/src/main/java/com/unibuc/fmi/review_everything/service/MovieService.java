@@ -53,6 +53,16 @@ public class MovieService {
         return modelMapper.map(movies, listType);
     }
 
+//    public List<MovieResponseDto> getAllMovies(int pageNumber, int pageSize) {
+//        var pageable = PageRequest.of(pageNumber, pageSize);
+//
+//        var movies = movieRepository.findMovies(pageable);
+//
+//        var listType = new TypeToken<List<MovieResponseDto>>() {}.getType();
+//
+//        return modelMapper.map(movies, listType);
+//    }
+
     public MovieResponseDto addActorToMovie(Long movieId, PersonIdRequestDto personIdRequestDto) {
         var movie = movieRepository.findById(movieId).orElseThrow(MovieNotFoundException::new);
 
