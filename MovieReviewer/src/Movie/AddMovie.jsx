@@ -1,15 +1,31 @@
-import React, { useState, useEffect } from "react";
+import React, {useEffect, useState} from "react";
+import profilePic from "../assets/images/profile-pic.png";
 import axios from "axios";
 
 function AddMovie() {
-  const [movieData, setMovieData] = useState({
-    title: "",
-    shortDescription: "",
-    year: "",
-    directorId: "",
-    actorId: "",
-    image: null,
-  });
+  const [existingPersons, setExistingPersons] = useState([
+    {
+      id: "1",
+      picture: { profilePic },
+      firstname: "Person",
+      lastname: "1",
+      birthdate: "1/1/1000",
+    },
+    {
+      id: "2",
+      picture: { profilePic },
+      firstname: "ABPerson",
+      lastname: "2",
+      birthdate: "1/1/1000",
+    },
+    {
+      id: "3",
+      picture: { profilePic },
+      firstname: "CPerson",
+      lastname: "3",
+      birthdate: "1/1/1000",
+    },
+  ]);
 
   const [directorResults, setDirectorResults] = useState([]);
   const [actorResults, setActorResults] = useState([]);
@@ -28,55 +44,77 @@ function AddMovie() {
     setMovieData({ ...movieData, [name]: value });
   };
 
-  const handleImageChange = (e) => {
-    const imageFile = e.target.files[0];
-    setMovieData({ ...movieData, image: imageFile });
+  useEffect(() => {
+    if (token) {
+      // get the logged in user to check if it is an admin
+      axios
+          .get("http://localhost:8080/api/v1/me", {
+            headers: {
+              Authorization: `Bearer ${token}`, // Include the token in the 'Authorization' header
+            },
+          })
+          .then((response) => {
+            axios
+                .get("http://localhost:8080/api/v1/persons", {
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                  }
+                })
+                .then((response) => {
+                  const data = response.data;
+                  console.log("Persons");
+                  setExistingPersons(data);
+                  console.log(existingPersons);
+                })
+                .catch((error) => {
+                  console.log(error);
+                })
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+    }
+  }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    setSuccessMessage("");
+    axios.
+    post("http://localhost:8080/api/v1/movies",
+        {
+          title,
+          shortDescription,
+          year,
+          directorId,
+          image,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Include the token in the 'Authorization' header
+          },
+        })
+        .then((response) => {
+          const data = response.data;
+          console.log(data);
+          window.location.href = `/`;
+        })
+        .catch((error) => {
+          console.log(error);
+        })
   };
 
-  const searchPerson = async (fullName, field) => {
-    try {
-      const [firstName, lastName] = fullName.split(" ");
-      const response = await axios.get(
-        `http://localhost:8080/api/v1/persons?first-name=${firstName}&last-name=${lastName}&page-number=0&page-size=10`
-      );
-
-      if (field === "director") {
-        setDirectorResults(response.data);
-      } else if (field === "actor") {
-        setActorResults(response.data);
-      }
-    } catch (error) {
-      console.error("Error searching for person:", error);
+  const handlePictureChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const base64String = event.target.result.split(',')[1];
+        setImage(base64String);
+      };  
+      reader.readAsDataURL(file);
     }
   };
-
-  const handleActorSelection = (person) => {
-    setSelectedActor(person);
-    setMovieData({ ...movieData, actorId: person.id });
-    // Clear actor search results when selecting
-    setActorResults([]);
-  };
-
-  const handleDirectorSelection = (person) => {
-    setSelectedDirector(person);
-    setMovieData({ ...movieData, directorId: person.id });
-    // Clear director search results when selecting
-    setDirectorResults([]);
-  };
-
-  const addMovie = async () => {
-    try {
-      const { title, shortDescription, year, directorId, actorId, image } =
-        movieData;
-
-      const payload = {
-        title,
-        shortDescription,
-        year,
-        directorId,
-        actorId,
-        image,
-      };
 
       const response = await axios.post(
         "http://localhost:8080/api/v1/movies",
@@ -134,8 +172,46 @@ function AddMovie() {
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="directorName" className="form-label">
-            Director
+          <label htmlFor="director" className="form-label">
+            Director:
+          </label>
+          <select
+            className="form-select"
+            id="director"
+            value={directorId}
+            onChange={(e) => setDirectorId(e.target.value)}
+            required
+          >
+            <option value="">Select Director</option>
+            {existingPersons.map((person) => (
+              <option key={person.id} value={person.id}>
+                {person.firstName + " " + person.lastName}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="mb-3">
+          <label htmlFor="actors" className="form-label">
+            Actors:
+          </label>
+          <select
+            className="form-select"
+            id="actor"
+            value={actorId}
+            onChange={(e) => setActorId(e.target.value)}
+            required
+          >
+            <option value="">Select Actor</option>
+            {existingPersons.map((person) => (
+              <option key={person.id} value={person.id}>
+                {person.firstName + " " + person.lastName}
+              </option>
+            ))}
+          </select>
+        </div>
+        {/* <div className="mb-3">
+          <label htmlFor="genre" className="form-label">
+            Genre:
           </label>
           <input
             type="text"

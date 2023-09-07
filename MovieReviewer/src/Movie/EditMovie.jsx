@@ -1,45 +1,84 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import { useParams } from "react-router-dom";
 import profilePic from "../assets/images/profile-pic.png";
 import HarryPotterMovie from "../assets/images/HarryPotterMovie.jpg";
 import { Form, Button } from "react-bootstrap";
+import axios from "axios";
 
 function EditMovie() {
   const { id } = useParams();
 
   // Sample list of existing persons
-  const existingPersons = [
-    {
-      id: "1",
-      picture: { profilePic },
-      firstname: "Person",
-      lastname: "1",
-      birthdate: "1/1/1000",
-    },
-    {
-      id: "2",
-      picture: { profilePic },
-      firstname: "ABPerson",
-      lastname: "2",
-      birthdate: "1/1/1000",
-    },
-    {
-      id: "3",
-      picture: { profilePic },
-      firstname: "CPerson",
-      lastname: "3",
-      birthdate: "1/1/1000",
-    },
-  ];
+  const [existingPersons, setExistingPersons] = useState([]);
+  const token = localStorage.getItem("jwtToken"); // Retrieve the JWT token from storage
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    if (token) {
+      console.log("Avem token");
+      // get the logged in user to check if it is an admin
+      axios
+          .get("http://localhost:8080/api/v1/me", {
+            headers: {
+              Authorization: `Bearer ${token}`, // Include the token in the 'Authorization' header
+            },
+          })
+          .then((response) => {
+            console.log(response);
+
+            if (response.data.authorizationRoles.split(",").length > 1) {
+              setIsAdmin(true);
+            }
+
+            axios
+                .get(`http://localhost:8080/api/v1/movies/${id}`, {
+                  headers: {
+                    Authorization: `Bearer ${token}`, // Include the token in the 'Authorization' header
+                  },
+                })
+                .then((response) => {
+                  console.log("Movie");
+
+                  const data = response.data;
+                  const director = data.director;
+                  const actors = data.actors;
+
+                  setMovie({
+                    id: data.id,
+                    title: data.title,
+                    director: { id: director.id,
+                      name: director.firstName + director.lastName },
+                    actors,
+                    genre: "Genre",
+                    poster: data.image,
+                    description: data.shortDescription,
+                  });
+
+                  console.log(movie);
+                  // getReviews();
+                })
+                .catch((error) => {
+                  console.log("Error fetching the movie with id " + id);
+                  console.log(error);
+                })
+          })
+          .catch((error) => {
+            console.error("Error fetching user data:", error);
+          });
+    } else {
+      // Handle the case where the user is not authenticated
+      console.log("aici");
+    }
+  }, []);
 
   const movie = {
     id: 1,
     title: "Movie Title",
     director: { id: 1, name: "Director Name" },
     actors: [
-      { id: 2, name: "Actor 1" },
-      { id: 2, name: "Actor 2" },
-      { id: 2, name: "Actor 3" },
+      { id: 1 },
+      { id: 2 },
+      { id: 3 },
     ],
     genre: "Genre",
     poster: HarryPotterMovie,
