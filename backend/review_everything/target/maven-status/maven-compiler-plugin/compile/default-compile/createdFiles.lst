@@ -7,6 +7,7 @@ com\unibuc\fmi\review_everything\repository\UserRepository.class
 com\unibuc\fmi\review_everything\model\Person.class
 com\unibuc\fmi\review_everything\controller\PersonController.class
 com\unibuc\fmi\review_everything\model\Movie.class
+com\unibuc\fmi\review_everything\exception\friendrequest\FriendNotFoundException.class
 com\unibuc\fmi\review_everything\exception\user\UserBadRequestException.class
 com\unibuc\fmi\review_everything\dto\person\response\PersonResponseDto.class
 com\unibuc\fmi\review_everything\controller\ReviewController.class
@@ -49,13 +50,16 @@ com\unibuc\fmi\review_everything\dto\person\request\PersonIdRequestDto.class
 com\unibuc\fmi\review_everything\repository\ReviewRepository.class
 com\unibuc\fmi\review_everything\service\UserService.class
 com\unibuc\fmi\review_everything\exception\movie\MovieNotFoundException.class
+com\unibuc\fmi\review_everything\dto\review\response\ReviewLikeInfo.class
 com\unibuc\fmi\review_everything\exception\friendrequest\FriendRequestNotFoundException.class
 com\unibuc\fmi\review_everything\service\PersonService.class
 com\unibuc\fmi\review_everything\exception\review\ReviewNotFoundException.class
+com\unibuc\fmi\review_everything\exception\friendrequest\FriendRequestAlreadyExistsException.class
 com\unibuc\fmi\review_everything\dto\movie\request\MovieRequestDto.class
 com\unibuc\fmi\review_everything\service\ReviewService$1.class
 com\unibuc\fmi\review_everything\ReviewEverythingApplication.class
 com\unibuc\fmi\review_everything\service\MovieService$1.class
+com\unibuc\fmi\review_everything\exception\friendrequest\FriendRequestBadRequestException.class
 com\unibuc\fmi\review_everything\model\Review.class
 com\unibuc\fmi\review_everything\dto\friendrequest\request\FriendRequestDto.class
 com\unibuc\fmi\review_everything\controller\MeController.class

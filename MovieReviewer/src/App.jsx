@@ -98,17 +98,61 @@ function App() {
     <>
       <Navbar />
       <Routes>
-        <Route path="/" element={<ReviewBody {...{searchValue, reviewsState, setReviewsState, searchedReviewsState, setSearchedReviewsState}}/>} />
-        <Route path="/profile/:username/edit" element={<EditProfile />} />
-        <Route path="/profile/:username" element={<ProfilePage />} />
-        <Route path="/person/:id" element={<PersonPage />} />
-        <Route path="/person/:id/edit" element={<EditPerson />} />
-        <Route path="/person/add" element={<AddPerson />} />
-        <Route path="/movie/:id" element={<Movie />} />
-        <Route path="/movie/add" element={<AddMovie />} />
-        <Route path="/movie/:id/edit" element={<EditMovie />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+        <Route 
+          path="/" 
+          element={<ReviewBody 
+                    {
+                      ...{
+                        searchValue,
+                        reviewsState, 
+                        setReviewsState, 
+                        searchedReviewsState, 
+                        setSearchedReviewsState
+                      }
+                    }
+                  />
+                  }         
+        />
+        <Route 
+          path="/profile/:username/edit" 
+          element={<EditProfile />}   
+        />
+        <Route 
+          path="/profile/:username"
+          element={<ProfilePage />} 
+        />
+        <Route 
+          path="/person/:id"
+          element={<PersonPage />} 
+        />
+        <Route 
+          path="/person/:id/edit" 
+          element={<EditPerson />}   
+        />
+        <Route 
+          path="/person/add" 
+          element={<AddPerson />}
+        />
+        <Route 
+          path="/movie/:id" 
+          element={<Movie />}
+        />
+        <Route 
+          path="/movie/add" 
+          element={<AddMovie />}
+        />
+        <Route 
+          path="/movie/:id/edit" 
+          element={<EditMovie />} 
+        />
+        <Route 
+          path="/register" 
+          element={<Register />} 
+        />
+        <Route 
+          path="/login" 
+          element={<Login />}
+        />
       </Routes>
     </>
   );

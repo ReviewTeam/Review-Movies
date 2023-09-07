@@ -5,25 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="39ad5e4d-15e8-481d-95c1-6eca86ab005e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/f9d7d8aa-7463-4616-b16f-5c2d99242654.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/f9d7d8aa-7463-4616-b16f-5c2d99242654.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/review_everything/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/backend/review_everything/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/review_everything/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/review_everything/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/review_everything/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/review_everything/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/review_everything/src/main/java/com/unibuc/fmi/review_everything/controller/FriendRequestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/review_everything/src/main/java/com/unibuc/fmi/review_everything/controller/FriendRequestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/review_everything/src/main/java/com/unibuc/fmi/review_everything/controller/MeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/review_everything/src/main/java/com/unibuc/fmi/review_everything/controller/MeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/review_everything/src/main/java/com/unibuc/fmi/review_everything/dto/friendrequest/response/FriendResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/review_everything/src/main/java/com/unibuc/fmi/review_everything/dto/friendrequest/response/FriendResponseDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/review_everything/src/main/java/com/unibuc/fmi/review_everything/dto/user/request/UserRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/review_everything/src/main/java/com/unibuc/fmi/review_everything/dto/user/request/UserRequestDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/review_everything/src/main/java/com/unibuc/fmi/review_everything/dto/user/response/UserResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/review_everything/src/main/java/com/unibuc/fmi/review_everything/dto/user/response/UserResponseDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/review_everything/src/main/java/com/unibuc/fmi/review_everything/exception/RestExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/review_everything/src/main/java/com/unibuc/fmi/review_everything/exception/RestExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/review_everything/src/main/java/com/unibuc/fmi/review_everything/model/FriendRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/review_everything/src/main/java/com/unibuc/fmi/review_everything/model/FriendRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/review_everything/src/main/java/com/unibuc/fmi/review_everything/model/Status.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/review_everything/src/main/java/com/unibuc/fmi/review_everything/enums/Status.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/review_everything/src/main/java/com/unibuc/fmi/review_everything/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/review_everything/src/main/java/com/unibuc/fmi/review_everything/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/review_everything/src/main/java/com/unibuc/fmi/review_everything/repository/FriendRequestRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/review_everything/src/main/java/com/unibuc/fmi/review_everything/repository/FriendRequestRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/review_everything/src/main/java/com/unibuc/fmi/review_everything/service/FriendRequestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/review_everything/src/main/java/com/unibuc/fmi/review_everything/service/FriendRequestService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/review_everything/src/main/java/com/unibuc/fmi/review_everything/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/review_everything/src/main/java/com/unibuc/fmi/review_everything/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/review_everything/src/main/resources/Review Everything.postman_collection.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/review_everything/src/main/resources/Review Everything.postman_collection.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< Updated upstream
+=======
+      <change beforePath="$PROJECT_DIR$/MovieReviewer/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/MovieReviewer/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MovieReviewer/src/Movie/Movie.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/MovieReviewer/src/Movie/Movie.jsx" afterDir="false" />
+>>>>>>> Stashed changes
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,11 +34,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+<<<<<<< Updated upstream
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "AlexBranch",
     "last_opened_file_path": "C:/Users/gabi_/Desktop/computer science/ReviewEverything/backend",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -59,13 +48,28 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
+=======
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;AlexBranch&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/John/Downloads/Lucruri de pastrat/FMI/Anul II/Semestrul II/MDS/Review Movies/ReviewEverything&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+>>>>>>> Stashed changes
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -79,25 +83,37 @@
       <workItem from="1688391686160" duration="646000" />
       <workItem from="1688397772061" duration="261000" />
       <workItem from="1692397798768" duration="173000" />
+      <workItem from="1694024389125" duration="3132000" />
+      <workItem from="1694035789321" duration="1331000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/backend/review_everything/src/main/java/com/unibuc/fmi/review_everything/ReviewEverythingApplication.java</url>
-          <line>19</line>
-          <properties class="com.unibuc.fmi.review_everything.ReviewEverythingApplication" method="run">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ID_WIDTH">
+                <map>
+<<<<<<< Updated upstream
+                  <entry key="Table.Default.Author.ColumnIdWidth" value="77" />
+                  <entry key="Table.Default.Date.ColumnIdWidth" value="80" />
+                  <entry key="Table.Space.CommitStatus.ColumnIdWidth" value="79" />
+=======
+                  <entry key="Table.Default.Author.ColumnIdWidth" value="32" />
+                  <entry key="Table.Default.Date.ColumnIdWidth" value="38" />
+                  <entry key="Table.Space.CommitStatus.ColumnIdWidth" value="37" />
+>>>>>>> Stashed changes
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

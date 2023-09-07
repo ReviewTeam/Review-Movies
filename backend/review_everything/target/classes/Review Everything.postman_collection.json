@@ -4,7 +4,7 @@
 		"name": "Review Everything",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "20905212",
-		"_collection_link": "https://lively-equinox-995172.postman.co/workspace/Review-Everything~27a4e2eb-4738-4f09-a8f5-45546f79bc56/collection/20905212-1d967764-e185-4bdb-8c29-921bdc0187f4?action=share&creator=20905212&source=collection_link"
+		"_collection_link": "https://lively-equinox-995172.postman.co/workspace/Review-Everything~27a4e2eb-4738-4f09-a8f5-45546f79bc56/collection/20905212-1d967764-e185-4bdb-8c29-921bdc0187f4?action=share&source=collection_link&creator=20905212"
 	},
 	"item": [
 		{
@@ -97,7 +97,39 @@
 					"response": []
 				},
 				{
-					"name": "[USER] Find user by username",
+					"name": "[USER] Get user by username Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{user_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/users/john.doe",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"john.doe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[USER] Find users by username",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -712,7 +744,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huLmRvZSIsImF1dGhvcml0aWVzIjpbIlJPTEVfVVNFUiJdLCJleHAiOjE2ODg0ODE1MTB9.ZmpjWEB4CPKyx2-hPYdl9XYYltcC7XgK843NADxek23ZszApKKrTS0G-Y9kKNQYCEwdNSDYlGCkiS8SLxKh5tw",
+									"value": "{{user_token}}",
 									"type": "string"
 								}
 							]
@@ -721,7 +753,12 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": ""
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "http://localhost:8080/api/v1/me/friends/2",
@@ -743,19 +780,31 @@
 				},
 				{
 					"name": "[USER] Get list of friends requests",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huLmRvZSIsImF1dGhvcml0aWVzIjpbIlJPTEVfVVNFUiJdLCJleHAiOjE2ODg0ODM2NTV9.VNiywWBvIDhacjIU_DQW-4hjEXT33l7vh-HlY-EDGiKbYW5PJnm7DM2WrXYlVEvkI_Sqg-1_xG806diBhqAv9Q",
+									"value": "{{admin_token}}",
 									"type": "string"
 								}
 							]
 						},
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://localhost:8080/api/v1/me/friends/requests",
 							"protocol": "http",
@@ -776,25 +825,36 @@
 				},
 				{
 					"name": "[USER] Acccept / Reject friend request",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huLmRvZSIsImF1dGhvcml0aWVzIjpbIlJPTEVfVVNFUiJdLCJleHAiOjE2ODg0OTkwNTR9.R6kyG3CGVGuKgUlBEy94hDsLAaJqEtcZU8mpNLZs_QLU9zk_7uRxqxmKzGWY5MBBAfSCYUb6cAmNvpJmqTKpCg",
+									"value": "{{user_token}}",
 									"type": "string"
 								}
 							]
 						},
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"status\": \"ACCEPTED\"\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/me/friends/requests/5",
+							"raw": "http://localhost:8080/api/v1/me/friends/requests/6",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -806,7 +866,7 @@
 								"me",
 								"friends",
 								"requests",
-								"5"
+								"6"
 							]
 						}
 					},
@@ -820,7 +880,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huLmRvZSIsImF1dGhvcml0aWVzIjpbIlJPTEVfVVNFUiJdLCJleHAiOjE2ODg1MDc4MDh9.KC1Il8UYx6KTdousWPnqmC73g4eAjYAOqhAJQ50Tzx_1jH8v2EGPqN6YbysZm_7E9rYVstvLlwjnPJWf9TYNTw",
+									"value": "{{user_token}}",
 									"type": "string"
 								}
 							]
@@ -866,7 +926,12 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"movieId\": 1,\r\n    \"rating\": 5,\r\n    \"description\": \"Un film excelent!\"\r\n}"
+							"raw": "{\r\n    \"movieId\": 1,\r\n    \"rating\": 5,\r\n    \"description\": \"Un film excelent!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "http://localhost:8080/api/v1/me/reviews",
@@ -913,7 +978,12 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"movieId\": 1,\r\n    \"rating\": 3,\r\n    \"description\": \"Un film bun, dar nu excelent\"\r\n}"
+							"raw": "{\r\n    \"movieId\": 1,\r\n    \"rating\": 3,\r\n    \"description\": \"Un film bun, dar nu excelent\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "http://localhost:8080/api/v1/me/reviews/2",
