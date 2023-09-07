@@ -10,7 +10,7 @@ function Movie() {
   const { id } = useParams();
   const [reviewScore, setReviewScore] = useState(0);
   const [reviewDescription, setReviewDescription] = useState("");
-  const [itle, setTitle] = useState("");
+  const [reviewTitle, setReviewTitle] = useState("");
 
   const token = localStorage.getItem("jwtToken"); // Retrieve the JWT token from storage
   const [isAdmin, setIsAdmin] = useState(false);
@@ -22,8 +22,7 @@ function Movie() {
       { id: 2, name: "Actor 4"},
       { id: 2, name: "Actor 5"},
       { id: 2, name: "Actor 6"},
-      { id: 2, name: "Actor 7"}.
-      { id: 2, name: "Actor 1" },
+      { id: 2, name: "Actor 7"},
       { id: 2, name: "Actor 2" },
       { id: 2, name: "Actor 3" },
     ],
@@ -74,6 +73,7 @@ function Movie() {
               });
 
               console.log(movie);
+             // getReviews();
             })
             .catch((error) => {
               console.log("Error fetching the movie with id " + id);
@@ -88,6 +88,38 @@ function Movie() {
       console.log("aici");
     }
   }, []);
+
+  const getReviews = () => {
+    axios
+        .get(`http://localhost:8080/api/v1/movies/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`, // Include the token in the 'Authorization' header
+          },
+        })
+        .then((response) => {
+          console.log("Movie");
+
+          const data = response.data;
+          const director = data.director;
+          const actors = data.actors;
+
+          setMovie({
+            id: data.id,
+            title: data.title,
+            director: {
+              id: director.id,
+              name: director.firstName + director.lastName
+            },
+            actors,
+            genre: "Genre",
+            poster: data.image,
+            description: data.shortDescription,
+          });
+        })
+        .catch((error) => {
+          console.error("Error fetching movie reviews:", error);
+        });
+  }
 
   const addReview = (e) => {
     e.preventDefault();
@@ -120,7 +152,7 @@ function Movie() {
     console.log(reviewScore);
   }
 
-  const onChaneTitle = (e) => {
+  const onChangeTitle = (e) => {
     setReviewTitle(e.target.value);
     console.log(title);
   }
@@ -135,7 +167,7 @@ function Movie() {
       <br />
       <Row>
         <Col xs={8} md={4}>
-          <img src={movie.poster} alt="Movie Poster" className="img-fluid" />
+          <img src={`data:image;base64,${movie.poster}`} alt="Movie Poster" className="img-fluid" />
         </Col>
         <Col>
           <h1>{movie.title}</h1>
@@ -194,12 +226,10 @@ function Movie() {
               <input type="number" onChange={onChangeScore}></input>
             </div>
             <div>
-
-              <input
               <label>Description </label>
               <textarea onChange={onChangeDescription}></textarea>
             </div>
-            <button type="button" class="btn btn-primary" onClick={addReview}>Add</button>
+            <button type="button" className="btn btn-primary" onClick={addReview}>Add</button>
           </div>
         </Col>
       </Row>
