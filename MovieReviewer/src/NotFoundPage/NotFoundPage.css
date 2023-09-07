@@ -1,0 +1,56 @@
+/* NotFoundPage.css */
+
+.container {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 92vh;
+    min-width: 100%;
+
+  }
+  
+  .inner-container {
+    background-color: white;
+    border: 20px solid #8E27F5;
+    border-radius: 25px;
+    padding: 20px;
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center;
+    height: 30vh;
+    width: 34vw;
+  }
+  
+  .error_message {
+    font-size: 40px;
+    font-weight: 700;
+    margin: 0;
+  }
+  
+  .prompt {
+    font-size: 32px;
+    color: #595959;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .back-button {
+    display: block;
+    margin-top: 40px;
+    padding: 12px;
+    background-color: #8E27F5; 
+    color: white; 
+    font-size: 32px;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 20px; 
+    text-decoration: none;
+  }
+  
+  .back-button:hover {
+    background-color: #b4b4b4; 
+    color: #8E27F5; 
+  }
+  
