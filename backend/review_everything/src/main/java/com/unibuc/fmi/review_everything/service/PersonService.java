@@ -1,9 +1,11 @@
 package com.unibuc.fmi.review_everything.service;
 
 
+import com.unibuc.fmi.review_everything.dto.movie.response.MovieResponseDto;
 import com.unibuc.fmi.review_everything.dto.person.request.PersonRequestDto;
 import com.unibuc.fmi.review_everything.dto.person.response.PersonResponseDto;
 import com.unibuc.fmi.review_everything.exception.person.PersonNotFoundException;
+import com.unibuc.fmi.review_everything.model.Movie;
 import com.unibuc.fmi.review_everything.model.Person;
 import com.unibuc.fmi.review_everything.repository.PersonRepository;
 import lombok.RequiredArgsConstructor;
@@ -44,6 +46,19 @@ public class PersonService {
 
         return modelMapper.map(persons, listType);
     }
+    public List<MovieResponseDto> getMoviesActedByPerson(Long personId) {
+        var person = personRepository.findById(personId).orElseThrow(PersonNotFoundException::new);
+        List <Movie> actedInMovies = person.getActedInMovies();
+        var listType = new TypeToken<List<MovieResponseDto>>() {}.getType();
+        return modelMapper.map(actedInMovies, listType);
+    }
+
+    public List<MovieResponseDto> getMoviesDirectedByPerson(Long personId) {
+        var person = personRepository.findById(personId).orElseThrow(PersonNotFoundException::new);
+        List <Movie> actedInMovies = person.getDirectedMovies();
+        var listType = new TypeToken<List<MovieResponseDto>>() {}.getType();
+        return modelMapper.map(actedInMovies, listType);
+    }
 
     public PersonResponseDto updatePerson(Long personId, PersonRequestDto personRequestDto) {
         personRepository.findById(personId).orElseThrow(PersonNotFoundException::new);
@@ -55,6 +70,7 @@ public class PersonService {
 
         return modelMapper.map(updatedPerson, PersonResponseDto.class);
     }
+
 
     public PersonResponseDto findPersonById(Long personId) {
         var person = personRepository.findById(personId).orElseThrow(PersonNotFoundException::new);

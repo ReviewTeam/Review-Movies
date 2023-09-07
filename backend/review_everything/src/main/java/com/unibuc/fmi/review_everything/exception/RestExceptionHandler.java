@@ -2,8 +2,13 @@ package com.unibuc.fmi.review_everything.exception;
 
 import com.unibuc.fmi.review_everything.dto.error.ErrorDto;
 import com.unibuc.fmi.review_everything.exception.auth.AuthUnauthorizedAccessException;
+import com.unibuc.fmi.review_everything.exception.friendrequest.FriendNotFoundException;
+import com.unibuc.fmi.review_everything.exception.friendrequest.FriendRequestAlreadyExistsException;
+import com.unibuc.fmi.review_everything.exception.friendrequest.FriendRequestBadRequestException;
+import com.unibuc.fmi.review_everything.exception.friendrequest.FriendRequestNotFoundException;
 import com.unibuc.fmi.review_everything.exception.movie.MovieNotFoundException;
 import com.unibuc.fmi.review_everything.exception.person.PersonNotFoundException;
+import com.unibuc.fmi.review_everything.exception.review.ReviewNotFoundException;
 import com.unibuc.fmi.review_everything.exception.user.UserBadRequestException;
 import com.unibuc.fmi.review_everything.exception.user.UserForbiddenException;
 import com.unibuc.fmi.review_everything.exception.user.UserNotFoundException;
@@ -66,7 +71,12 @@ public class RestExceptionHandler {
             UserBadRequestException.class,
             AccessDeniedException.class,
             PersonNotFoundException.class,
-            MovieNotFoundException.class
+            MovieNotFoundException.class,
+            ReviewNotFoundException.class,
+            FriendRequestNotFoundException.class,
+            FriendRequestBadRequestException.class,
+            FriendNotFoundException.class,
+            FriendRequestAlreadyExistsException.class
     })
 
     protected ResponseEntity<Object> handleException(Exception ex) {
@@ -78,13 +88,13 @@ public class RestExceptionHandler {
                     -> status = HttpStatus.UNAUTHORIZED;
             case "UserForbiddenException", "AccessDeniedException"
                     -> status = HttpStatus.FORBIDDEN;
-            case "UserNotFoundException", "PersonNotFoundException", "MovieNotFoundException"
+            case "UserNotFoundException", "PersonNotFoundException", "MovieNotFoundException",
+                    "ReviewNotFoundException", "FriendRequestNotFoundException", "FriendNotFoundException", "FriendRequestAlreadyExistsException"
                     -> status = HttpStatus.NOT_FOUND;
-            case "UserBadRequestException"
+            case "UserBadRequestException", "FriendRequestBadRequestException"
                     -> status = HttpStatus.BAD_REQUEST;
             default -> status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
-
         return buildErrorResponse(status, message);
     }
 }

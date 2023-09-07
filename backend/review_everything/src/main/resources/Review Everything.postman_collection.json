@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "1d967764-e185-4bdb-8c29-921bdc0187f4",
+		"_postman_id": "b84937f8-e119-4d54-8c61-566dc86e461e",
 		"name": "Review Everything",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "28312123",
-		"_collection_link": "https://lively-equinox-995172.postman.co/workspace/Review-Everything~27a4e2eb-4738-4f09-a8f5-45546f79bc56/collection/20905212-1d967764-e185-4bdb-8c29-921bdc0187f4?action=share&source=collection_link&creator=28312123"
+		"_collection_link": "https://lively-equinox-995172.postman.co/workspace/Review-Everything~27a4e2eb-4738-4f09-a8f5-45546f79bc56/collection/28310303-b84937f8-e119-4d54-8c61-566dc86e461e?action=share&source=collection_link&creator=28312123"
 	},
 	"item": [
 		{
@@ -608,6 +608,72 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "[USER] Find movies acted by person",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{user_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/persons/3/acted-movies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"persons",
+								"3",
+								"acted-movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[USER] Find movies directed by person",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{user_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/persons/2/directed-movies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"persons",
+								"2",
+								"directed-movies"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -1021,7 +1087,7 @@
 							"raw": "{\r\n    \"status\": \"ACCEPTED\"\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/me/friends/requests/6",
+							"raw": "http://localhost:8080/api/v1/me/friends/requests/15",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1033,7 +1099,7 @@
 								"me",
 								"friends",
 								"requests",
-								"6"
+								"15"
 							]
 						}
 					},
@@ -1151,7 +1217,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huLmRvZSIsImF1dGhvcml0aWVzIjpbIlJPTEVfVVNFUiJdLCJleHAiOjE2ODg1MTU4MjB9.NBJMwbFinQUyPsVOI5fUcXCUUdl_mKTAMboH8L7MkmuuLLPFfpWE_76wVa1nnnkCHKge0pXwQTCV7njkS6DJDA",
+									"value": "{{admin_token}}",
 									"type": "string"
 								}
 							]
@@ -1160,7 +1226,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"movieId\": 1,\r\n    \"rating\": 5,\r\n    \"description\": \"Un film excelent!\"\r\n}",
+							"raw": "{\r\n    \"movieId\": 4,\r\n    \"rating\": 5,\r\n    \"description\": \"Un film excelent!\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1168,7 +1234,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/me/reviews",
+							"raw": "http://localhost:8080/api/v1/reviews",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1177,7 +1243,6 @@
 							"path": [
 								"api",
 								"v1",
-								"me",
 								"reviews"
 							]
 						}
@@ -1396,6 +1461,14 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Find Review by id",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
 				}
 			]
 		},
@@ -1410,7 +1483,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "",
+									"value": "{{admin_token}}",
 									"type": "string"
 								}
 							]
