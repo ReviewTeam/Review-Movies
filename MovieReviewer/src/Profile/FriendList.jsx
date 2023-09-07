@@ -17,7 +17,7 @@ function FirendList() {
         <div className="col">
           <div className="row">
             <div className="col text-center">
-              '<h2>Friends</h2>
+              <h2>Friends</h2>
             </div>
           </div>
           <div className="row">
