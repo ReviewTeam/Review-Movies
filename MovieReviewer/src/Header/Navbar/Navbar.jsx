@@ -8,7 +8,7 @@ import axios from "axios";
 import profilePic from "../../assets/images/profile-pic.png";
 import { Button } from "react-bootstrap";
 
-function Navbar({searchValue, onChange}) {
+function Navbar({ searchValue, onChange }) {
   const [user, setUser] = useState(null);
   const [url, setUrl] = useState("/");
 
@@ -25,7 +25,7 @@ function Navbar({searchValue, onChange}) {
           },
         })
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           const userData = {
             profilePic,
             username: response.data.username,
@@ -52,6 +52,9 @@ function Navbar({searchValue, onChange}) {
     }
   }, []);
 
+  console.log("ROLES");
+  console.log(user);
+
   function logout() {
     localStorage.removeItem("jwtToken");
     window.location.href = `/`;
@@ -63,7 +66,7 @@ function Navbar({searchValue, onChange}) {
       <Link to="/">
         <img src={movieLogo} className="logo" alt="Movie logo" />
       </Link>
-      <SearchBar {...{searchValue, onChange}}/>
+      <SearchBar {...{ searchValue, onChange }} />
 
       {isAdmin && (
         <Link to="/movie/add" style={{ color: "white" }}>

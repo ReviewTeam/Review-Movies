@@ -51,16 +51,21 @@ function EditProfile() {
     setSuccessMessage("");
 
     try {
-      await axios.put("http://localhost:8080/api/v1/me", {
-        headers: {
-          // "Content-Type": "application/json", // or other content types
-          Authorization: `Bearer ${token}`, // Include the token in the 'Authorization' header
+      await axios.put(
+        "http://localhost:8080/api/v1/me",
+        {
+          firstName,
+          lastName,
+          email,
+          password,
         },
-        firstName,
-        lastName,
-        email,
-        password,
-      });
+        {
+          headers: {
+            // "Content-Type": "application/json", // or other content types
+            Authorization: `Bearer ${token}`, // Include the token in the 'Authorization' header
+          },
+        }
+      );
       setSuccessMessage("Profile edited!");
       window.location.href = `/profile/${username}`;
     } catch (error) {
