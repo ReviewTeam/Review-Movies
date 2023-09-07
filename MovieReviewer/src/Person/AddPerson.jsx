@@ -39,7 +39,7 @@ function AddPerson() {
         )
         .then(() => {
           setSuccessMessage("Person added!");
-          // window.location.href = `/`;
+          window.location.href = `/`;
         })
         .catch((error) => {
           console.log(error);
@@ -91,26 +91,7 @@ function AddPerson() {
             required
           />
         </div>
-        {/* {picture && (
-          <div className="mb-3">
-            <label>Preview:</label>
-            <img src={picture} alt="Preview" style={{ maxWidth: "200px" }} />
-          </div>
-        )} */}
 
-        {/* <div className="mb-3">
-          <label htmlFor="profileImage" className="form-label">
-            Profile Image
-          </label>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleFileChange}
-            className="form-control"
-            id="profileImage"
-            required
-          />
-        </div> */}
         <div className="mb-3">
           <label htmlFor="firstName" className="form-label">
             First Name:

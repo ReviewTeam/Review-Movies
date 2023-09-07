@@ -1,5 +1,4 @@
 import { useParams, Link } from "react-router-dom";
-import profilePic from "../assets/images/profile-pic.png";
 import { Container, Row, Col } from "react-bootstrap";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
@@ -34,27 +33,24 @@ function PersonPage() {
         .catch((error) => {
           console.error("Error fetching user data:", error);
         });
-    } else {
-      // Handle the case where the user is not authenticated
-      console.log("aici");
-    }
 
-    axios
-      .get(`http://localhost:8080/api/v1/persons/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`, // Include the token in the 'Authorization' header
-        },
-      })
-      .then((response) => {
-        console.log(response);
-        setFirstName(response.data.firstName);
-        setLastName(response.data.lastName);
-        setBirthDate(response.data.birthDate);
-        setImage(response.data.image);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      axios
+        .get(`http://localhost:8080/api/v1/persons/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`, // Include the token in the 'Authorization' header
+          },
+        })
+        .then((response) => {
+          console.log(response);
+          setFirstName(response.data.firstName);
+          setLastName(response.data.lastName);
+          setBirthDate(response.data.birthDate);
+          setImage(response.data.image);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   }, [id]);
 
   return (

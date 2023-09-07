@@ -40,7 +40,7 @@ function UserProfile() {
               })
               .then((response1) => {
                 const userData1 = {
-                  image: response1.data.image,
+                  image: response1.data[0].image,
                   username: response1.data[0].username,
                   firstName: response1.data[0].firstName,
                   lastName: response1.data[0].lastName,
@@ -74,8 +74,8 @@ function UserProfile() {
     return <div>Loading...</div>;
   }
 
-  // console.log("USER");
-  // console.log(user);
+  console.log("USER");
+  console.log(user);
 
   return (
     <div className="profile bg-light p-3">

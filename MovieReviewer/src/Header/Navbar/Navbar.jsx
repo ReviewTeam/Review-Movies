@@ -5,7 +5,6 @@ import UserSlot from "../UserSlot/UserSlot";
 import "./Navbar.css";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import profilePic from "../../assets/images/profile-pic.png";
 import { Button } from "react-bootstrap";
 
 function Navbar({ searchValue, onChange }) {
@@ -27,7 +26,7 @@ function Navbar({ searchValue, onChange }) {
         .then((response) => {
           // console.log(response);
           const userData = {
-            profilePic,
+            image: response.data.image,
             username: response.data.username,
             firstName: response.data.firstName,
             lastName: response.data.lastName,
@@ -84,7 +83,11 @@ function Navbar({ searchValue, onChange }) {
       {/* Go to the user profile by clicking on the user slot */}
       {user && (
         <Link to={url} style={{ textDecoration: "none" }}>
-          <UserSlot username={user.username} score={user.score} />
+          <UserSlot
+            username={user.username}
+            score={user.score}
+            image={user.image}
+          />
         </Link>
       )}
 
