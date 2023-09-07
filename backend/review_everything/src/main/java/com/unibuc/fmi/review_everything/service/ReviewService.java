@@ -52,6 +52,11 @@ public class ReviewService {
         return modelMapper.map(savedReview, ReviewResponseDto.class);
     }
 
+    public ReviewResponseDto findReviewById(Long reviewId) {
+        var review = reviewRepository.findById(reviewId).orElseThrow(ReviewNotFoundException::new);
+        return modelMapper.map(review, ReviewResponseDto.class);
+    }
+
     public List<ReviewResponseDto> getUserReviews(Long userId) {
         var user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
         var reviews = reviewRepository.findByUser(user);
