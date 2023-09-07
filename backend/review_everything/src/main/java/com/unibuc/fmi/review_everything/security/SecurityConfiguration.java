@@ -31,6 +31,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(authz -> authz
                         .requestMatchers(
                                 antMatcher(HttpMethod.GET, "/api/v1/ping"),
+                                antMatcher(HttpMethod.GET, "/api/v1/public"),
                                 antMatcher(HttpMethod.POST, "/api/v1/users"),
                                 antMatcher(HttpMethod.POST, "/api/v1/auth")).permitAll()
                         .anyRequest()
