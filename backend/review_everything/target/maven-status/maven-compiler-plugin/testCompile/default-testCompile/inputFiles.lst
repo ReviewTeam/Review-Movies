@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 D:\Facultate\Anul II\Semestrul II\Metode de dezvoltare software\ProiectGit\ReviewEverything\backend\review_everything\src\test\java\com\unibuc\fmi\review_everything\service\AuthServiceTest.java
 D:\Facultate\Anul II\Semestrul II\Metode de dezvoltare software\ProiectGit\ReviewEverything\backend\review_everything\src\test\java\com\unibuc\fmi\review_everything\service\UserServiceTest.java
 D:\Facultate\Anul II\Semestrul II\Metode de dezvoltare software\ProiectGit\ReviewEverything\backend\review_everything\src\test\java\com\unibuc\fmi\review_everything\service\MovieServiceTest.java
 D:\Facultate\Anul II\Semestrul II\Metode de dezvoltare software\ProiectGit\ReviewEverything\backend\review_everything\src\test\java\com\unibuc\fmi\review_everything\service\PersonServiceTest.java
+=======
+C:\Users\John\Downloads\Lucruri de pastrat\FMI\Anul II\Semestrul II\MDS\Review Movies\ReviewEverything\backend\review_everything\src\test\java\com\unibuc\fmi\review_everything\service\UserServiceTest.java
+C:\Users\John\Downloads\Lucruri de pastrat\FMI\Anul II\Semestrul II\MDS\Review Movies\ReviewEverything\backend\review_everything\src\test\java\com\unibuc\fmi\review_everything\service\PersonServiceTest.java
+C:\Users\John\Downloads\Lucruri de pastrat\FMI\Anul II\Semestrul II\MDS\Review Movies\ReviewEverything\backend\review_everything\src\test\java\com\unibuc\fmi\review_everything\service\MovieServiceTest.java
+C:\Users\John\Downloads\Lucruri de pastrat\FMI\Anul II\Semestrul II\MDS\Review Movies\ReviewEverything\backend\review_everything\src\test\java\com\unibuc\fmi\review_everything\service\AuthServiceTest.java
+>>>>>>> AlexBranch

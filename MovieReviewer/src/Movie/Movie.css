@@ -1,0 +1,22 @@
+.AddReview {
+  display: flex;
+  flex-direction: column;
+}
+
+.AddReview div {
+  display: flex;
+  margin: 10px 0;
+}
+
+.AddReview div label {
+  padding-right: 10px;
+}
+
+.AddReview div {
+  font-size: 1.5rem;
+}
+
+textarea {
+  width: 300px;
+  height: 200px;
+}
