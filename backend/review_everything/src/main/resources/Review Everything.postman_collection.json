@@ -1219,7 +1219,9 @@
 				{
 					"name": "Update Review",
 					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {}
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
 					},
 					"request": {
 						"auth": {
@@ -1227,24 +1229,25 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbjY5IiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9VU0VSIiwiUk9MRV9BRE1JTiJdLCJleHAiOjE2ODg1MTczOTF9.XgfSztkYvIwqQIjDvKAGoxPqcE36WgW44G79n_YnDEqbBrwSvRxtya13emVhlW_XpzdjRgHApRT64YdAKPkGsw",
+									"value": "{{admin_token}}",
 									"type": "string"
 								}
 							]
 						},
-						"method": "POST",
-						"header": [],
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"movieId\": 1,\r\n    \"rating\": 3,\r\n    \"description\": \"Un film bun, dar nu excelent\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": "{\r\n    \"movieId\": 4,\r\n    \"rating\": 3,\r\n    \"description\": \"Un film bun, dar nu excelent\"\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/me/reviews/2",
+							"raw": "http://localhost:8080/api/v1/reviews/7",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1253,9 +1256,8 @@
 							"path": [
 								"api",
 								"v1",
-								"me",
 								"reviews",
-								"2"
+								"7"
 							]
 						}
 					},
@@ -1269,7 +1271,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huLmRvZSIsImF1dGhvcml0aWVzIjpbIlJPTEVfVVNFUiJdLCJleHAiOjE2ODg1MTgyNjl9.8S7tAKOtMbKmM7_zO2AhVUzJccSMlCBjuh7sB4dzVYQ2_UD3Kf8Fc80wyibQ2wtvD4BmTJW3FzdaBqPm6IeNIg",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huLmRvZSIsImF1dGhvcml0aWVzIjpbIlJPTEVfVVNFUiJdLCJleHAiOjE2OTIyODgzNDV9.kl2J3JFxCKCihm0CL0PVdsla6ZrTbM_sVa2ewsQkt0BdKxYLOALVGhgwHwTdiB-JLH0rO_cQgzK8XuKq9DOSKA",
 									"type": "string"
 								}
 							]
@@ -1281,7 +1283,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/me/reviews/1",
+							"raw": "http://localhost:8080/api/v1/reviews/4",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1290,9 +1292,8 @@
 							"path": [
 								"api",
 								"v1",
-								"me",
 								"reviews",
-								"1"
+								"4"
 							]
 						}
 					},
@@ -1402,34 +1403,22 @@
 			"name": "Feed",
 			"item": [
 				{
-					"name": "Get Authentificated Feed",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
+					"name": "Get Feed",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{user_token}}",
+									"value": "",
 									"type": "string"
 								}
 							]
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/authenticated",
+							"raw": "http://localhost:8080/api/v1/feed",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1438,28 +1427,7 @@
 							"path": [
 								"api",
 								"v1",
-								"authenticated"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get Public Feed",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/v1/public",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"v1",
-								"public"
+								"feed"
 							]
 						}
 					},

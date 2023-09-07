@@ -24,17 +24,23 @@ public class FeedController {
     private final ReviewService reviewService;
 
 
-    @GetMapping("/authenticated")
-    @Secured("ROLE_USER")
-    public ResponseEntity<List<ReviewResponseDto>> getAuthenticatedFeed() {
-        Long currentUserId = userService.getCurrentUser().getId();
-        List<ReviewResponseDto> feed = reviewService.getAuthenticatedFeed(currentUserId);
-        return ResponseEntity.ok(feed);
-    }
+//    @GetMapping("/authenticated")
+//    @Secured("ROLE_USER")
+//    public ResponseEntity<List<ReviewResponseDto>> getAuthenticatedFeed() {
+//        Long currentUserId = userService.getCurrentUser().getId();
+//        List<ReviewResponseDto> feed = reviewService.getAuthenticatedFeed(currentUserId);
+//        return ResponseEntity.ok(feed);
+//    }
+//
+//    @GetMapping("/public")
+//    public ResponseEntity<List<ReviewResponseDto>> getPublicFeed() {
+//        List<ReviewResponseDto> feed = reviewService.getPublicFeed();
+//        return ResponseEntity.ok(feed);
+//    }
 
-    @GetMapping("/public")
-    public ResponseEntity<List<ReviewResponseDto>> getPublicFeed() {
-        List<ReviewResponseDto> feed = reviewService.getPublicFeed();
+    @GetMapping("/feed")
+    public ResponseEntity<List<ReviewResponseDto>> getFeed() {
+        List<ReviewResponseDto> feed = reviewService.getFeed();
         return ResponseEntity.ok(feed);
     }
 }

@@ -142,27 +142,56 @@ public class ReviewService {
         return review.getNrLikes();
     }
 
-    public List<ReviewResponseDto> getAuthenticatedFeed(Long userId) {
+//    public List<ReviewResponseDto> getAuthenticatedFeed(Long userId) {
+//        List<Review> feed;
+//
+//        var friends = userService.getFriends(userId);
+//
+//        feed = reviewRepository.findTop20ByUserInOrderByCreatedAtDesc(friends);
+//
+//        int remainingCount = 20 - feed.size();
+//
+//        if (remainingCount > 0) {
+//            List<Review> remainingReviews = reviewRepository.findTop20ByOrderByCreatedAtDesc();
+//            remainingReviews.removeAll(feed);
+//            feed.addAll(remainingReviews.subList(0, Math.min(remainingCount, remainingReviews.size())));
+//        }
+//
+//        var listType = new TypeToken<List<ReviewResponseDto>>() {}.getType();
+//        return modelMapper.map(feed, listType);
+//    }
+//
+//    public List<ReviewResponseDto> getPublicFeed() {
+//        List<Review> feed = reviewRepository.findTop20ByOrderByCreatedAtDesc();
+//        var listType = new TypeToken<List<ReviewResponseDto>>() {}.getType();
+//        return modelMapper.map(feed, listType);
+//    }
+
+    public List<ReviewResponseDto> getFeed() {
+
         List<Review> feed;
 
-        var friends = userService.getFriends(userId);
+        var currentUser = userService.getCurrentUserOrNull();
 
-        feed = reviewRepository.findTop20ByUserInOrderByCreatedAtDesc(friends);
 
-        int remainingCount = 20 - feed.size();
+        if(currentUser != null) {
+            var userId = currentUser.getId();
 
-        if (remainingCount > 0) {
-            List<Review> remainingReviews = reviewRepository.findTop20ByOrderByCreatedAtDesc();
-            remainingReviews.removeAll(feed);
-            feed.addAll(remainingReviews.subList(0, Math.min(remainingCount, remainingReviews.size())));
+            var friends = userService.getFriends(userId);
+
+            feed = reviewRepository.findTop20ByUserInOrderByCreatedAtDesc(friends);
+
+            int remainingCount = 20 - feed.size();
+
+            if (remainingCount > 0) {
+                List<Review> remainingReviews = reviewRepository.findTop20ByOrderByCreatedAtDesc();
+                remainingReviews.removeAll(feed);
+                feed.addAll(remainingReviews.subList(0, Math.min(remainingCount, remainingReviews.size())));
+            }
         }
-
-        var listType = new TypeToken<List<ReviewResponseDto>>() {}.getType();
-        return modelMapper.map(feed, listType);
-    }
-
-    public List<ReviewResponseDto> getPublicFeed() {
-        List<Review> feed = reviewRepository.findTop20ByOrderByCreatedAtDesc();
+        else {
+            feed = reviewRepository.findTop20ByOrderByCreatedAtDesc();
+        }
         var listType = new TypeToken<List<ReviewResponseDto>>() {}.getType();
         return modelMapper.map(feed, listType);
     }

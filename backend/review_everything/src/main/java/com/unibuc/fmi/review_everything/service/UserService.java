@@ -66,6 +66,18 @@ public class UserService {
         return modelMapper.map(loggedInUser, UserResponseDto.class);
     }
 
+    public UserResponseDto getCurrentUserOrNull() {
+        var loggedInUsername = authenticationUtil.getLoggedInUsername();
+        if (loggedInUsername == null) {
+            return null;
+        }
+        var loggedInUser = userRepository.findUserByUsername(loggedInUsername).orElse(null);
+        if (loggedInUser == null) {
+            return null;
+        }
+        return modelMapper.map(loggedInUser, UserResponseDto.class);
+    }
+
     public UserResponseDto getUserByUsername(String username) {
         var user = userRepository.findUserByUsername(username).orElseThrow(UserNotFoundException::new);
 
