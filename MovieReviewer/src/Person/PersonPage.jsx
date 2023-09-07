@@ -14,6 +14,9 @@ function PersonPage() {
   const [birthDate, setBirthDate] = useState("");
   const [image, setImage] = useState(null);
 
+  const [moviesActed, setMoviesActed] = useState([]);
+  const [moviesDirected, setMoviesDirected] = useState([]);
+
   useEffect(() => {
     if (token) {
       // get the logged in user to check if it is an admin
@@ -51,6 +54,26 @@ function PersonPage() {
           console.log(error);
         });
     }
+
+    axios
+      .get(`http://localhost:8080/api/v1/persons/${id}/acted-movies`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Include the token in the 'Authorization' header
+        },
+      })
+      .then((response) => {
+        setMoviesActed(response.data);
+      });
+
+    axios
+      .get(`http://localhost:8080/api/v1/persons/${id}/directed-movies`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Include the token in the 'Authorization' header
+        },
+      })
+      .then((response) => {
+        setMoviesDirected(response.data);
+      });
   }, [id]);
 
   return (
@@ -77,13 +100,16 @@ function PersonPage() {
               <h2>Acted in</h2>
             </div>
             <ul class="list-group">
-              {
-                <li class="list-group-item">
-                  <Link to={`/movie`} style={{ textDecoration: "none" }}>
-                    <div className="col text-center">Movie</div>
+              {moviesActed.map((movie) => (
+                <li className="list-group-item" key={movie.id}>
+                  <Link
+                    to={`/movie/${movie.id}`}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <div className="col text-center">{movie.title}</div>
                   </Link>
                 </li>
-              }
+              ))}
             </ul>
           </Col>
           <Col>
@@ -91,13 +117,16 @@ function PersonPage() {
               <h2>Directed</h2>
             </div>
             <ul class="list-group">
-              {
-                <li class="list-group-item">
-                  <Link to={`/movie`} style={{ textDecoration: "none" }}>
-                    <div className="col text-center">Movie</div>
+              {moviesDirected.map((movie) => (
+                <li className="list-group-item" key={movie.id}>
+                  <Link
+                    to={`/movie/${movie.id}`}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <div className="col text-center">{movie.title}</div>
                   </Link>
                 </li>
-              }
+              ))}
             </ul>
           </Col>
         </Row>
