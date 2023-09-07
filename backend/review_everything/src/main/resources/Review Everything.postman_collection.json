@@ -1087,7 +1087,7 @@
 							"raw": "{\r\n    \"status\": \"ACCEPTED\"\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/me/friends/requests/6",
+							"raw": "http://localhost:8080/api/v1/me/friends/requests/15",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1099,7 +1099,7 @@
 								"me",
 								"friends",
 								"requests",
-								"6"
+								"15"
 							]
 						}
 					},
@@ -1217,7 +1217,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huLmRvZSIsImF1dGhvcml0aWVzIjpbIlJPTEVfVVNFUiJdLCJleHAiOjE2ODg1MTU4MjB9.NBJMwbFinQUyPsVOI5fUcXCUUdl_mKTAMboH8L7MkmuuLLPFfpWE_76wVa1nnnkCHKge0pXwQTCV7njkS6DJDA",
+									"value": "{{admin_token}}",
 									"type": "string"
 								}
 							]
@@ -1226,7 +1226,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"movieId\": 1,\r\n    \"rating\": 5,\r\n    \"description\": \"Un film excelent!\"\r\n}",
+							"raw": "{\r\n    \"movieId\": 4,\r\n    \"rating\": 5,\r\n    \"description\": \"Un film excelent!\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1234,7 +1234,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/me/reviews",
+							"raw": "http://localhost:8080/api/v1/reviews",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1243,7 +1243,6 @@
 							"path": [
 								"api",
 								"v1",
-								"me",
 								"reviews"
 							]
 						}
@@ -1460,6 +1459,14 @@
 								"2"
 							]
 						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find Review by id",
+					"request": {
+						"method": "GET",
+						"header": []
 					},
 					"response": []
 				}
