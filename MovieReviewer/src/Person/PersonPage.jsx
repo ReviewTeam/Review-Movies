@@ -33,7 +33,20 @@ function PersonPage() {
       // Handle the case where the user is not authenticated
       console.log("aici");
     }
-  }, []);
+
+    axios
+      .get(`http://localhost:8080/api/v1/persons/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Include the token in the 'Authorization' header
+        },
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [id]);
 
   const people = [
     {
@@ -51,7 +64,7 @@ function PersonPage() {
       birthdate: "1/1/1000",
     },
     {
-      id: "3",
+      id: "9",
       picture: { profilePic },
       firstname: "Person",
       lastname: "3",

@@ -3,7 +3,7 @@ import profilePic from "../assets/images/profile-pic.png";
 import { useState } from "react";
 
 function AddPerson() {
-  const [picture, setPicture] = useState("");
+  const [image, setImage] = useState(null);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [birthDate, setBirthDate] = useState("");
@@ -29,6 +29,7 @@ function AddPerson() {
             firstName,
             lastName,
             birthDate,
+            image,
           },
           {
             headers: {
@@ -38,27 +39,24 @@ function AddPerson() {
         )
         .then(() => {
           setSuccessMessage("Person added!");
+          // window.location.href = `/`;
         })
         .catch((error) => {
           console.log(error);
           setError("Error");
         });
-
-      // Reset the form after submission
-      // setPicture("");
-      // setFirstName("");
-      // setLastName("");
-      // setBirthDate("");
     }
   };
 
   const handlePictureChange = (e) => {
     const file = e.target.files[0];
+
     if (file) {
       const reader = new FileReader();
-      reader.onloadend = function (event) {
+
+      reader.onload = function (event) {
         const base64String = event.target.result.split(",")[1];
-        setPicture(base64String);
+        setImage(base64String);
       };
       reader.readAsDataURL(file);
     }
@@ -81,13 +79,13 @@ function AddPerson() {
       </center>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
-          <label htmlFor="picture" className="form-label">
+          <label htmlFor="image" className="form-label">
             Picture:
           </label>
           <input
             type="file"
             className="form-control"
-            id="picture"
+            id="image"
             accept="image/*"
             onChange={handlePictureChange}
             required

@@ -52,8 +52,8 @@ function Navbar({ searchValue, onChange }) {
     }
   }, []);
 
-  console.log("ROLES");
-  console.log(user);
+  // console.log("ROLES");
+  // console.log(user);
 
   function logout() {
     localStorage.removeItem("jwtToken");

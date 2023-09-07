@@ -74,8 +74,8 @@ function UserProfile() {
     return <div>Loading...</div>;
   }
 
-  console.log("USER");
-  console.log(user);
+  // console.log("USER");
+  // console.log(user);
 
   return (
     <div className="profile bg-light p-3">
