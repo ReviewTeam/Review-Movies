@@ -129,15 +129,15 @@ function Movie() {
     console.log("description: " + reviewDescription);
 
     axios
-        .post("http://localhost:8080/api/v1/me/reviews", {
-          data: {
-            "movieId": id,
-            "rating": reviewScore,
-            "description": reviewDescription
-          },
-          headers: {
-            Authorization: `Bearer ${token}`, // Include the token in the 'Authorization' header
-          }
+        .post("http://localhost:8080/api/v1/me/reviews",
+            {
+                    movieId: id,
+                    rating: reviewScore,
+                    description: reviewDescription },
+                      {
+                        headers: {
+                        Authorization: `Bearer ${token}`, // Include the token in the 'Authorization' header
+            }
         })
         .then((response) => {
           console.log(response);
