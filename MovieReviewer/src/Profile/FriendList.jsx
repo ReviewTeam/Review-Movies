@@ -1,45 +1,55 @@
-import { Link } from "react-router-dom";
+import axios from "axios";
+import React from "react";
+import { useEffect, useState } from "react";
+import './FriendList.css';
+import FriendRequestList from "./FriendRequestList";
 
-function FirendList({ user }) {
-  // Dummy friend list
-  const friends = {
-    'user1': ['user2', 'user3'],
-    'user2': ['user1', 'user3'],
-    'user3': ['user1', 'user2']
+function FriendList({ username }) {
+  const [loading, setLoading] = useState(true);
+  const [friendList, setFriendList] = useState([]);
+
+  useEffect(() => {
+    const token = localStorage.getItem("jwtToken");
+
+    if (token) {
+      axios
+        .get(`http://localhost:8080/api/v1/me/friends`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          const friendsData = response.data.map((friend) => ({
+            fullName: `${friend.firstName} ${friend.lastName}`,
+          }));
+          setFriendList(friendsData);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error("Error fetching friend list:", error);
+          setLoading(false);
+        });
+    } else {
+      setLoading(false);
+    }
+  }, [username]);
+
+  if (loading) {
+    return <div>Loading friend list...</div>;
   }
 
-  // get the friend list of the current user
-  const friendList = friends[user.username];
-
   return (
-    <>
-      <div className="container">
-        <div className="col">
-          <div className="row">
-            <div className="col text-center">'
-              <h2>Friends</h2>
-            </div>
-          </div>
-          <div className="row"> 
-            <ul class="list-group">
-              {/* Diplay each frind with a link to that user's profile */}
-              {
-                friendList.map(friend => <li class="list-group-item"><Link to={`/profile/${friend}`} style={{ textDecoration: 'none' }}>
-                  
-                  <div className="col text-center">
-                    {friend}
-                  </div>
-                </Link></li>)
-              }
-            </ul>
-          </div>
-          
-        </div>
-        
+    <div>
+      <h2>Friend List</h2>
+      <div className="friend-list-container">
+        <ul className="friend-list">
+          {friendList.map((friend) => (
+            <li key={friend.fullName}>{friend.fullName}</li>
+          ))}
+        </ul>
       </div>
-      
-    </>
+    </div>
   );
 }
 
-export default FirendList;
+export default FriendList;
