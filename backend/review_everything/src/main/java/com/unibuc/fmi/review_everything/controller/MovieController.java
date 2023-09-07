@@ -43,6 +43,14 @@ public class MovieController {
         return ResponseEntity.ok(movieService.findMoviesByTitle(title, pageNumber, pageSize));
     }
 
+//    @GetMapping
+//    public ResponseEntity<List<MovieResponseDto>> getAllMovies(
+//            @RequestParam(name = "page-number", required = false, defaultValue = "0") int pageNumber,
+//            @RequestParam(name = "page-size", required = false, defaultValue = "10") int pageSize
+//    ){
+//        return ResponseEntity.ok(movieService.getAllMovies(pageNumber, pageSize));
+//    }
+
     @Secured({"ROLE_ADMIN"})
     @PostMapping("/{movieId}/persons")
     public ResponseEntity<MovieResponseDto> addActorToMovie(

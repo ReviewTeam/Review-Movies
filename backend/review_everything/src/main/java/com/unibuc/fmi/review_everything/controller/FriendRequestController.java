@@ -35,7 +35,7 @@ public class FriendRequestController {
 
     @Secured({"ROLE_USER"})
     @GetMapping("/requests")
-    public ResponseEntity<List<FriendRequest>> getFriendRequests() {
+    public ResponseEntity<List<FriendResponseDto>> getFriendRequests() {
         return ResponseEntity.ok(friendRequestService.getFriendRequests(userService.getCurrentUser().getId()));
     }
 

@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class FriendResponseDto {
     private Long id;
-    private User sender;
-    private User receiver;
     private Status status;
+    private Long sender_id;
+    private String username;
 }

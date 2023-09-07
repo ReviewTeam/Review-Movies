@@ -1,9 +1,13 @@
 package com.unibuc.fmi.review_everything.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Entity
@@ -25,4 +29,12 @@ public class Review {
 
     @Column(nullable = false)
     private String description;
+
+    private int nrLikes;
+
+    @ManyToMany
+    private List<User> likedByUsers;
+
+    @NotNull
+    private LocalDateTime createdAt;
 }

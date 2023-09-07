@@ -3,7 +3,10 @@ package com.unibuc.fmi.review_everything.service;
 import com.unibuc.fmi.review_everything.dto.user.request.UserRequestDto;
 import com.unibuc.fmi.review_everything.dto.user.request.UserUpdateRequestDto;
 import com.unibuc.fmi.review_everything.dto.user.response.UserResponseDto;
+import com.unibuc.fmi.review_everything.enums.Status;
+import com.unibuc.fmi.review_everything.model.FriendRequest;
 import com.unibuc.fmi.review_everything.model.User;
+import com.unibuc.fmi.review_everything.repository.FriendRequestRepository;
 import com.unibuc.fmi.review_everything.repository.UserRepository;
 import com.unibuc.fmi.review_everything.util.AuthenticationUtil;
 import com.unibuc.fmi.review_everything.exception.user.UserNotFoundException;
@@ -26,6 +29,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final ModelMapper modelMapper;
+    //private final FriendRequestRepository friendRequestRepository;
 
     public UserResponseDto createUser(UserRequestDto userRequestDto) {
         final String encodedPassword = passwordEncoder.encode(userRequestDto.getPassword());
@@ -62,6 +66,18 @@ public class UserService {
         return modelMapper.map(loggedInUser, UserResponseDto.class);
     }
 
+    public UserResponseDto getCurrentUserOrNull() {
+        var loggedInUsername = authenticationUtil.getLoggedInUsername();
+        if (loggedInUsername == null) {
+            return null;
+        }
+        var loggedInUser = userRepository.findUserByUsername(loggedInUsername).orElse(null);
+        if (loggedInUser == null) {
+            return null;
+        }
+        return modelMapper.map(loggedInUser, UserResponseDto.class);
+    }
+
     public UserResponseDto getUserByUsername(String username) {
         var user = userRepository.findUserByUsername(username).orElseThrow(UserNotFoundException::new);
 
@@ -95,4 +111,32 @@ public class UserService {
         var user = userRepository.findUserByUsername(username).orElseThrow(UserNotFoundException::new);
         userRepository.delete(user);
     }
+
+//    public List<User> getFriends(Long userId) {
+//        var user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
+//        List<User> friends = new ArrayList<>();
+//
+//        var sentRequests = friendRequestRepository.findBySenderAndStatus(user, Status.ACCEPTED);
+//        for (FriendRequest request : sentRequests) {
+//            if (!Objects.equals(request.getReceiver().getId(), userId) && !this.checkFriendIsAlreadyInList(friends, request.getReceiver())) {
+//                friends.add(request.getReceiver());
+//            }
+//        }
+//
+//        var receivedRequests = friendRequestRepository.findByReceiverAndStatus(user, Status.ACCEPTED);
+//        for (FriendRequest request : receivedRequests) {
+//            if (!Objects.equals(request.getSender().getId(), userId) && !this.checkFriendIsAlreadyInList(friends, request.getSender())) {
+//                friends.add(request.getSender());
+//            }
+//        }
+//
+//        //var listType = new TypeToken<List<UserResponseDto>>() {}.getType();
+//        return friends;
+//    }
+//
+//    private boolean checkFriendIsAlreadyInList(List<User> friendRequests, User friend) {
+//        List<Long> friendRequestIds = friendRequests.stream().map(User::getId).toList();
+//
+//        return friendRequestIds.contains(friend.getId());
+//    }
 }
