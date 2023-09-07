@@ -12,4 +12,5 @@ public interface PersonRepository extends JpaRepository<Person, Long>, PagingAnd
     @Query("SELECT p FROM Person p WHERE (:firstName IS NULL OR LOWER(p.firstName) = LOWER(:firstName)) " +
             "AND (:lastName IS NULL OR LOWER(p.lastName) = LOWER(:lastName))")
     List<Person> findPersonsByFirstNameAndLastName(String firstName, String lastName, Pageable pageable);
+
 }

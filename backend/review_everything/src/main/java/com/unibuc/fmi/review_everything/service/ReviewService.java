@@ -5,6 +5,7 @@ import com.unibuc.fmi.review_everything.dto.review.response.ReviewResponseDto;
 import com.unibuc.fmi.review_everything.exception.movie.MovieNotFoundException;
 import com.unibuc.fmi.review_everything.exception.review.ReviewNotFoundException;
 import com.unibuc.fmi.review_everything.exception.user.UserNotFoundException;
+import com.unibuc.fmi.review_everything.model.FriendRequest;
 import com.unibuc.fmi.review_everything.model.Movie;
 import com.unibuc.fmi.review_everything.model.Review;
 import com.unibuc.fmi.review_everything.model.User;
@@ -142,30 +143,6 @@ public class ReviewService {
         return review.getNrLikes();
     }
 
-//    public List<ReviewResponseDto> getAuthenticatedFeed(Long userId) {
-//        List<Review> feed;
-//
-//        var friends = userService.getFriends(userId);
-//
-//        feed = reviewRepository.findTop20ByUserInOrderByCreatedAtDesc(friends);
-//
-//        int remainingCount = 20 - feed.size();
-//
-//        if (remainingCount > 0) {
-//            List<Review> remainingReviews = reviewRepository.findTop20ByOrderByCreatedAtDesc();
-//            remainingReviews.removeAll(feed);
-//            feed.addAll(remainingReviews.subList(0, Math.min(remainingCount, remainingReviews.size())));
-//        }
-//
-//        var listType = new TypeToken<List<ReviewResponseDto>>() {}.getType();
-//        return modelMapper.map(feed, listType);
-//    }
-//
-//    public List<ReviewResponseDto> getPublicFeed() {
-//        List<Review> feed = reviewRepository.findTop20ByOrderByCreatedAtDesc();
-//        var listType = new TypeToken<List<ReviewResponseDto>>() {}.getType();
-//        return modelMapper.map(feed, listType);
-//    }
 
     public List<ReviewResponseDto> getFeed() {
 
@@ -177,9 +154,13 @@ public class ReviewService {
         if(currentUser != null) {
             var userId = currentUser.getId();
 
-            var friends = userService.getFriends(userId);
+            //var friends = userService.getFriends(userId);
 
-            feed = reviewRepository.findTop20ByUserInOrderByCreatedAtDesc(friends);
+
+            var friendsDto = friendRequestService.getFriends(userId);
+            var friends = modelMapper.map(friendsDto, new TypeToken<List<User>>() {}.getType());
+
+            feed = reviewRepository.findTop20ByUserInOrderByCreatedAtDesc((List<User>) friends);
 
             int remainingCount = 20 - feed.size();
 

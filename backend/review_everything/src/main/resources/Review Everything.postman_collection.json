@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "1d967764-e185-4bdb-8c29-921bdc0187f4",
+		"_postman_id": "b84937f8-e119-4d54-8c61-566dc86e461e",
 		"name": "Review Everything",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "28312123",
-		"_collection_link": "https://lively-equinox-995172.postman.co/workspace/Review-Everything~27a4e2eb-4738-4f09-a8f5-45546f79bc56/collection/20905212-1d967764-e185-4bdb-8c29-921bdc0187f4?action=share&source=collection_link&creator=28312123"
+		"_collection_link": "https://lively-equinox-995172.postman.co/workspace/Review-Everything~27a4e2eb-4738-4f09-a8f5-45546f79bc56/collection/28310303-b84937f8-e119-4d54-8c61-566dc86e461e?action=share&source=collection_link&creator=28312123"
 	},
 	"item": [
 		{
@@ -604,6 +604,72 @@
 								"v1",
 								"persons",
 								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[USER] Find movies acted by person",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{user_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/persons/3/acted-movies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"persons",
+								"3",
+								"acted-movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[USER] Find movies directed by person",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{user_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/persons/2/directed-movies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"persons",
+								"2",
+								"directed-movies"
 							]
 						}
 					},
@@ -1410,7 +1476,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "",
+									"value": "{{admin_token}}",
 									"type": "string"
 								}
 							]
