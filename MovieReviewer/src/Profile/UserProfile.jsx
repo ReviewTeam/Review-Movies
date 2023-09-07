@@ -26,7 +26,7 @@ function UserProfile() {
             firstName: response.data.firstName,
             lastName: response.data.lastName,
             email: response.data.email,
-            score: 321,
+            score: response.data.score
           };
 
           setUser(userData);

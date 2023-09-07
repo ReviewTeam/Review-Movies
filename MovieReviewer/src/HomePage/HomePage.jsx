@@ -1,5 +1,6 @@
 import Body from "../Body/ReviewBody"
 import NavBar from "../Header/Navbar/Navbar"
+import ReviewBody from "../Body/ReviewBody"
 
 function HomePage() {
     return (

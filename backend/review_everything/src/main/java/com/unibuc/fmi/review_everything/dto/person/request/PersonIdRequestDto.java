@@ -1,0 +1,14 @@
+package com.unibuc.fmi.review_everything.dto.person.request;
+
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class PersonIdRequestDto {
+    @NotNull
+    private Long id;
+}

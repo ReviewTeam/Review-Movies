@@ -1,17 +1,24 @@
 import Review from '../Review/Review'
 import './Feed.css'
 
-function Feed() {
-    const nrOfReviews = 5
-    let arrayReviews = Array(nrOfReviews).fill(null).map((_, index) => index)
-    console.log("array of reviews")
-    console.log(arrayReviews)
+function Feed({searchValue, reviewsState, setReviewsState, searchedReviewsState, setSearchedReviewsState}) {
+    // console.log("array of reviews")
+    // console.log(arrayReviews)
+    console.log("Search revieweul state-ul este: ", searchedReviewsState);
 
     return (
         <div className="feed">
-            {arrayReviews.map(index => (
-                <Review key={index} />
-            ))}
+            {searchValue ? searchedReviewsState.map((review, id) => {
+                const newObject = {...review, searchedReviewsState, setSearchedReviewsState}
+                return <Review key={id} id={id} {...newObject}/>
+            }) : reviewsState.map((review, id) => {
+                const newObject = {...review, reviewsState, setReviewsState}
+                return <Review key={id} id={id} {...newObject}/>
+            })}
+
+            {/* <h3>Add new review</h3>
+            
+            <ReviewForm {...{setReviewsState}} /> */}
         </div>
     )
 }

@@ -11,6 +11,7 @@ function FriendList({ username }) {
   useEffect(() => {
     const token = localStorage.getItem("jwtToken");
 
+
     if (token) {
       axios
         .get(`http://localhost:8080/api/v1/me/friends`, {
@@ -53,3 +54,4 @@ function FriendList({ username }) {
 }
 
 export default FriendList;
+

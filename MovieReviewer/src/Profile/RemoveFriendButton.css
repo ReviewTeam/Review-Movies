@@ -1,0 +1,12 @@
+/* SendFriendRequestButton.css */
+.send-friend-request-button {
+    background-color: #d3371c; /* Purple */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 24px;
+    font-weight: 800;
+  }
+  

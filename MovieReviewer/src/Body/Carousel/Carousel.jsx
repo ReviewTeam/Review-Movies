@@ -6,7 +6,6 @@ import { useState } from "react"
 function Carousel() {
     const numOfElements = 15
     const carouselArray = Array(numOfElements).fill(null).map((_, index) => index)
-    console.log(carouselArray)
 
     const [scrollLeft, setScrollLeft] = useState(0);
 
@@ -29,8 +28,6 @@ function Carousel() {
             <div id="rightScroll">
                 <img src={carouselRightLogo} onClick={() => {
                     let element = document.querySelector('.carousel section')
-                    console.log("Scroll left:", element.scrollLeft)
-                    console.log("Scroll width: ", element.getBoundingClientRect().width)
                     if(element.scrollLeft < element.getBoundingClientRect().width) {
                         $('.carousel section').animate({scrollLeft: '+=480'}, 500);
                     }

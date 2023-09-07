@@ -2,16 +2,20 @@ import Carousel from "./Carousel/Carousel";
 import './ReviewBody.css'
 import Feed from "./Feed/Feed";
 
-function ReviewBody() {
+// eslint-disable-next-line react/prop-types
+function ReviewBody({searchValue, reviewsState, setReviewsState, searchedReviewsState, setSearchedReviewsState}) {
+
+    console.log("Search revieweul state-ul este: ", searchedReviewsState);
+    console.log(searchValue)
     return (
         <div className="body">
             <section className="carouselSection">
                 <div className="carouselText">
-                    <span>Check out the most popular movies & series according to our members</span>
+                    <h1>Check out the most popular movies & series according to our members</h1>
                 </div>
                 <Carousel />
             </section>
-            <Feed />
+            <Feed {...{searchValue, reviewsState, setReviewsState, searchedReviewsState, setSearchedReviewsState}}/>
         </div>
     )
 }
