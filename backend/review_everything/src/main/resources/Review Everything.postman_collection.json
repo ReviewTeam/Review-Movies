@@ -3,8 +3,8 @@
 		"_postman_id": "b84937f8-e119-4d54-8c61-566dc86e461e",
 		"name": "Review Everything",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "28312123",
-		"_collection_link": "https://lively-equinox-995172.postman.co/workspace/Review-Everything~27a4e2eb-4738-4f09-a8f5-45546f79bc56/collection/28310303-b84937f8-e119-4d54-8c61-566dc86e461e?action=share&source=collection_link&creator=28312123"
+		"_exporter_id": "20905212",
+		"_collection_link": "https://lively-equinox-995172.postman.co/workspace/Review-Everything~27a4e2eb-4738-4f09-a8f5-45546f79bc56/collection/28310303-b84937f8-e119-4d54-8c61-566dc86e461e?action=share&source=collection_link&creator=20905212"
 	},
 	"item": [
 		{
@@ -354,7 +354,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstName\" : \"John\",\r\n    \"lastName\" : \"Doe\",\r\n    \"email\" : \"john.doe@gmail.com\",\r\n    \"username\" : \"john.doe\",\r\n    \"password\" : \"P@ssword321\"\r\n}",
+							"raw": "{\r\n    \"firstName\" : \"Jane\",\r\n    \"lastName\" : \"Doee\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1087,7 +1087,7 @@
 							"raw": "{\r\n    \"status\": \"ACCEPTED\"\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/me/friends/requests/6",
+							"raw": "http://localhost:8080/api/v1/me/friends/requests/15",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1099,7 +1099,7 @@
 								"me",
 								"friends",
 								"requests",
-								"6"
+								"15"
 							]
 						}
 					},
@@ -1217,7 +1217,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huLmRvZSIsImF1dGhvcml0aWVzIjpbIlJPTEVfVVNFUiJdLCJleHAiOjE2ODg1MTU4MjB9.NBJMwbFinQUyPsVOI5fUcXCUUdl_mKTAMboH8L7MkmuuLLPFfpWE_76wVa1nnnkCHKge0pXwQTCV7njkS6DJDA",
+									"value": "{{admin_token}}",
 									"type": "string"
 								}
 							]
@@ -1226,7 +1226,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"movieId\": 1,\r\n    \"rating\": 5,\r\n    \"description\": \"Un film excelent!\"\r\n}",
+							"raw": "{\r\n    \"movieId\": 4,\r\n    \"rating\": 5,\r\n    \"description\": \"Un film excelent!\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1234,7 +1234,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/me/reviews",
+							"raw": "http://localhost:8080/api/v1/reviews",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1243,7 +1243,6 @@
 							"path": [
 								"api",
 								"v1",
-								"me",
 								"reviews"
 							]
 						}
@@ -1460,6 +1459,14 @@
 								"2"
 							]
 						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find Review by id",
+					"request": {
+						"method": "GET",
+						"header": []
 					},
 					"response": []
 				}

@@ -2,9 +2,9 @@ package com.unibuc.fmi.review_everything.controller;
 
 import com.unibuc.fmi.review_everything.dto.review.response.ReviewResponseDto;
 import com.unibuc.fmi.review_everything.dto.user.request.UserUpdateRequestDto;
+import com.unibuc.fmi.review_everything.dto.user.response.UserResponseDto;
 import com.unibuc.fmi.review_everything.service.ReviewService;
 import com.unibuc.fmi.review_everything.service.UserService;
-import com.unibuc.fmi.review_everything.dto.user.response.UserResponseDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

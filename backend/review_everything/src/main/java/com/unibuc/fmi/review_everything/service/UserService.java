@@ -96,11 +96,22 @@ public class UserService {
 
         var loggedInUser = userRepository.findUserByUsername(loggedInUsername).orElseThrow(UserNotFoundException::new);
 
-        loggedInUser.setFirstName(userUpdateRequestDto.getFirstName());
-        loggedInUser.setLastName(userUpdateRequestDto.getLastName());
-        loggedInUser.setEmail(userUpdateRequestDto.getEmail());
-        loggedInUser.setPassword(userUpdateRequestDto.getPassword());
-        loggedInUser.setImage(userUpdateRequestDto.getImage());
+        var firstName = userUpdateRequestDto.getFirstName();
+        var lastName = userUpdateRequestDto.getLastName();
+        var password = userUpdateRequestDto.getPassword();
+        var image = userUpdateRequestDto.getImage();
+        if(firstName != null){
+            loggedInUser.setFirstName(firstName);
+        }
+        if(lastName != null){
+            loggedInUser.setLastName(lastName);
+        }
+        if(password != null){
+            loggedInUser.setPassword(passwordEncoder.encode(password));
+        }
+        if(image != null){
+            loggedInUser.setImage(image);
+        }
 
         var updatedUser = userRepository.save(loggedInUser);
 
