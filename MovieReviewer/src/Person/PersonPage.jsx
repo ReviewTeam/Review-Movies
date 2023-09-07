@@ -1,5 +1,4 @@
 import { useParams, Link } from "react-router-dom";
-import profilePic from "../assets/images/profile-pic.png";
 import { Container, Row, Col } from "react-bootstrap";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
@@ -9,6 +8,14 @@ function PersonPage() {
 
   const token = localStorage.getItem("jwtToken"); // Retrieve the JWT token from storage
   const [isAdmin, setIsAdmin] = useState(false);
+
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [birthDate, setBirthDate] = useState("");
+  const [image, setImage] = useState(null);
+
+  const [moviesActed, setMoviesActed] = useState([]);
+  const [moviesDirected, setMoviesDirected] = useState([]);
 
   useEffect(() => {
     if (token) {
@@ -29,42 +36,45 @@ function PersonPage() {
         .catch((error) => {
           console.error("Error fetching user data:", error);
         });
-    } else {
-      // Handle the case where the user is not authenticated
-      console.log("aici");
-    }
-  }, []);
 
-  const people = [
-    {
-      id: "1",
-      picture: { profilePic },
-      firstname: "Person",
-      lastname: "1",
-      birthdate: "1/1/1000",
-    },
-    {
-      id: "2",
-      picture: { profilePic },
-      firstname: "Person",
-      lastname: "2",
-      birthdate: "1/1/1000",
-    },
-    {
-      id: "3",
-      picture: { profilePic },
-      firstname: "Person",
-      lastname: "3",
-      birthdate: "1/1/1000",
-    },
-  ];
-
-  let person;
-  for (let i = 0; i < people.length; i++) {
-    if (people[i].id === id) {
-      person = people[i];
+      axios
+        .get(`http://localhost:8080/api/v1/persons/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`, // Include the token in the 'Authorization' header
+          },
+        })
+        .then((response) => {
+          console.log(response);
+          setFirstName(response.data.firstName);
+          setLastName(response.data.lastName);
+          setBirthDate(response.data.birthDate);
+          setImage(response.data.image);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
-  }
+
+    axios
+      .get(`http://localhost:8080/api/v1/persons/${id}/acted-movies`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Include the token in the 'Authorization' header
+        },
+      })
+      .then((response) => {
+        setMoviesActed(response.data);
+      });
+
+    axios
+      .get(`http://localhost:8080/api/v1/persons/${id}/directed-movies`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Include the token in the 'Authorization' header
+        },
+      })
+      .then((response) => {
+        setMoviesDirected(response.data);
+      });
+  }, [id]);
 
   return (
     <>
@@ -72,15 +82,15 @@ function PersonPage() {
         <Row className="justify-content-center mt-5">
           <Col xs={12} md={6} className="text-center">
             <img
-              src={profilePic}
+              src={`data:image;base64,${image}`}
               alt="Profile"
               className="rounded-circle mb-4"
               style={{ width: "200px" }}
             />
             <h2>
-              {person.firstname} {person.lastname}
+              {firstName} {lastName}
             </h2>
-            <p>Birthdate: {person.birthdate}</p>
+            <p>Birthdate: {birthDate}</p>
           </Col>
         </Row>
 
@@ -90,13 +100,16 @@ function PersonPage() {
               <h2>Acted in</h2>
             </div>
             <ul class="list-group">
-              {
-                <li class="list-group-item">
-                  <Link to={`/movie`} style={{ textDecoration: "none" }}>
-                    <div className="col text-center">Movie</div>
+              {moviesActed.map((movie) => (
+                <li className="list-group-item" key={movie.id}>
+                  <Link
+                    to={`/movie/${movie.id}`}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <div className="col text-center">{movie.title}</div>
                   </Link>
                 </li>
-              }
+              ))}
             </ul>
           </Col>
           <Col>
@@ -104,13 +117,16 @@ function PersonPage() {
               <h2>Directed</h2>
             </div>
             <ul class="list-group">
-              {
-                <li class="list-group-item">
-                  <Link to={`/movie`} style={{ textDecoration: "none" }}>
-                    <div className="col text-center">Movie</div>
+              {moviesDirected.map((movie) => (
+                <li className="list-group-item" key={movie.id}>
+                  <Link
+                    to={`/movie/${movie.id}`}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <div className="col text-center">{movie.title}</div>
                   </Link>
                 </li>
-              }
+              ))}
             </ul>
           </Col>
         </Row>
@@ -120,7 +136,7 @@ function PersonPage() {
             <center>
               <Link
                 to={{
-                  pathname: `/person/${person.id}/edit`,
+                  pathname: `/person/${id}/edit`,
                 }}
                 style={{ textDecoration: "none" }}
               >

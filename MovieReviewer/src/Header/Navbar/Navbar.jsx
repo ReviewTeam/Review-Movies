@@ -5,9 +5,9 @@ import UserSlot from "../UserSlot/UserSlot";
 import "./Navbar.css";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import profilePic from "../../assets/images/profile-pic.png";
+import { Button } from "react-bootstrap";
 
-function Navbar({searchValue, onChange}) {
+function Navbar({ searchValue, onChange }) {
   const [user, setUser] = useState(null);
   const [url, setUrl] = useState("/");
 
@@ -24,9 +24,9 @@ function Navbar({searchValue, onChange}) {
           },
         })
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           const userData = {
-            profilePic,
+            image: response.data.image,
             username: response.data.username,
             firstName: response.data.firstName,
             lastName: response.data.lastName,
@@ -51,7 +51,13 @@ function Navbar({searchValue, onChange}) {
     }
   }, []);
 
-  console.log(isAdmin);
+  // console.log("ROLES");
+  // console.log(user);
+
+  function logout() {
+    localStorage.removeItem("jwtToken");
+    window.location.href = `/`;
+  }
 
   return (
     <nav>
@@ -59,7 +65,7 @@ function Navbar({searchValue, onChange}) {
       <Link to="/">
         <img src={movieLogo} className="logo" alt="Movie logo" />
       </Link>
-      <SearchBar {...{searchValue, onChange}}/>
+      <SearchBar {...{ searchValue, onChange }} />
 
       {isAdmin && (
         <Link to="/movie/add" style={{ color: "white" }}>
@@ -71,10 +77,17 @@ function Navbar({searchValue, onChange}) {
           Add Person
         </Link>
       )}
+
+      {user && <Button onClick={logout}>Logout</Button>}
+
       {/* Go to the user profile by clicking on the user slot */}
       {user && (
         <Link to={url} style={{ textDecoration: "none" }}>
-          <UserSlot username={user.username} score={user.score} />
+          <UserSlot
+            username={user.username}
+            score={user.score}
+            image={user.image}
+          />
         </Link>
       )}
 
