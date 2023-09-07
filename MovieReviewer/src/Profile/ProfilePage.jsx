@@ -4,7 +4,8 @@ import profilePic from "../assets/images/profile-pic.png";
 import UserProfile from "./UserProfile";
 import PlaceHolder from "./PlaceHolder";
 import FirendList from "./FriendList";
-import Review from "../Body/Review/Review";
+// import Review from "../Body/Review/Review";
+import Review from "../Movie/MovieReview";
 import axios from "axios";
 
 function ProfilePage() {
@@ -19,9 +20,7 @@ function ProfilePage() {
           </div>
 
           {/* Reviews in the middle */}
-          <div className="col-6">
-            <Review></Review>
-          </div>
+          <div className="col-6"></div>
 
           {/* Friend list on the right*/}
           {/* <div className="col-3">

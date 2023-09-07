@@ -7,11 +7,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Button } from "react-bootstrap";
 
-<<<<<<< HEAD
 function Navbar({ searchValue, onChange }) {
-=======
-function Navbar() {
->>>>>>> AlexBranch
   const [user, setUser] = useState(null);
   const [url, setUrl] = useState("/");
 
@@ -69,11 +65,8 @@ function Navbar() {
       <Link to="/">
         <img src={movieLogo} className="logo" alt="Movie logo" />
       </Link>
-<<<<<<< HEAD
+
       <SearchBar {...{ searchValue, onChange }} />
-=======
-      <SearchBar />
->>>>>>> AlexBranch
 
       {isAdmin && (
         <Link to="/movie/add" style={{ color: "white" }}>
