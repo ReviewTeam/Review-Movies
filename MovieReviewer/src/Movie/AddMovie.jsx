@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import profilePic from "../assets/images/profile-pic.png";
+import axios from "axios";
 
 function AddMovie() {
-  const existingPersons = [
+  const [existingPersons, setExistingPersons] = useState([
     {
       id: "1",
       picture: { profilePic },
@@ -24,7 +25,7 @@ function AddMovie() {
       lastname: "3",
       birthdate: "1/1/1000",
     },
-  ];
+  ]);
 
   const [title, setTitle] = useState("");
   const [directorId, setDirectorId] = useState("");
@@ -39,44 +40,73 @@ function AddMovie() {
 
   const token = localStorage.getItem("jwtToken"); // Retrieve the JWT token from storage
 
+  useEffect(() => {
+    if (token) {
+      // get the logged in user to check if it is an admin
+      axios
+          .get("http://localhost:8080/api/v1/me", {
+            headers: {
+              Authorization: `Bearer ${token}`, // Include the token in the 'Authorization' header
+            },
+          })
+          .then((response) => {
+            axios
+                .get("http://localhost:8080/api/v1/persons", {
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                  }
+                })
+                .then((response) => {
+                  const data = response.data;
+                  console.log("Persons");
+                  setExistingPersons(data);
+                  console.log(existingPersons);
+                })
+                .catch((error) => {
+                  console.log(error);
+                })
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+    }
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setSuccessMessage("");
-    if (token) {
-      try {
-        console.log(firstName, lastName, birthdate);
-        await axios.post("http://localhost:8080/api/v1/movies", {
-          headers: {
-            Authorization: `Bearer ${token}`, // Include the token in the 'Authorization' header
-          },
+    axios.
+    post("http://localhost:8080/api/v1/movies",
+        {
           title,
           shortDescription,
           year,
           directorId,
-          actorId,
           image,
-        });
-        setSuccessMessage("Movie added!");
-      } catch (error) {
-        setError("Error. Please try again.");
-      }
-      setTitle("");
-      setDirectorId("");
-      setActorId("");
-      // setGenre("");
-      setImage("");
-      setShortDescription("");
-      setYear("");
-    }
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Include the token in the 'Authorization' header
+          },
+        })
+        .then((response) => {
+          const data = response.data;
+          console.log(data);
+          window.location.href = `/`;
+        })
+        .catch((error) => {
+          console.log(error);
+        })
   };
 
   const handlePictureChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
-      reader.onloadend = () => {
-        setPoster(reader.result);
+      reader.onload = (event) => {
+        const base64String = event.target.result.split(',')[1];
+        setImage(base64String);
       };  
       reader.readAsDataURL(file);
     }
@@ -136,7 +166,7 @@ function AddMovie() {
             <option value="">Select Director</option>
             {existingPersons.map((person) => (
               <option key={person.id} value={person.id}>
-                {person.firstname + " " + person.lastname}
+                {person.firstName + " " + person.lastName}
               </option>
             ))}
           </select>
@@ -155,7 +185,7 @@ function AddMovie() {
             <option value="">Select Actor</option>
             {existingPersons.map((person) => (
               <option key={person.id} value={person.id}>
-                {person.firstname + " " + person.lastname}
+                {person.firstName + " " + person.lastName}
               </option>
             ))}
           </select>

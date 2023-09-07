@@ -3,7 +3,7 @@ import { useState } from 'react'
 import star from '../assets/logos/star.svg'
 import like from '../assets/logos/like.svg'
 
-function Review({id}) {
+function Review() {
     // console.log(imgSrc)
     // console.log(imgAlt)
     // console.log(movieName)
@@ -11,7 +11,7 @@ function Review({id}) {
     // console.log(userName)
     // console.log(reviewText)
     // {id, imgSrc, imgAlt, movieName, score, userName, reviewText, likes, reviewsState, setReviewsState}
-    
+    console.log("movie review");
     const [isEditingState, setIsEditingState] = useState(false)
     const [imgSrc, setImgSrc] = useState();
     const [imgAlt, setImgAlt] = useState();
