@@ -21,3 +21,4 @@ Review Movies is a dynamic web application tailored for movie enthusiasts and cr
 https://lucid.app/lucidchart/33c62c4c-226b-4b62-88f1-74f8700a0911/edit?viewport_loc=-960%2C-292%2C6656%2C3140%2C0_0&invitationId=inv_b6f77fc1-b940-4fbe-9cbd-8798e564864c[Blank_diagram.pdf](https://github.com/ReviewTeam/ReviewEverything/files/12560643/Blank_diagram.pdf)
 
 [Uploading Blank_diagram.pdf…]()
+[UserFlowDiagram.pdf](https://github.com/ReviewTeam/ReviewEverything/files/12560817/UserFlowDiagram.pdf)
