@@ -59,6 +59,7 @@ com\unibuc\fmi\review_everything\exception\friendrequest\FriendRequestNotFoundEx
 com\unibuc\fmi\review_everything\service\PersonService.class
 com\unibuc\fmi\review_everything\exception\review\ReviewNotFoundException.class
 com\unibuc\fmi\review_everything\exception\friendrequest\FriendRequestAlreadyExistsException.class
+com\unibuc\fmi\review_everything\service\ReviewService$5.class
 com\unibuc\fmi\review_everything\dto\movie\request\MovieRequestDto.class
 com\unibuc\fmi\review_everything\controller\FeedController.class
 com\unibuc\fmi\review_everything\service\ReviewService$1.class

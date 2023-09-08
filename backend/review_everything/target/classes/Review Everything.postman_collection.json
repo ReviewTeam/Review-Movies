@@ -3,8 +3,8 @@
 		"_postman_id": "b84937f8-e119-4d54-8c61-566dc86e461e",
 		"name": "Review Everything",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "28312123",
-		"_collection_link": "https://lively-equinox-995172.postman.co/workspace/Review-Everything~27a4e2eb-4738-4f09-a8f5-45546f79bc56/collection/28310303-b84937f8-e119-4d54-8c61-566dc86e461e?action=share&source=collection_link&creator=28312123"
+		"_exporter_id": "20905212",
+		"_collection_link": "https://lively-equinox-995172.postman.co/workspace/Review-Everything~27a4e2eb-4738-4f09-a8f5-45546f79bc56/collection/28310303-b84937f8-e119-4d54-8c61-566dc86e461e?action=share&source=collection_link&creator=20905212"
 	},
 	"item": [
 		{
@@ -354,7 +354,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstName\" : \"John\",\r\n    \"lastName\" : \"Doe\",\r\n    \"email\" : \"john.doe@gmail.com\",\r\n    \"username\" : \"john.doe\",\r\n    \"password\" : \"P@ssword321\"\r\n}",
+							"raw": "{\r\n    \"firstName\" : \"Jane\",\r\n    \"lastName\" : \"Doee\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1087,11 +1087,7 @@
 							"raw": "{\r\n    \"status\": \"ACCEPTED\"\r\n}"
 						},
 						"url": {
-<<<<<<< HEAD
-							"raw": "http://localhost:8080/api/v1/me/friends/requests/6",
-=======
 							"raw": "http://localhost:8080/api/v1/me/friends/requests/15",
->>>>>>> AlexBranch
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1103,11 +1099,7 @@
 								"me",
 								"friends",
 								"requests",
-<<<<<<< HEAD
-								"6"
-=======
 								"15"
->>>>>>> AlexBranch
 							]
 						}
 					},
@@ -1234,11 +1226,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-<<<<<<< HEAD
-							"raw": "{\r\n    \"movieId\": 1,\r\n    \"rating\": 5,\r\n    \"description\": \"Un film excelent!\"\r\n}",
-=======
 							"raw": "{\r\n    \"movieId\": 4,\r\n    \"rating\": 5,\r\n    \"description\": \"Un film excelent!\"\r\n}",
->>>>>>> AlexBranch
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1294,65 +1282,6 @@
 					"response": []
 				},
 				{
-<<<<<<< HEAD
-					"name": "Get current user reviews",
-=======
-					"name": "Update Review",
-					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {
-							"content-type": true
-						}
-					},
->>>>>>> AlexBranch
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{admin_token}}",
-									"type": "string"
-								}
-							]
-						},
-<<<<<<< HEAD
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/v1/me/reviews",
-=======
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"movieId\": 4,\r\n    \"rating\": 3,\r\n    \"description\": \"Un film bun, dar nu excelent\"\r\n}"
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/v1/reviews/7",
->>>>>>> AlexBranch
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"v1",
-<<<<<<< HEAD
-								"me",
-								"reviews"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Update Review",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
@@ -1392,8 +1321,6 @@
 							"path": [
 								"api",
 								"v1",
-=======
->>>>>>> AlexBranch
 								"reviews",
 								"7"
 							]
@@ -1478,7 +1405,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{admin_token}}",
+									"value": "{{user_token}}",
 									"type": "string"
 								}
 							]
@@ -1486,7 +1413,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/reviews/4",
+							"raw": "http://localhost:8080/api/v1/reviews/movie/4",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1496,6 +1423,7 @@
 								"api",
 								"v1",
 								"reviews",
+								"movie",
 								"4"
 							]
 						}
@@ -1534,17 +1462,71 @@
 						}
 					},
 					"response": []
-<<<<<<< HEAD
-=======
 				},
 				{
 					"name": "Find Review by id",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{admin_token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/reviews/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"reviews",
+								"6"
+							]
+						}
 					},
 					"response": []
->>>>>>> AlexBranch
+				},
+				{
+					"name": "Get reviews by username",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{admin_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/reviews/user-reviews/admin69",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"reviews",
+								"user-reviews",
+								"admin69"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
