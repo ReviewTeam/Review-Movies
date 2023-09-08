@@ -1,7 +1,5 @@
-import Review from "../../Movie/MovieReview";
+import Review from "../Review/Review";
 import "./Feed.css";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
 
 function Feed({
   searchValue,
@@ -13,21 +11,26 @@ function Feed({
   // console.log("array of reviews")
   // console.log(arrayReviews)
   console.log("Search revieweul state-ul este: ", searchedReviewsState);
-  const [reviews, setReviews] = useState([]);
-
-  useEffect(() => {
-    // get the logged in user
-    axios.get("http://localhost:8080/api/v1/feed").then((response) => {
-      console.log(response);
-      setReviews(response.data);
-    });
-  }, []);
 
   return (
     <div className="feed">
-      {reviews.map((review) => (
-        <Review key={review.id} id={review.id}></Review>
-      ))}
+      {searchValue
+        ? searchedReviewsState.map((review, id) => {
+            const newObject = {
+              ...review,
+              searchedReviewsState,
+              setSearchedReviewsState,
+            };
+            return <Review key={id} id={id} {...newObject} />;
+          })
+        : reviewsState.map((review, id) => {
+            const newObject = { ...review, reviewsState, setReviewsState };
+            return <Review key={id} id={id} {...newObject} />;
+          })}
+
+      {/* <h3>Add new review</h3>
+            
+            <ReviewForm {...{setReviewsState}} /> */}
     </div>
   );
 }
