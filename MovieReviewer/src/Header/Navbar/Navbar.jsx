@@ -7,8 +7,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Button } from "react-bootstrap";
 
+function Navbar({ searchValue, onChange }) {
 
-function Navbar() {
   const [user, setUser] = useState(null);
   const [url, setUrl] = useState("/");
 
@@ -66,7 +66,9 @@ function Navbar() {
       <Link to="/">
         <img src={movieLogo} className="logo" alt="Movie logo" />
       </Link>
-      <SearchBar />
+
+      <SearchBar {...{ searchValue, onChange }} />
+
 
       {isAdmin && (
         <Link to="/movie/add" style={{ color: "white" }}>
