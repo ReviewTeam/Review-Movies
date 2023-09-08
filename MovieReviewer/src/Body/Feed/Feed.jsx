@@ -26,7 +26,7 @@ function Feed({
   return (
     <div className="feed">
       {reviews.map((review) => (
-        <Review id={review.id}></Review>
+        <Review key={review.id} id={review.id}></Review>
       ))}
     </div>
   );
