@@ -8,6 +8,7 @@ import axios from "axios";
 import { Button } from "react-bootstrap";
 
 function Navbar({ searchValue, onChange }) {
+
   const [user, setUser] = useState(null);
   const [url, setUrl] = useState("/");
 
@@ -68,6 +69,7 @@ function Navbar({ searchValue, onChange }) {
 
       <SearchBar {...{ searchValue, onChange }} />
 
+
       {isAdmin && (
         <Link to="/movie/add" style={{ color: "white" }}>
           Add Movie
@@ -91,17 +93,18 @@ function Navbar({ searchValue, onChange }) {
           />
         </Link>
       )}
-
-      {!user && (
-        <Link to="/login" style={{ color: "white" }}>
-          Login
-        </Link>
-      )}
-      {!user && (
-        <Link to="/register" style={{ color: "white" }}>
-          Register
-        </Link>
-      )}
+      <div className="auth-links" style={{display: user ? "none" : "block"}}>
+        {!user && (
+          <Link to="/login" style={{ color: "white" }}>
+            Login
+          </Link>
+        )}
+        {!user && (
+          <Link to="/register" style={{ color: "white" }}>
+            Register
+          </Link>
+        )}
+      </div>
     </nav>
   );
 }
