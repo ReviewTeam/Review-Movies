@@ -51,9 +51,6 @@ function Navbar({ searchValue, onChange }) {
     }
   }, []);
 
-  // console.log("ROLES");
-  // console.log(user);
-
   function logout() {
     localStorage.removeItem("jwtToken");
     window.location.href = `/`;
@@ -91,17 +88,18 @@ function Navbar({ searchValue, onChange }) {
           />
         </Link>
       )}
-
-      {!user && (
-        <Link to="/login" style={{ color: "white" }}>
-          Login
-        </Link>
-      )}
-      {!user && (
-        <Link to="/register" style={{ color: "white" }}>
-          Register
-        </Link>
-      )}
+      <div className="auth-links" style={{ display: user ? "none" : "block" }}>
+        {!user && (
+          <Link to="/login" style={{ color: "white" }}>
+            Login
+          </Link>
+        )}
+        {!user && (
+          <Link to="/register" style={{ color: "white" }}>
+            Register
+          </Link>
+        )}
+      </div>
     </nav>
   );
 }

@@ -11,14 +11,14 @@ import PersonPage from "./Person/PersonPage";
 import AddPerson from "./Person/AddPerson";
 import EditPerson from "./Person/EditPerson";
 import Movie from "./Movie/Movie";
-import HarryPotterMovie from "./assets/images/HarryPotterMovie.jpg";
-import Inception from "./assets/images/Inception.jpg";
-import JohnWick1 from "./assets/images/JohnWick1.jpg";
-import TheGodfatherI from "./assets/images/TheGodfatherI.jpg";
 import AddMovie from "./Movie/AddMovie";
 import EditMovie from "./Movie/EditMovie";
 import Register from "./Profile/Register";
 import Login from "./Profile/Login";
+import HarryPotterMovie from "./assets/images/HarryPotterMovie.jpg";
+import Inception from "./assets/images/Inception.jpg";
+import JohnWick1 from "./assets/images/JohnWick1.jpg";
+import TheGodfatherI from "./assets/images/TheGodfatherI.jpg";
 
 function App() {
   const [reviewsState, setReviewsState] = useState([

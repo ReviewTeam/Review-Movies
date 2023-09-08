@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import {useEffect, useState} from 'react'
+import {useEffect, useRef, useState} from 'react'
 import star from '../assets/logos/star.svg'
 import like from '../assets/logos/like.svg'
-import review from "../Body/Review/Review.jsx";
+import "./MovieReview.css";
 import axios from "axios";
 
 function Review({ id }) {
@@ -14,7 +14,9 @@ function Review({ id }) {
     // console.log(reviewText)
     // {id, imgSrc, imgAlt, movieName, score, userName, reviewText, likes, reviewsState, setReviewsState}
     console.log("movie review");
-    const [isEditingState, setIsEditingState] = useState(false)
+    const myElementRef = useRef(null);
+    const [movieId, setMovieId] = useState();
+    const [isEditing, setIsEditing] = useState(false)
     const [imgSrc, setImgSrc] = useState();
     const [imgAlt, setImgAlt] = useState();
     const [movieName, setMovieName] = useState();
@@ -41,6 +43,7 @@ function Review({ id }) {
                 const movie = data.movie;
                 setImgSrc(movie.image);
                 setImgAlt(movie.title + " " + movie.year);
+                setMovieId(movie.id);
                 setMovieName(movie.title);
                 setScore(data.rating);
                 setUserName(user.username);
@@ -77,13 +80,29 @@ function Review({ id }) {
     }
 
     const onEdit = () => {
-        if(isEditingState) {
-            document.getElementsByClassName('reviewTextArea')[key - 1].style.display = "none";
+        if(isEditing) {
+            myElementRef.current.querySelector('.reviewTextArea').style.display = "none";
+            axios
+                .put(`http://localhost:8080/api/v1/reviews/${id}`, {
+                    movieId,
+                    rating: score,
+                    description: newReviewText
+                }, {
+                    headers: {
+                        Authorization: `Bearer ${token}`, // Include the token in the 'Authorization' header
+                    },
+                })
+                .then((response) => {
+                    console.log("update review with id " + id);
+                    console.log(response.data);
+                    setReviewText(newReviewText);
+                })
+                .catch(console.log);
         } else {
-            document.getElementsByClassName('reviewTextArea')[id].style.display = "block"
+            myElementRef.current.querySelector('.reviewTextArea').style.display = "block"
         }
 
-        setIsEditingState(!isEditingState)
+        setIsEditing(!isEditing);
     }
 
     const onLiking = () => {
@@ -102,7 +121,7 @@ function Review({ id }) {
     }
     
     return (
-        <div className='flexContainer'>
+        <div className='flexContainer' ref={myElementRef}>
             <div className="reviewContainer">
                 <section className="reviewSectionCoverImage">
                     <img src={`data:image;base64,${imgSrc}`} alt={imgAlt}/>
@@ -132,12 +151,14 @@ function Review({ id }) {
                         <div className="editDiv">
                             <img className="likeIcon" onClick={onLiking} src={like} alt="like" />
                             <span>{likes}</span>
-                            <button className="editReview" onClick={onEdit}>{!isEditingState ? "Edit" : "Save"}</button>
+                            <button className="editReview" onClick={onEdit}>{!isEditing ? "Edit" : "Save"}</button>
                         </div>
                     </section>
                 </section>
             </div>
-            <div> <textarea className="reviewTextArea" value={reviewText} onInput={onInput}></textarea></div>
+            <div>
+                <textarea className="reviewTextArea" value={newReviewText} onInput={onInput} />
+            </div>
            
         </div> 
     )
