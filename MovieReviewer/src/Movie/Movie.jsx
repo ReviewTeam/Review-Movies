@@ -157,7 +157,7 @@ function Movie() {
     console.log("description: " + reviewDescription);
 
     axios
-        .post("http://localhost:8080/api/v1/me/reviews",
+        .post(`http://localhost:8080/api/v1/me/reviews`,
             {
                     movieId: id,
                     rating: reviewScore,
