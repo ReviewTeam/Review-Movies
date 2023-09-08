@@ -3,11 +3,26 @@ import { useParams } from "react-router-dom";
 import profilePic from "../assets/images/profile-pic.png";
 import HarryPotterMovie from "../assets/images/HarryPotterMovie.jpg";
 import { Form, Button } from "react-bootstrap";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {Container , Dropdown} from 'react-bootstrap';
 import axios from "axios";
 
 function EditMovie() {
   const { id } = useParams();
 
+  const [movie, setMovie] = useState( {
+    id: 1,
+    title: "Movie Title",
+    director: { id: 1, name: "Director Name" },
+    actors: [
+      { id: 1 },
+      { id: 2 },
+      { id: 3 },
+    ],
+    genre: "Genre",
+    poster: HarryPotterMovie,
+    description: "Short description of the movie.",
+  });
   // Sample list of existing persons
   const [existingPersons, setExistingPersons] = useState([]);
   const token = localStorage.getItem("jwtToken"); // Retrieve the JWT token from storage
@@ -15,7 +30,7 @@ function EditMovie() {
 
   useEffect(() => {
     if (token) {
-      console.log("Avem token");
+    //  console.log("Avem token");
       // get the logged in user to check if it is an admin
       axios
           .get("http://localhost:8080/api/v1/me", {
@@ -24,7 +39,7 @@ function EditMovie() {
             },
           })
           .then((response) => {
-            console.log(response);
+           // console.log(response);
 
             if (response.data.authorizationRoles.split(",").length > 1) {
               setIsAdmin(true);
@@ -37,7 +52,7 @@ function EditMovie() {
                   },
                 })
                 .then((response) => {
-                  console.log("Movie");
+                 // console.log("Movie");
 
                   const data = response.data;
                   const director = data.director;
@@ -54,12 +69,28 @@ function EditMovie() {
                     description: data.shortDescription,
                   });
 
-                  console.log(movie);
+                 // console.log(movie);
+                  axios
+                      .get("http://localhost:8080/api/v1/persons", {
+                        headers: {
+                          Authorization: `Bearer ${token}`,
+                        }
+                      })
+                      .then((response) => {
+                        const data = response.data;
+                        console.log("Persons");
+                        console.log(response);
+                        setExistingPersons(data);
+                        console.log(data);
+                      })
+                      .catch((error) => {
+                       // console.log(error);
+                      })
                   // getReviews();
                 })
                 .catch((error) => {
-                  console.log("Error fetching the movie with id " + id);
-                  console.log(error);
+                  // console.log("Error fetching the movie with id " + id);
+                  // console.log(error);
                 })
           })
           .catch((error) => {
@@ -70,20 +101,6 @@ function EditMovie() {
       console.log("aici");
     }
   }, []);
-
-  const movie = {
-    id: 1,
-    title: "Movie Title",
-    director: { id: 1, name: "Director Name" },
-    actors: [
-      { id: 1 },
-      { id: 2 },
-      { id: 3 },
-    ],
-    genre: "Genre",
-    poster: HarryPotterMovie,
-    description: "Short description of the movie.",
-  };
 
   const [title, setTitle] = useState(movie.title);
   const [director, setDirector] = useState(movie.director);
@@ -113,9 +130,28 @@ function EditMovie() {
     setDescription("");
   };
 
+  const handleOnClickDropdownItem = (e) => {}
+
+
   return (
     <div className="container">
       <br />
+      <label htmlFor="actors" className="form-label">
+        Actors:
+      </label>
+      <Dropdown>
+        <Dropdown.Toggle variant=" primary" id="dropdown-basic">
+          Dropdown Navigation Button
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu>
+          {existingPersons.map((actor) => {
+            <Dropdown.Item key={actor.id}  href={`#/action-${actor.id}`} onClick={handleOnClickDropdownItem}>
+              {actor.firstName + " " + actor.lastName}
+            </Dropdown.Item>
+          })}
+        </Dropdown.Menu>
+      </Dropdown>
       <h1>Edit Movie</h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
@@ -192,7 +228,7 @@ function EditMovie() {
               <Form.Label>Poster:</Form.Label>
               <div className="d-flex align-items-center">
                 <img
-                  src={HarryPotterMovie}
+                    src={`data:image;base64,${movie.image}`}
                   alt="Profile"
                   className="mr-3"
                   style={{ width: "100px", height: "100px" }}
