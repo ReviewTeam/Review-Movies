@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom";
-import profilePic from "../assets/images/profile-pic.png";
 import { useEffect, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
@@ -7,12 +6,11 @@ import axios from "axios";
 function EditProfile() {
   const { username } = useParams();
 
-  const [picture, setPicture] = useState("");
+  const [image, setImage] = useState(null);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUser] = useState(null);
 
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
@@ -29,7 +27,7 @@ function EditProfile() {
           },
         })
         .then((response) => {
-          setPicture(profilePic);
+          // setPicture(response.data.picture);
           setFirstName(response.data.firstName);
           setLastName(response.data.lastName);
           setEmail(response.data.email);
@@ -37,8 +35,6 @@ function EditProfile() {
         .catch((error) => {
           console.error("Error fetching user data:", error);
         });
-    } else {
-      // Handle the case where the user is not authenticated
     }
   }, []);
 
@@ -51,18 +47,48 @@ function EditProfile() {
     setSuccessMessage("");
 
     try {
-      await axios.put("http://localhost:8080/api/v1/me", {
-        headers: {
-          // "Content-Type": "application/json", // or other content types
-          Authorization: `Bearer ${token}`, // Include the token in the 'Authorization' header
+      console.log(firstName);
+      console.log(lastName);
+      console.log(email);
+      console.log(password);
+      console.log(image);
+      await axios.put(
+        "http://localhost:8080/api/v1/me",
+        {
+          firstName,
+          lastName,
+          email,
+          password,
+          image,
         },
-        firstName,
-        lastName,
-        email,
-        password,
-      });
+        {
+          headers: {
+            // "Content-Type": "application/json", // or other content types
+            Authorization: `Bearer ${token}`, // Include the token in the 'Authorization' header
+          },
+        }
+      );
       setSuccessMessage("Profile edited!");
-      window.location.href = `/profile/${username}`;
+
+      // localStorage.removeItem("jwtToken");
+      // axios
+      //   .post("http://localhost:8080/api/v1/auth", {
+      //     username,
+      //     password,
+      //   })
+      //   .then((response) => {
+      //     const token = response.data.token;
+
+      //     localStorage.setItem("jwtToken", token);
+
+      //     window.location.href = `/`;
+      //     console.log(token);
+      //   })
+      //   .catch((error) => {
+      //     setError("Login failed. Please check your credentials.");
+      //   });
+
+      // window.location.href = `/profile/${username}`;
     } catch (error) {
       console.log(error);
       setError("Error!");
@@ -75,10 +101,18 @@ function EditProfile() {
     window.location.href = `/profile/${username}`;
   };
 
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    // Handle the selected file, such as uploading it to a server or processing it locally
-    setProfilePicture(URL.createObjectURL(file));
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = function (event) {
+        const base64String = event.target.result.split(",")[1];
+        setImage(base64String);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   return (
@@ -94,7 +128,7 @@ function EditProfile() {
             <Form.Label>Profile Picture:</Form.Label>
             <div className="d-flex align-items-center">
               <img
-                src={profilePic}
+                src={`data:image;base64,${image}`}
                 alt="Profile"
                 className="mr-3"
                 style={{ width: "100px", height: "100px" }}

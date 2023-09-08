@@ -12,71 +12,80 @@ import RemoveFriendButton from "./RemoveFriendButton";
 
 
 function ProfilePage() {
-  const { username } = useParams();
+  const { username } = useState(0);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
 
   const token = localStorage.getItem("jwtToken"); // Retrieve the JWT token from storage
+  console.log(token);
 
-  useEffect(() => {
 
+useEffect(() => {
 
-    if (token) {
-      // get the logged in user
-      axios
-        .get("http://localhost:8080/api/v1/me", {
-          headers: {
-            Authorization: `Bearer ${token}`, // Include the token in the 'Authorization' header
-          },
-        })
-        .then((response) => {
-          const userData = {
-            image: response.data.image,
-            username: response.data.username,
-            firstName: response.data.firstName,
-            lastName: response.data.lastName,
-            email: response.data.email,
-            score: response.data.score,
-          };
+  console.log("salam");
 
-          setUser(userData);
-          setLoading(false);
-        })
-        .catch((error) => {
-          console.error("Error fetching user data:", error);
-          setLoading(false);
-        });
-    } else {
-      // Handle the case where the user is not authenticated
-      setLoading(false);
-    }
-
-  if (!user || user.username != username) {
-    // if it is another user's profile page get that user's data
+  if (token) { 
+    
+    // get the logged in user
     axios
-      .get(`http://localhost:8080/api/v1/users?username=${username}`, {
+      .get("http://localhost:8080/api/v1/me", {
         headers: {
           Authorization: `Bearer ${token}`, // Include the token in the 'Authorization' header
         },
       })
-      .then((response1) => {
-        const userData1 = {
-          profilePic,
-          username: response1.data[0].username,
-          firstName: response1.data[0].firstName,
-          lastName: response1.data[0].lastName,
-          email: response1.data[0].email,
+      .then((response) => {
+        console.log("salam");
+        const userData = {
+          image: response.data.image,
+          username: response.data.username,
+          firstName: response.data.firstName,
+          lastName: response.data.lastName,
+          email: response.data.email,
           score: 321,
         };
 
-        setUser((prevUser) => ({ ...prevUser, ...userData1 }));
+        console.log(userData);
+
+        // check if the current profile page is the logged in user's profile page
+        if (userData.username != username) {
+          // if it is another user's profile page get that user's data
+          axios
+            .get(`http://localhost:8080/api/v1/users?username=${username}`, {
+              headers: {
+                Authorization: `Bearer ${token}`, // Include the token in the 'Authorization' header
+              },
+            })
+            .then((response1) => {
+              const userData1 = {
+                image: response1.data[0].image,
+                username: response1.data[0].username,
+                firstName: response1.data[0].firstName,
+                lastName: response1.data[0].lastName,
+                email: response1.data[0].email,
+                score: 321,
+              };
+
+              setUser((prevUser) => ({ ...prevUser, ...userData1 }));
+              setLoading(false);
+            })
+            .catch((error) => {
+              console.error("Error fetching user data:", error);
+              setLoading(false);
+            });
+        } else {
+          setUser(userData);
+          setLoading(false);
+        }
       })
       .catch((error) => {
+        console.log("salam");
         console.error("Error fetching user data:", error);
         setLoading(false);
       });
+  } else {
+    // Handle the case where the user is not authenticated
+    setLoading(false);
   }
-
 }, []);
 
 
@@ -108,7 +117,7 @@ function ProfilePage() {
         <div className="row">
           {/* User information on the left */}
           <div className="col-3">
-            <UserProfile />
+            <UserProfile user={user} username={username}/>
           </div>
 
           {/* Reviews in the middle */}
@@ -117,21 +126,23 @@ function ProfilePage() {
           </div>
 
           {/* Friend list on the right*/}
-          if ({user} && {user.username} == {username}) {  /* check if the current profile page is the logged in user's profile page */
+          if ({user.username} != {username}) {  /* check if the current profile page is the logged in user's profile page */
               <div className="col-3">
                 <FriendList user={user}/>
                 <FriendRequestList user={user}/>
               </div>
           }
-          else if ( {friendUsernames}.includes(username) == false){
+          else if ( {friendUsernames}.includes({username}) == false){
               <div className="col-3">
+                <FriendList user={user}/>
                 <SendFriendRequestButton username={username}/>
               </div>
           }
 
           else {
             <div className="col-3">
-                <RemoveFriendButton username={username}/>
+              <FriendList user={user}/>
+              <RemoveFriendButton username={username}/>
             </div>
           }
           
