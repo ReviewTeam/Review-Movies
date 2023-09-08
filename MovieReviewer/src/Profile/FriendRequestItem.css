@@ -1,0 +1,63 @@
+.friend-request-item {
+    border: 3px solid #9c9c9c;
+    border-radius: 12px;
+    padding: 10px;
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .friend-request-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-grow: 1;
+  }
+  
+  .friend-request-name {
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  
+  .friend-request-buttons {
+    display: flex;
+    gap: 5px;
+  }
+  
+  .accept-button {
+    width: 80px;
+    height: 40px;
+    border: none;
+    background-color: #009c00;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    font-size: 16px;
+    color: white;
+    font-weight: 600;
+  }
+
+
+
+
+  .reject-button {
+    width: 80px;
+    height: 40px;
+    border: none;
+    background-color: #b80000;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    font-size: 16px;
+    color: white;
+    font-weight: 600;
+  }
+  

@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-function UserProfile() {
+function UserProfile({ userScore }) {
   const { username } = useParams();
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
@@ -26,7 +26,7 @@ function UserProfile() {
             firstName: response.data.firstName,
             lastName: response.data.lastName,
             email: response.data.email,
-            score: 321,
+            score: userScore,
           };
 
           // check if the current profile page is the logged in user's profile page
@@ -74,8 +74,8 @@ function UserProfile() {
     return <div>Loading...</div>;
   }
 
-  console.log("USER");
-  console.log(user);
+  // console.log("USER");
+  // console.log(user);
 
   return (
     <div className="profile bg-light p-3">
