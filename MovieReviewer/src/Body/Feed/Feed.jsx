@@ -21,7 +21,7 @@ function Feed({
       console.log(response);
       setReviews(response.data);
     });
-  });
+  }, []);
 
   return (
     <div className="feed">
