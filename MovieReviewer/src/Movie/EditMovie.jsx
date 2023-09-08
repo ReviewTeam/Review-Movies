@@ -1,13 +1,26 @@
 import {useEffect, useState} from "react";
 import { useParams } from "react-router-dom";
-import profilePic from "../assets/images/profile-pic.png";
 import HarryPotterMovie from "../assets/images/HarryPotterMovie.jpg";
-import { Form, Button } from "react-bootstrap";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Dropdown } from 'react-bootstrap';
 import axios from "axios";
 
 function EditMovie() {
   const { id } = useParams();
 
+  const [movie, setMovie] = useState( {
+    id: 1,
+    title: "Movie Title",
+    director: { id: 1, name: "Director Name" },
+    actors: [
+      { id: 1 },
+      { id: 2 },
+      { id: 3 },
+    ],
+    genre: "Genre",
+    poster: HarryPotterMovie,
+    description: "Short description of the movie.",
+  });
   // Sample list of existing persons
   const [existingPersons, setExistingPersons] = useState([]);
   const token = localStorage.getItem("jwtToken"); // Retrieve the JWT token from storage
@@ -15,7 +28,7 @@ function EditMovie() {
 
   useEffect(() => {
     if (token) {
-      console.log("Avem token");
+    //  console.log("Avem token");
       // get the logged in user to check if it is an admin
       axios
           .get("http://localhost:8080/api/v1/me", {
@@ -24,7 +37,7 @@ function EditMovie() {
             },
           })
           .then((response) => {
-            console.log(response);
+           // console.log(response);
 
             if (response.data.authorizationRoles.split(",").length > 1) {
               setIsAdmin(true);
@@ -37,7 +50,7 @@ function EditMovie() {
                   },
                 })
                 .then((response) => {
-                  console.log("Movie");
+                 // console.log("Movie");
 
                   const data = response.data;
                   const director = data.director;
@@ -54,12 +67,28 @@ function EditMovie() {
                     description: data.shortDescription,
                   });
 
-                  console.log(movie);
+                 // console.log(movie);
+                  axios
+                      .get("http://localhost:8080/api/v1/persons", {
+                        headers: {
+                          Authorization: `Bearer ${token}`,
+                        }
+                      })
+                      .then((response) => {
+                        const data = response.data;
+                        console.log("Persons");
+                        console.log(response);
+                        setExistingPersons(data);
+                        console.log(data);
+                      })
+                      .catch((error) => {
+                       // console.log(error);
+                      })
                   // getReviews();
                 })
                 .catch((error) => {
-                  console.log("Error fetching the movie with id " + id);
-                  console.log(error);
+                  // console.log("Error fetching the movie with id " + id);
+                  // console.log(error);
                 })
           })
           .catch((error) => {
@@ -70,20 +99,6 @@ function EditMovie() {
       console.log("aici");
     }
   }, []);
-
-  const movie = {
-    id: 1,
-    title: "Movie Title",
-    director: { id: 1, name: "Director Name" },
-    actors: [
-      { id: 1 },
-      { id: 2 },
-      { id: 3 },
-    ],
-    genre: "Genre",
-    poster: HarryPotterMovie,
-    description: "Short description of the movie.",
-  };
 
   const [title, setTitle] = useState(movie.title);
   const [director, setDirector] = useState(movie.director);
@@ -113,114 +128,29 @@ function EditMovie() {
     setDescription("");
   };
 
+  const handleOnClickDropdownItem = (e) => {}
+
   return (
     <div className="container">
       <br />
+      <label htmlFor="actors" className="form-label">
+        Actors:
+      </label>
+      <Dropdown>
+        <Dropdown.Toggle variant=" primary" id="dropdown-basic">
+          Dropdown Navigation Button
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu>
+          {existingPersons.map((actor) => {
+            <Dropdown.Item key={actor.id}  href={`#/action-${actor.id}`} onClick={handleOnClickDropdownItem}>
+              {actor.firstName + " " + actor.lastName}
+            </Dropdown.Item>
+          })}
+        </Dropdown.Menu>
+      </Dropdown>
       <h1>Edit Movie</h1>
       <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="title" className="form-label">
-            Title:
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="director" className="form-label">
-            Director:
-          </label>
-          <select
-            className="form-select"
-            id="director"
-            value={director}
-            onChange={(e) => setDirector(e.target.value)}
-            required
-          >
-            <option value="">Select Director</option>
-            {existingPersons.map((person) => (
-              <option key={person.id} value={person.id}>
-                {person.firstname + " " + person.lastname}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="mb-3">
-          <label htmlFor="actors" className="form-label">
-            Actors:
-          </label>
-          <select
-            multiple
-            className="form-select"
-            id="actors"
-            value={actors}
-            onChange={(e) =>
-              setActors(
-                Array.from(e.target.selectedOptions, (option) => option.value)
-              )
-            }
-            required
-          >
-            {existingPersons.map((person) => (
-              <option key={person.id} value={person.id}>
-                {person.firstname + " " + person.lastname}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="mb-3">
-          <label htmlFor="genre" className="form-label">
-            Genre:
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="genre"
-            value={genre}
-            onChange={(e) => setGenre(e.target.value)}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <Form onSubmit={handleSubmit}>
-            <Form.Group>
-              <Form.Label>Poster:</Form.Label>
-              <div className="d-flex align-items-center">
-                <img
-                  src={HarryPotterMovie}
-                  alt="Profile"
-                  className="mr-3"
-                  style={{ width: "100px", height: "100px" }}
-                />
-                <Button
-                  variant="outline-primary"
-                  style={{ color: "#8e27f5", borderColor: "#8e27f5" }}
-                >
-                  Change
-                </Button>
-                <Form.Control type="file" onChange={handleFileChange} />
-              </div>
-            </Form.Group>
-          </Form>
-        </div>
-        <div className="mb-3">
-          <label htmlFor="description" className="form-label">
-            Description:
-          </label>
-          <textarea
-            className="form-control"
-            id="description"
-            rows="3"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            required
-          ></textarea>
-        </div>
         <button
           type="submit"
           className="btn btn-primary"

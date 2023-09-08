@@ -3,7 +3,7 @@ import movieLogo from "../../assets/logos/movieLogo.svg";
 import SearchBar from "../SearchBar/SearchBar";
 import UserSlot from "../UserSlot/UserSlot";
 import "./Navbar.css";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { Button } from "react-bootstrap";
 

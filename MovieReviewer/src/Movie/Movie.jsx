@@ -157,18 +157,19 @@ function Movie() {
     console.log("description: " + reviewDescription);
 
     axios
-        .post(`http://localhost:8080/api/v1/me/reviews`,
+        .post(`http://localhost:8080/api/v1/reviews`,
             {
                     movieId: id,
                     rating: reviewScore,
                     description: reviewDescription },
-                      {
+              {
                         headers: {
                         Authorization: `Bearer ${token}`, // Include the token in the 'Authorization' header
-            }
+                           }
         })
         .then((response) => {
           console.log(response);
+          window.location.href=`/movie/${id}`;
         })
         .catch((error) => {
           console.log(error);
