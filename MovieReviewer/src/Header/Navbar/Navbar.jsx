@@ -98,17 +98,18 @@ function Navbar() {
           />
         </Link>
       )}
-
-      {!user && (
-        <Link to="/login" style={{ color: "white" }}>
-          Login
-        </Link>
-      )}
-      {!user && (
-        <Link to="/register" style={{ color: "white" }}>
-          Register
-        </Link>
-      )}
+      <div class="auth-links" style={{display: user ? "none" : "block"}}>
+        {!user && (
+          <Link to="/login" style={{ color: "white" }}>
+            Login
+          </Link>
+        )}
+        {!user && (
+          <Link to="/register" style={{ color: "white" }}>
+            Register
+          </Link>
+        )}
+      </div>
     </nav>
   );
 }
