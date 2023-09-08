@@ -1,10 +1,8 @@
 import {useEffect, useState} from "react";
 import { useParams } from "react-router-dom";
-import profilePic from "../assets/images/profile-pic.png";
 import HarryPotterMovie from "../assets/images/HarryPotterMovie.jpg";
-import { Form, Button } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Container , Dropdown} from 'react-bootstrap';
+import { Dropdown } from 'react-bootstrap';
 import axios from "axios";
 
 function EditMovie() {
@@ -132,7 +130,6 @@ function EditMovie() {
 
   const handleOnClickDropdownItem = (e) => {}
 
-
   return (
     <div className="container">
       <br />
@@ -154,109 +151,6 @@ function EditMovie() {
       </Dropdown>
       <h1>Edit Movie</h1>
       <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="title" className="form-label">
-            Title:
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="director" className="form-label">
-            Director:
-          </label>
-          <select
-            className="form-select"
-            id="director"
-            value={director}
-            onChange={(e) => setDirector(e.target.value)}
-            required
-          >
-            <option value="">Select Director</option>
-            {existingPersons.map((person) => (
-              <option key={person.id} value={person.id}>
-                {person.firstname + " " + person.lastname}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="mb-3">
-          <label htmlFor="actors" className="form-label">
-            Actors:
-          </label>
-          <select
-            multiple
-            className="form-select"
-            id="actors"
-            value={actors}
-            onChange={(e) =>
-              setActors(
-                Array.from(e.target.selectedOptions, (option) => option.value)
-              )
-            }
-            required
-          >
-            {existingPersons.map((person) => (
-              <option key={person.id} value={person.id}>
-                {person.firstname + " " + person.lastname}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="mb-3">
-          <label htmlFor="genre" className="form-label">
-            Genre:
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="genre"
-            value={genre}
-            onChange={(e) => setGenre(e.target.value)}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <Form onSubmit={handleSubmit}>
-            <Form.Group>
-              <Form.Label>Poster:</Form.Label>
-              <div className="d-flex align-items-center">
-                <img
-                    src={`data:image;base64,${movie.image}`}
-                  alt="Profile"
-                  className="mr-3"
-                  style={{ width: "100px", height: "100px" }}
-                />
-                <Button
-                  variant="outline-primary"
-                  style={{ color: "#8e27f5", borderColor: "#8e27f5" }}
-                >
-                  Change
-                </Button>
-                <Form.Control type="file" onChange={handleFileChange} />
-              </div>
-            </Form.Group>
-          </Form>
-        </div>
-        <div className="mb-3">
-          <label htmlFor="description" className="form-label">
-            Description:
-          </label>
-          <textarea
-            className="form-control"
-            id="description"
-            rows="3"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            required
-          ></textarea>
-        </div>
         <button
           type="submit"
           className="btn btn-primary"
