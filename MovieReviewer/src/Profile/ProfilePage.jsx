@@ -26,7 +26,7 @@ function ProfilePage() {
           setUserReview(response.data);
 
           let scr = 0;
-          for (let i = 0; i <= response.data.length; i++) {
+          for (let i = 0; i < response.data.length; i++) {
             scr += response.data[i].nrLikes;
           }
           setUserScore(scr);
