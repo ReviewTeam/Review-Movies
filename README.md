@@ -16,11 +16,3 @@ Review Movies is a dynamic web application tailored for movie enthusiasts and cr
 ## Backend
 - The backend side of the application can be found in the backend folder `Review Movies\ReviewEverything\backend`
 - To start the application you will need to build the images of the containers and start them using this command: `docker compose up`
-
-## UML Diagram
-https://lucid.app/lucidchart/33c62c4c-226b-4b62-88f1-74f8700a0911/edit?viewport_loc=-960%2C-292%2C6656%2C3140%2C0_0&invitationId=inv_b6f77fc1-b940-4fbe-9cbd-8798e564864c[Blank_diagram.pdf](https://github.com/ReviewTeam/ReviewEverything/files/12560643/Blank_diagram.pdf)
-
-[UserFlowDiagram.pdf](https://github.com/ReviewTeam/ReviewEverything/files/12560817/UserFlowDiagram.pdf)
-
-## Demo
-https://youtu.be/jaxDyR2gasg
